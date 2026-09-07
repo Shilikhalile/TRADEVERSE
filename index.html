@@ -1,32 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TRADEVERSE — MARKET LAB</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>
+        TRADEVERSE — MARKET LAB
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
 </head>
 
 <body>
 
+    <!-- =========================================
+         LOADING
+    ========================================== -->
+
     <div id="loading">
+
         <div class="loading-text">
             INITIALIZING MARKET LAB...
         </div>
+
     </div>
 
-    <!-- HOME 3D SPACE -->
+
+    <!-- =========================================
+         HOME 3D SPACE
+    ========================================== -->
+
     <canvas id="scene"></canvas>
 
-    <!-- HOME UI -->
-    <div class="ui" id="homeUI">
+
+    <!-- =========================================
+         HOME UI
+    ========================================== -->
+
+    <div
+        class="ui"
+        id="homeUI">
 
         <header class="home-header">
-            <div class="logo">TRADEVERSE</div>
-            <div class="status">MARKET LAB ONLINE</div>
+
+            <div class="logo">
+                TRADEVERSE
+            </div>
+
+            <div class="status">
+                MARKET LAB ONLINE
+            </div>
+
         </header>
+
 
         <main class="hero">
 
@@ -36,7 +68,8 @@
             </h1>
 
             <p>
-                Learn how price moves, one concept at a time.
+                Learn how price moves,
+                one concept at a time.
             </p>
 
             <button id="startBtn">
@@ -45,16 +78,30 @@
 
         </main>
 
+
         <footer class="home-footer">
-            <span>MOVE YOUR MOUSE</span>
-            <span>SCROLL TO EXPLORE</span>
-            <span>v0.1</span>
+
+            <span>
+                MOVE YOUR MOUSE
+            </span>
+
+            <span>
+                SCROLL TO EXPLORE
+            </span>
+
+            <span>
+                v0.1
+            </span>
+
         </footer>
 
     </div>
 
 
-    <!-- INTRO -->
+    <!-- =========================================
+         INTRO TRANSITION
+    ========================================== -->
+
     <div id="intro">
 
         <div class="intro-content">
@@ -92,6 +139,7 @@
 
             </div>
 
+
             <button id="backBtn">
                 ← BACK
             </button>
@@ -101,7 +149,7 @@
 
         <main class="candle-main">
 
-            <!-- 3D SPACE + CANDLE -->
+            <!-- FULL SCREEN 3D SPACE -->
 
             <div class="candle-view">
 
@@ -136,9 +184,11 @@
                     of price during a specific period of time.
                 </p>
 
+
                 <div class="ohlc">
 
                     <div class="ohlc-item">
+
                         <span class="ohlc-label">
                             OPEN
                         </span>
@@ -148,9 +198,12 @@
                             id="openValue">
                             100.00
                         </span>
+
                     </div>
 
+
                     <div class="ohlc-item">
+
                         <span class="ohlc-label">
                             HIGH
                         </span>
@@ -160,9 +213,12 @@
                             id="highValue">
                             108.00
                         </span>
+
                     </div>
 
+
                     <div class="ohlc-item">
+
                         <span class="ohlc-label">
                             LOW
                         </span>
@@ -172,9 +228,12 @@
                             id="lowValue">
                             97.00
                         </span>
+
                     </div>
 
+
                     <div class="ohlc-item">
+
                         <span class="ohlc-label">
                             CLOSE
                         </span>
@@ -184,6 +243,7 @@
                             id="closeValue">
                             105.00
                         </span>
+
                     </div>
 
                 </div>
@@ -237,4 +297,5 @@
     </script>
 
 </body>
+
 </html>
