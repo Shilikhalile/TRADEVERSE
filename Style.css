@@ -9,302 +9,234 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-
-    background: #02040a;
+    background: #050807;
     color: white;
-
     font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =====================================================
+/* =========================================
    HOME
-===================================================== */
+   ========================================= */
 
-.page {
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: space-between;
-
-    padding: 35px 45px;
-
+.home {
+    position: fixed;
+    inset: 0;
     background:
-        radial-gradient(
-            circle at 70% 45%,
-            rgba(20,255,130,0.08),
-            transparent 35%
-        ),
-        #02040a;
+        radial-gradient(circle at 50% 45%, #10251d 0%, #07100d 30%, #050807 65%);
+    overflow: hidden;
+}
+
+.home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
 }
 
 
-header {
+.top-title {
+    position: absolute;
+    top: 30px;
+    left: 40px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.logo {
-
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 4px;
 }
 
+.top-title span {
+    display: block;
+    margin-top: 7px;
 
-.status {
-
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: 3px;
-    opacity: 0.45;
+    opacity: .45;
 }
 
 
-main {
-    max-width: 900px;
+.hero {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-
-.small-title {
-
+.hero-small {
     margin-bottom: 20px;
 
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 5px;
-
-    opacity: 0.35;
+    opacity: .5;
 }
 
-
-h1 {
-
-    font-size:
-        clamp(55px, 8vw, 125px);
-
-    line-height: 0.88;
-
-    font-weight: 600;
-
-    letter-spacing: -6px;
+.hero h1 {
+    font-size: clamp(45px, 7vw, 100px);
+    line-height: .9;
+    letter-spacing: -4px;
+    font-weight: 700;
 }
 
-
-main p {
-
-    margin-top: 30px;
-
-    max-width: 500px;
+.hero p {
+    margin-top: 28px;
 
     font-size: 15px;
-
-    line-height: 1.7;
-
-    opacity: 0.55;
+    line-height: 1.6;
+    opacity: .55;
 }
 
 
 #startBtn {
+    margin-top: 38px;
 
-    margin-top: 35px;
-
-    padding: 16px 26px;
+    padding: 15px 22px;
 
     background: transparent;
-
     color: white;
 
-    border:
-        1px solid
-        rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,.25);
 
-    font-size: 10px;
-
-    letter-spacing: 3px;
+    font-size: 11px;
+    letter-spacing: 2px;
 
     cursor: pointer;
 
-    transition: 0.3s;
+    transition: .3s;
 }
 
+#startBtn span {
+    margin-left: 20px;
+}
 
 #startBtn:hover {
-
     background: white;
-
-    color: #02040a;
-
-    transform: translateX(6px);
+    color: black;
 }
 
 
-footer {
+.home-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    right: 40px;
 
     display: flex;
-
     justify-content: space-between;
 
-    font-size: 9px;
+    font-size: 8px;
+    line-height: 1.8;
+    letter-spacing: 2px;
 
-    letter-spacing: 3px;
+    opacity: .4;
+}
 
-    opacity: 0.35;
+.home-footer span {
+    opacity: .6;
 }
 
 
-/* =====================================================
+/* =========================================
    LAB
-===================================================== */
+   ========================================= */
 
-#lab {
-
+.lab {
     position: fixed;
-
     inset: 0;
 
     display: none;
 
-    width: 100vw;
-    height: 100vh;
+    background:
+        radial-gradient(circle at 50% 50%, #10251d 0%, #07100d 35%, #050807 75%);
 
     overflow: hidden;
+}
 
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(0,255,130,0.10),
-            transparent 32%
-        ),
-        #02040a;
-
-    perspective: 1400px;
+.lab.active {
+    display: block;
 }
 
 
-.lab-ui {
+/* =========================================
+   LAB HEADER
+   ========================================= */
 
+.lab-header {
     position: absolute;
 
-    inset: 0;
-}
-
-
-/* =====================================================
-   TOP
-===================================================== */
-
-.lab-top {
-
-    position: absolute;
-
-    top: 32px;
-
-    left: 42px;
-    right: 42px;
+    top: 30px;
+    left: 40px;
+    right: 40px;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
     z-index: 100;
 }
 
-
-.lab-title {
+.lab-header div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 
     font-size: 10px;
-
-    letter-spacing: 4px;
-
-    opacity: 0.65;
+    letter-spacing: 3px;
 }
 
+.lab-header strong {
+    font-size: 9px;
+    opacity: .4;
+}
 
 #backBtn {
-
-    padding: 11px 20px;
-
     background: transparent;
-
     color: white;
 
-    border:
-        1px solid
-        rgba(255,255,255,0.25);
+    border: 0;
 
     font-size: 9px;
-
     letter-spacing: 2px;
 
     cursor: pointer;
 
-    transition: 0.3s;
-}
+    opacity: .5;
 
+    transition: .3s;
+}
 
 #backBtn:hover {
-
-    background: white;
-
-    color: #02040a;
+    opacity: 1;
 }
 
 
-/* =====================================================
+/* =========================================
    CANDLE STAGE
-===================================================== */
-
-/*
-   IMPORTANT:
-   All labels are INSIDE candle-scene.
-   Therefore they rotate with the candle.
-*/
+   ========================================= */
 
 .candle-stage {
-
     position: absolute;
-
-    left: 50%;
-    top: 42%;
 
     width: 720px;
     height: 560px;
 
-    transform:
-        translate(-50%, -50%);
+    left: 50%;
+    top: 48%;
 
-    perspective: 1200px;
-
-    transform-style: preserve-3d;
-
-    cursor: grab;
-
-    touch-action: none;
-
-    z-index: 20;
+    transform: translate(-50%, -50%);
 }
 
 
-.candle-stage:active {
-
-    cursor: grabbing;
-}
-
-
-/* =====================================================
+/* =========================================
    CANDLE SCENE
-===================================================== */
+   IMPORTANT:
+   ONLY THE CANDLE MOVES
+   ========================================= */
 
 .candle-scene {
-
     position: absolute;
 
     left: 50%;
@@ -316,170 +248,153 @@ footer {
     transform:
         translate(-50%, -50%)
         scale(1)
-        rotateX(-8deg)
-        rotateY(-25deg);
-
-    transform-style: preserve-3d;
-}
-
-
-/* =====================================================
-   CANDLE
-===================================================== */
-
-.candle {
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 130px;
-    height: 250px;
-
-    transform:
-        translate(-50%, -50%);
+        rotateX(0deg)
+        rotateY(0deg);
 
     transform-style: preserve-3d;
 
-    animation:
-        candleFloat 3.5s
-        ease-in-out
-        infinite;
+    cursor: grab;
 
     z-index: 10;
 }
 
-
-@keyframes candleFloat {
-
-    0% {
-        margin-top: 0;
-    }
-
-    50% {
-        margin-top: -12px;
-    }
-
-    100% {
-        margin-top: 0;
-    }
+.candle-scene:active {
+    cursor: grabbing;
 }
 
 
-/* =====================================================
-   WICK
-===================================================== */
+/* =========================================
+   CANDLE
+   ========================================= */
 
-.wick {
-
+.candle {
     position: absolute;
+
+    width: 130px;
+    height: 320px;
 
     left: 50%;
-
-    top: 5px;
-
-    width: 6px;
-    height: 215px;
+    top: 50%;
 
     transform:
-        translateX(-50%);
+        translate(-50%, -50%)
+        translateZ(0);
 
-    background:
-        linear-gradient(
-            to bottom,
-            #ffffff,
-            #c8d4ce 50%,
-            #ffffff
-        );
-
-    border-radius: 6px;
-
-    box-shadow:
-        0 0 10px
-        rgba(255,255,255,0.45);
-
-    z-index: 1;
+    transform-style: preserve-3d;
 }
 
 
-/* =====================================================
-   CANDLE BODY
-===================================================== */
+/* =========================================
+   WICK
+   ========================================= */
 
-.candle-body {
-
+.wick {
     position: absolute;
 
-    left: 0;
-    top: 55px;
+    width: 5px;
+    height: 215px;
+
+    left: 50%;
+    top: 20px;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(
+        to bottom,
+        #d8fbe7,
+        #46d58a,
+        #9affc5
+    );
+
+    box-shadow:
+        0 0 10px rgba(50,255,150,.5),
+        0 0 25px rgba(50,255,150,.2);
+
+    border-radius: 4px;
+
+    transform-style: preserve-3d;
+}
+
+
+/* =========================================
+   CANDLE BODY
+   ========================================= */
+
+.candle-body {
+    position: absolute;
 
     width: 130px;
     height: 155px;
 
+    left: 0;
+    top: 82px;
+
     transform-style: preserve-3d;
 
-    z-index: 3;
+    transform: translateZ(0);
 }
 
 
 .face {
-
     position: absolute;
 
     width: 130px;
     height: 155px;
 
-    border:
-        1px solid
-        rgba(255,255,255,0.10);
+    border: 1px solid rgba(180,255,210,.15);
 
     background:
         linear-gradient(
             135deg,
-            #42ff9e,
-            #08a95c
+            #38f27f 0%,
+            #0cb85b 45%,
+            #08753e 100%
         );
 
     box-shadow:
-
-        inset 0 0 25px
-        rgba(0,0,0,0.20),
-
-        0 0 35px
-        rgba(20,255,130,0.20);
+        inset 0 0 30px rgba(255,255,255,.08);
 }
 
+
+/* front */
 
 .front {
-    transform:
-        translateZ(65px);
+    transform: translateZ(65px);
 }
 
+
+/* back */
 
 .back {
-    transform:
-        rotateY(180deg)
-        translateZ(65px);
+    transform: rotateY(180deg) translateZ(65px);
 }
 
 
-.left {
-    transform:
-        rotateY(-90deg)
-        translateZ(65px);
-}
-
+/* right */
 
 .right {
+    width: 130px;
+
     transform:
         rotateY(90deg)
         translateZ(65px);
 }
 
 
-.top {
+/* left */
 
+.left {
+    width: 130px;
+
+    transform:
+        rotateY(-90deg)
+        translateZ(65px);
+}
+
+
+/* top */
+
+.top {
     height: 130px;
 
     transform:
@@ -487,647 +402,337 @@ footer {
         translateZ(65px);
 
     background:
-        radial-gradient(
-            circle,
-            #72ffb7,
-            #16d878
+        linear-gradient(
+            135deg,
+            #6aff9c,
+            #18c965
         );
 }
 
 
-.bottom {
+/* bottom */
 
+.bottom {
     height: 130px;
 
     transform:
         rotateX(-90deg)
         translateZ(90px);
-
-    background: #087a45;
 }
 
 
-/* =====================================================
+/* =========================================
    GLOW
-===================================================== */
+   ========================================= */
 
 .glow {
-
     position: absolute;
 
+    width: 170px;
+    height: 210px;
+
     left: 50%;
-    top: -10px;
+    top: 110px;
 
-    width: 75px;
-    height: 75px;
+    transform: translate(-50%, -50%);
 
-    transform:
-        translateX(-50%);
+    background: rgba(0,255,120,.12);
+
+    filter: blur(45px);
 
     border-radius: 50%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(70,255,160,0.75),
-            rgba(70,255,160,0.20),
-            transparent 70%
-        );
-
-    filter: blur(9px);
-
-    animation:
-        glowPulse 1.4s
-        ease-in-out
-        infinite;
-
-    z-index: 2;
+    z-index: -1;
 }
 
 
-@keyframes glowPulse {
+/* =========================================
+   FIXED LABELS
+   ========================================= */
 
-    0% {
-
-        opacity: 0.55;
-
-        transform:
-            translateX(-50%)
-            scale(0.8);
-    }
-
-    50% {
-
-        opacity: 1;
-
-        transform:
-            translateX(-50%)
-            scale(1.2);
-    }
-
-    100% {
-
-        opacity: 0.55;
-
-        transform:
-            translateX(-50%)
-            scale(0.8);
-    }
-}
-
-
-/* =====================================================
-   ANNOTATIONS
-===================================================== */
-
-/*
-   Candle geometry:
-
-   HIGH  = y 5
-   OPEN  = y 55
-   CLOSE = y 210
-   LOW   = y 220
-
-   The labels use the same coordinate system.
-*/
-
-
-.annotation {
-
+.label,
+.part-label {
     position: absolute;
 
-    display: flex;
-
-    align-items: center;
-
-    height: 35px;
-
-    z-index: 30;
-
-    white-space: nowrap;
+    z-index: 50;
 
     pointer-events: none;
 
-    transform-style: preserve-3d;
-}
+    color: white;
 
+    font-family: Arial, Helvetica, sans-serif;
 
-.annotation-text {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-
-.annotation-text strong {
-
-    font-size: 9px;
-
-    font-weight: 500;
-
-    letter-spacing: 3px;
-
-    opacity: 0.85;
-}
-
-
-.annotation-text span {
-
-    font-size: 9px;
+    font-size: 12px;
 
     letter-spacing: 2px;
 
-    opacity: 0.40;
-}
-
-
-.annotation-line {
-
-    width: 100px;
-
-    height: 1px;
-
-    background:
-        rgba(255,255,255,0.55);
-
-    position: relative;
-}
-
-
-.annotation-dot {
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    box-shadow:
-        0 0 8px
-        rgba(255,255,255,0.6);
-
-    flex-shrink: 0;
-}
-
-
-/* =====================================================
-   HIGH
-===================================================== */
-
-.high {
-
-    left: -120px;
-
-    top: 0px;
-
-    gap: 12px;
-}
-
-
-.high .annotation-line {
-
-    order: 2;
-}
-
-
-.high .annotation-dot {
-
-    order: 3;
-}
-
-
-/* =====================================================
-   OPEN
-===================================================== */
-
-.open {
-
-    left: -105px;
-
-    top: 50px;
-
-    gap: 12px;
-}
-
-
-.open .annotation-line {
-
-    order: 2;
-}
-
-
-.open .annotation-dot {
-
-    order: 3;
-}
-
-
-/* =====================================================
-   CLOSE
-===================================================== */
-
-.close {
-
-    left: 130px;
-
-    top: 205px;
-
-    gap: 12px;
-}
-
-
-.close .annotation-dot {
-
-    order: 1;
-}
-
-
-.close .annotation-line {
-
-    order: 2;
-}
-
-
-.close .annotation-text {
-
-    order: 3;
-}
-
-
-/* =====================================================
-   LOW
-===================================================== */
-
-.low {
-
-    left: 130px;
-
-    top: 215px;
-
-    gap: 12px;
-}
-
-
-.low .annotation-dot {
-
-    order: 1;
-}
-
-
-.low .annotation-line {
-
-    order: 2;
-}
-
-
-.low .annotation-text {
-
-    order: 3;
-}
-
-
-/* =====================================================
-   PART LABELS
-===================================================== */
-
-.part {
-
-    position: absolute;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    z-index: 25;
+    font-weight: 600;
 
     white-space: nowrap;
-
-    pointer-events: none;
 }
 
 
-.part span {
+/* =========================================
+   HIGH
+   ========================================= */
 
-    font-size: 7px;
-
-    letter-spacing: 3px;
-
-    opacity: 0.50;
+.high-label {
+    top: 80px;
+    left: 85px;
 }
 
-
-.part-line {
-
-    width: 42px;
-
-    height: 1px;
-
-    background:
-        rgba(255,255,255,0.35);
-}
-
-
-/* =====================================================
-   UPPER WICK LABEL
-===================================================== */
-
-.upper-wick-label {
-
-    left: 75px;
-
-    top: 23px;
-}
-
-
-.upper-wick-label .part-line {
-
-    order: 1;
-}
-
-
-/* =====================================================
-   BODY LABEL
-===================================================== */
-
-.body-label {
-
-    left: 145px;
-
-    top: 130px;
-}
-
-
-.body-label .part-line {
-
-    width: 50px;
-}
-
-
-/* =====================================================
-   LOWER WICK LABEL
-===================================================== */
-
-.lower-wick-label {
-
-    left: 75px;
-
-    top: 235px;
-}
-
-
-/* =====================================================
-   CENTER
-===================================================== */
-
-.lab-center {
-
+.high-label i {
     position: absolute;
 
-    left: 50%;
+    width: 95px;
+    height: 1px;
 
-    bottom: 62px;
+    left: 52px;
+    top: 8px;
 
-    transform:
-        translateX(-50%);
+    background: rgba(255,255,255,.55);
 
-    width: 500px;
-
-    text-align: center;
-
-    z-index: 50;
+    transform: rotate(10deg);
+    transform-origin: left center;
 }
 
 
-.lesson-number {
+/* =========================================
+   OPEN
+   ========================================= */
 
-    margin-bottom: 12px;
+.open-label {
+    top: 215px;
+    left: 55px;
+}
+
+.open-label i {
+    position: absolute;
+
+    width: 80px;
+    height: 1px;
+
+    left: 48px;
+    top: 8px;
+
+    background: rgba(255,255,255,.55);
+}
+
+
+/* =========================================
+   CLOSE
+   ========================================= */
+
+.close-label {
+    top: 345px;
+    right: 55px;
+}
+
+.close-label i {
+    position: absolute;
+
+    width: 85px;
+    height: 1px;
+
+    right: 53px;
+    top: 8px;
+
+    background: rgba(255,255,255,.55);
+}
+
+
+/* =========================================
+   LOW
+   ========================================= */
+
+.low-label {
+    bottom: 60px;
+    right: 85px;
+}
+
+.low-label i {
+    position: absolute;
+
+    width: 95px;
+    height: 1px;
+
+    right: 32px;
+    top: -12px;
+
+    background: rgba(255,255,255,.55);
+
+    transform: rotate(-10deg);
+    transform-origin: right center;
+}
+
+
+/* =========================================
+   PART LABELS
+   ========================================= */
+
+.upper-label {
+    top: 150px;
+    right: 65px;
+}
+
+.body-label {
+    top: 275px;
+    right: 75px;
+}
+
+.lower-label {
+    top: 405px;
+    left: 65px;
+}
+
+
+/* =========================================
+   BOTTOM
+   ========================================= */
+
+.lab-bottom {
+    position: absolute;
+
+    left: 40px;
+    right: 40px;
+    bottom: 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    z-index: 100;
+}
+
+.lab-bottom span {
+    display: block;
 
     font-size: 8px;
 
-    letter-spacing: 5px;
-
-    opacity: 0.4;
-}
-
-
-.lab-center h2 {
-
-    font-size:
-        clamp(32px, 4vw, 58px);
-
-    font-weight: 500;
-
-    letter-spacing: 8px;
-
-    line-height: 1;
-}
-
-
-.lab-center p {
-
-    margin-top: 15px;
-
-    font-size: 9px;
-
     letter-spacing: 3px;
 
-    opacity: 0.35;
+    opacity: .35;
 }
 
+.lab-bottom strong {
+    display: block;
 
-/* =====================================================
-   BOTTOM
-===================================================== */
+    margin-top: 7px;
 
-.lab-bottom {
+    font-size: 11px;
 
-    position: absolute;
+    letter-spacing: 2px;
+}
 
-    left: 42px;
-    right: 42px;
-
-    bottom: 28px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    font-size: 7px;
+.lesson-number {
+    font-size: 12px;
 
     letter-spacing: 3px;
+}
 
-    opacity: 0.28;
+.lesson-number span {
+    display: inline;
 
-    z-index: 50;
+    margin: 0 5px;
+
+    opacity: .3;
 }
 
 
-/* =====================================================
+/* =========================================
    MOBILE
-===================================================== */
+   ========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
-    .page {
-
-        padding: 25px;
+    .top-title {
+        top: 20px;
+        left: 20px;
     }
 
-
-    h1 {
-
-        font-size: 54px;
-
-        letter-spacing: -3px;
+    .hero {
+        left: 8%;
     }
 
-
-    .status {
-
-        font-size: 7px;
+    .hero h1 {
+        font-size: 48px;
     }
 
-
-    footer {
-
-        font-size: 6px;
+    .hero p {
+        font-size: 13px;
     }
 
+    .home-footer {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .lab-header {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+    }
 
     .candle-stage {
+        width: 100vw;
+        height: 520px;
 
-        width: 390px;
-
-        height: 430px;
-
-        top: 39%;
+        top: 50%;
     }
-
 
     .candle-scene {
-
-        width: 300px;
-
-        height: 360px;
-
         transform:
             translate(-50%, -50%)
-            scale(0.78)
-            rotateX(-8deg)
-            rotateY(-25deg);
+            scale(.78)
+            rotateX(0deg)
+            rotateY(0deg);
     }
 
-
-    .annotation-text strong {
-
-        font-size: 8px;
+    .label,
+    .part-label {
+        font-size: 9px;
+        letter-spacing: 1px;
     }
 
-
-    .annotation-text span {
-
-        font-size: 8px;
+    .high-label {
+        top: 65px;
+        left: 20px;
     }
 
-
-    .annotation-line {
-
-        width: 65px;
-    }
-
-
-    .high {
-
-        left: -70px;
-
-        top: 0;
-    }
-
-
-    .open {
-
-        left: -60px;
-
-        top: 50px;
-    }
-
-
-    .close {
-
-        left: 120px;
-
+    .open-label {
         top: 205px;
+        left: 15px;
     }
 
-
-    .low {
-
-        left: 120px;
-
-        top: 215px;
+    .close-label {
+        top: 335px;
+        right: 15px;
     }
 
-
-    .upper-wick-label {
-
-        left: 70px;
-
-        top: 20px;
+    .low-label {
+        bottom: 55px;
+        right: 20px;
     }
 
+    .upper-label {
+        top: 140px;
+        right: 15px;
+    }
 
     .body-label {
-
-        left: 125px;
-
-        top: 130px;
+        top: 270px;
+        right: 15px;
     }
 
-
-    .lower-wick-label {
-
-        left: 70px;
-
-        top: 235px;
+    .lower-label {
+        top: 400px;
+        left: 15px;
     }
-
-
-    .lab-center {
-
-        bottom: 55px;
-
-        width: 100%;
-    }
-
-
-    .lab-center h2 {
-
-        font-size: 27px;
-
-        letter-spacing: 4px;
-    }
-
-
-    .lab-center p {
-
-        font-size: 6px;
-    }
-
 
     .lab-bottom {
-
-        left: 24px;
-        right: 24px;
-
-        bottom: 18px;
-
-        font-size: 5px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
     }
-
-}
+    }
