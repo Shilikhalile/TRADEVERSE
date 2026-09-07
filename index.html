@@ -3,38 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>TRADEVERSE — MARKET LAB</title>
 
-    <link
-        rel="stylesheet"
-        href="Style.css">
+    <link rel="stylesheet" href="Style.css">
 </head>
 
 <body>
 
+    <!-- =========================
+         HOME
+    ========================== -->
+
     <div class="page" id="home">
 
         <header>
-            <div class="logo">
-                TRADEVERSE
-            </div>
-
-            <div class="status">
-                MARKET LAB ONLINE
-            </div>
+            <div class="logo">TRADEVERSE</div>
+            <div class="status">MARKET LAB ONLINE</div>
         </header>
 
-
         <main>
-
-            <div class="small-title">
-                TRADEVERSE
-            </div>
+            <div class="small-title">TRADEVERSE</div>
 
             <h1>
                 UNDERSTAND<br>
@@ -42,16 +32,13 @@
             </h1>
 
             <p>
-                Learn how price moves,
-                one concept at a time.
+                Learn how price moves, one concept at a time.
             </p>
 
             <button id="startBtn">
                 START LEARNING →
             </button>
-
         </main>
-
 
         <footer>
             <span>MOVE YOUR MOUSE</span>
@@ -63,8 +50,8 @@
 
 
     <!-- =========================
-         3D LAB
-    ========================= -->
+         CANDLESTICK LAB
+    ========================== -->
 
     <section id="lab">
 
@@ -72,9 +59,11 @@
 
         <div class="lab-ui">
 
+            <!-- TOP -->
+
             <div class="lab-top">
 
-                <div>
+                <div class="lab-title">
                     MARKET LAB / 01
                 </div>
 
@@ -84,6 +73,96 @@
 
             </div>
 
+
+            <!-- LEFT INFORMATION -->
+
+            <div class="info-card left-card">
+
+                <div class="info-label">
+                    OPEN
+                </div>
+
+                <div class="info-value">
+                    108.40
+                </div>
+
+                <div class="info-line"></div>
+
+                <div class="info-description">
+                    Price at the beginning
+                    of the period.
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT INFORMATION -->
+
+            <div class="info-card right-card">
+
+                <div class="info-label">
+                    HIGH
+                </div>
+
+                <div class="info-value">
+                    112.80
+                </div>
+
+                <div class="info-line"></div>
+
+                <div class="info-description">
+                    Highest price reached
+                    during the period.
+                </div>
+
+            </div>
+
+
+            <!-- LOW -->
+
+            <div class="info-card low-card">
+
+                <div class="info-label">
+                    LOW
+                </div>
+
+                <div class="info-value">
+                    106.20
+                </div>
+
+                <div class="info-line"></div>
+
+                <div class="info-description">
+                    Lowest price reached
+                    during the period.
+                </div>
+
+            </div>
+
+
+            <!-- CLOSE -->
+
+            <div class="info-card close-card">
+
+                <div class="info-label">
+                    CLOSE
+                </div>
+
+                <div class="info-value">
+                    111.70
+                </div>
+
+                <div class="info-line"></div>
+
+                <div class="info-description">
+                    Price at the end
+                    of the period.
+                </div>
+
+            </div>
+
+
+            <!-- CENTER TITLE -->
 
             <div class="lab-center">
 
@@ -96,14 +175,28 @@
                 </h2>
 
                 <p>
-                    Explore the movement of price.
+                    Drag to rotate · Scroll to zoom
                 </p>
 
             </div>
 
 
+            <!-- BOTTOM -->
+
             <div class="lab-bottom">
-                TRADEVERSE · CANDLESTICK LAB
+
+                <span>
+                    TRADEVERSE
+                </span>
+
+                <span>
+                    CANDLESTICK LAB
+                </span>
+
+                <span>
+                    01 / 05
+                </span>
+
             </div>
 
         </div>
@@ -111,8 +204,12 @@
     </section>
 
 
-    <<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
-<script src="script.js"></script>
+    <!-- THREE.JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
