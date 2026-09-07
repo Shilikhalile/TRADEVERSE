@@ -14,15 +14,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
 /* =========================================
    HOME
-   ========================================= */
+========================================= */
 
 .home {
     position: fixed;
     inset: 0;
-
     background:
         radial-gradient(
             circle at 50% 45%,
@@ -30,125 +28,74 @@ body {
             #07100d 30%,
             #050807 65%
         );
-
     overflow: hidden;
 }
 
 .home::before {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background-image:
-        linear-gradient(
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        );
-
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
     background-size: 60px 60px;
-
     pointer-events: none;
 }
 
-
-/* =========================================
-   HOME TITLE
-   ========================================= */
-
 .top-title {
     position: absolute;
-
     top: 30px;
     left: 40px;
-
     font-size: 16px;
     font-weight: 700;
-
     letter-spacing: 4px;
 }
 
 .top-title span {
     display: block;
-
     margin-top: 7px;
-
     font-size: 8px;
     letter-spacing: 3px;
-
     opacity: .45;
 }
 
-
-/* =========================================
-   HERO
-   ========================================= */
-
 .hero {
     position: absolute;
-
     left: 10%;
     top: 50%;
-
     transform: translateY(-50%);
 }
 
 .hero-small {
     margin-bottom: 20px;
-
     font-size: 11px;
     letter-spacing: 5px;
-
     opacity: .5;
 }
 
 .hero h1 {
     font-size: clamp(45px, 7vw, 100px);
-
     line-height: .9;
-
     letter-spacing: -4px;
-
     font-weight: 700;
 }
 
 .hero p {
     margin-top: 28px;
-
     font-size: 15px;
-
     line-height: 1.6;
-
     opacity: .55;
 }
 
-
-/* =========================================
-   START BUTTON
-   ========================================= */
-
 #startBtn {
     margin-top: 38px;
-
     padding: 15px 22px;
-
     background: transparent;
-
     color: white;
-
     border: 1px solid rgba(255,255,255,.25);
-
     font-size: 11px;
-
     letter-spacing: 2px;
-
     cursor: pointer;
-
     transition: .3s;
 }
 
@@ -161,28 +108,16 @@ body {
     color: black;
 }
 
-
-/* =========================================
-   HOME FOOTER
-   ========================================= */
-
 .home-footer {
     position: absolute;
-
     bottom: 30px;
     left: 40px;
     right: 40px;
-
     display: flex;
-
     justify-content: space-between;
-
     font-size: 8px;
-
     line-height: 1.8;
-
     letter-spacing: 2px;
-
     opacity: .4;
 }
 
@@ -192,16 +127,13 @@ body {
 
 
 /* =========================================
-   MARKET LAB
-   ========================================= */
+   LAB
+========================================= */
 
 .lab {
     position: fixed;
-
     inset: 0;
-
     display: none;
-
     background:
         radial-gradient(
             circle at 50% 50%,
@@ -209,7 +141,6 @@ body {
             #07100d 35%,
             #050807 75%
         );
-
     overflow: hidden;
 }
 
@@ -220,19 +151,16 @@ body {
 
 /* =========================================
    LAB HEADER
-   ========================================= */
+========================================= */
 
 .lab-header {
     position: absolute;
-
     top: 30px;
     left: 40px;
     right: 40px;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
     z-index: 100;
@@ -240,37 +168,25 @@ body {
 
 .lab-header div {
     display: flex;
-
     align-items: center;
-
     gap: 15px;
-
     font-size: 10px;
-
     letter-spacing: 3px;
 }
 
 .lab-header strong {
     font-size: 9px;
-
     opacity: .4;
 }
 
 #backBtn {
     background: transparent;
-
     color: white;
-
     border: 0;
-
     font-size: 9px;
-
     letter-spacing: 2px;
-
     cursor: pointer;
-
     opacity: .5;
-
     transition: .3s;
 }
 
@@ -281,7 +197,7 @@ body {
 
 /* =========================================
    CANDLE STAGE
-   ========================================= */
+========================================= */
 
 .candle-stage {
     position: absolute;
@@ -297,8 +213,10 @@ body {
 
 
 /* =========================================
-   3D CANDLE SCENE
-   ========================================= */
+   CANDLE SCENE
+   IMPORTANT:
+   هذا الجزء ما نبدلوش
+========================================= */
 
 .candle-scene {
     position: absolute;
@@ -331,7 +249,7 @@ body {
 
 /* =========================================
    CANDLE
-   ========================================= */
+========================================= */
 
 .candle {
     position: absolute;
@@ -352,7 +270,7 @@ body {
 
 /* =========================================
    WICK
-   ========================================= */
+========================================= */
 
 .wick {
     position: absolute;
@@ -385,7 +303,7 @@ body {
 
 /* =========================================
    CANDLE BODY
-   ========================================= */
+========================================= */
 
 .candle-body {
     position: absolute;
@@ -397,7 +315,6 @@ body {
     top: 82px;
 
     transform-style: preserve-3d;
-
     transform: translateZ(0);
 }
 
@@ -421,15 +338,9 @@ body {
         inset 0 0 30px rgba(255,255,255,.08);
 }
 
-
-/* FRONT */
-
 .front {
     transform: translateZ(65px);
 }
-
-
-/* BACK */
 
 .back {
     transform:
@@ -437,34 +348,22 @@ body {
         translateZ(65px);
 }
 
-
-/* RIGHT */
-
 .right {
     width: 130px;
-
     transform:
         rotateY(90deg)
         translateZ(65px);
 }
 
-
-/* LEFT */
-
 .left {
     width: 130px;
-
     transform:
         rotateY(-90deg)
         translateZ(65px);
 }
 
-
-/* TOP */
-
 .top {
     height: 130px;
-
     transform:
         rotateX(90deg)
         translateZ(65px);
@@ -477,12 +376,8 @@ body {
         );
 }
 
-
-/* BOTTOM */
-
 .bottom {
     height: 130px;
-
     transform:
         rotateX(-90deg)
         translateZ(90px);
@@ -491,7 +386,7 @@ body {
 
 /* =========================================
    GLOW
-   ========================================= */
+========================================= */
 
 .glow {
     position: absolute;
@@ -502,8 +397,7 @@ body {
     left: 50%;
     top: 110px;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     background: rgba(0,255,120,.12);
 
@@ -515,39 +409,40 @@ body {
 }
 
 
-/* =========================================
-   LABEL BASE
-   ========================================= */
+/* =====================================================
+   FIXED ANNOTATIONS
+   ===================================================== */
 
 .label,
 .part-label {
     position: absolute;
 
-    z-index: 50;
+    z-index: 80;
 
     pointer-events: none;
 
-    color: white;
+    color: #ffffff;
 
     font-family: Arial, Helvetica, sans-serif;
 
     font-size: 12px;
 
-    letter-spacing: 2px;
-
     font-weight: 600;
+
+    letter-spacing: 2px;
 
     white-space: nowrap;
 }
 
 
-/* =========================================
+/* =====================================================
    HIGH
-   ========================================= */
+   النقطة: أعلى الـwick
+   ===================================================== */
 
 .high-label {
-    top: 70px;
-    left: 75px;
+    top: 62px;
+    left: 88px;
 }
 
 .high-label i {
@@ -555,28 +450,28 @@ body {
 
     display: block;
 
-    width: 110px;
+    width: 125px;
     height: 1px;
 
-    left: 55px;
-    top: 8px;
+    left: 52px;
+    top: 7px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
 
-    transform:
-        rotate(8deg);
+    transform: rotate(12deg);
 
     transform-origin: left center;
 }
 
 
-/* =========================================
+/* =====================================================
    OPEN
-   ========================================= */
+   النقطة: أعلى الـBODY
+   ===================================================== */
 
 .open-label {
-    top: 215px;
-    left: 35px;
+    top: 207px;
+    left: 45px;
 }
 
 .open-label i {
@@ -584,25 +479,28 @@ body {
 
     display: block;
 
-    width: 105px;
+    width: 125px;
     height: 1px;
 
-    left: 52px;
-    top: 8px;
+    left: 51px;
+    top: 7px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
+
+    transform: rotate(0deg);
 
     transform-origin: left center;
 }
 
 
-/* =========================================
+/* =====================================================
    CLOSE
-   ========================================= */
+   النقطة: أسفل الـBODY
+   ===================================================== */
 
 .close-label {
-    top: 345px;
-    right: 35px;
+    top: 350px;
+    right: 45px;
 }
 
 .close-label i {
@@ -610,25 +508,28 @@ body {
 
     display: block;
 
-    width: 105px;
+    width: 125px;
     height: 1px;
 
     right: 55px;
-    top: 8px;
+    top: 7px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
+
+    transform: rotate(0deg);
 
     transform-origin: right center;
 }
 
 
-/* =========================================
+/* =====================================================
    LOW
-   ========================================= */
+   النقطة: أسفل الـwick
+   ===================================================== */
 
 .low-label {
-    bottom: 55px;
-    right: 75px;
+    bottom: 48px;
+    right: 88px;
 }
 
 .low-label i {
@@ -636,28 +537,28 @@ body {
 
     display: block;
 
-    width: 110px;
+    width: 125px;
     height: 1px;
 
-    right: 35px;
-    top: -12px;
+    right: 37px;
+    top: -9px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
 
-    transform:
-        rotate(-8deg);
+    transform: rotate(-12deg);
 
     transform-origin: right center;
 }
 
 
-/* =========================================
+/* =====================================================
    UPPER WICK
-   ========================================= */
+   الخط يدخل للـwick من اليمين
+   ===================================================== */
 
 .upper-label {
     top: 145px;
-    right: 45px;
+    right: 42px;
 }
 
 .upper-label::before {
@@ -665,25 +566,26 @@ body {
 
     position: absolute;
 
-    width: 75px;
+    width: 90px;
     height: 1px;
 
     right: 100%;
     top: 50%;
 
-    margin-right: 10px;
+    margin-right: 12px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
 }
 
 
-/* =========================================
+/* =====================================================
    BODY
-   ========================================= */
+   الخط يدخل في وسط جسم الشمعة
+   ===================================================== */
 
 .body-label {
-    top: 275px;
-    right: 55px;
+    top: 278px;
+    right: 48px;
 }
 
 .body-label::before {
@@ -691,25 +593,26 @@ body {
 
     position: absolute;
 
-    width: 70px;
+    width: 95px;
     height: 1px;
 
     right: 100%;
     top: 50%;
 
-    margin-right: 10px;
+    margin-right: 12px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
 }
 
 
-/* =========================================
+/* =====================================================
    LOWER WICK
-   ========================================= */
+   الخط يدخل للـwick السفلي
+   ===================================================== */
 
 .lower-label {
     top: 405px;
-    left: 45px;
+    left: 42px;
 }
 
 .lower-label::after {
@@ -717,21 +620,21 @@ body {
 
     position: absolute;
 
-    width: 80px;
+    width: 90px;
     height: 1px;
 
     left: 100%;
     top: 50%;
 
-    margin-left: 10px;
+    margin-left: 12px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
 }
 
 
-/* =========================================
-   LAB BOTTOM
-   ========================================= */
+/* =====================================================
+   BOTTOM INFO
+   ===================================================== */
 
 .lab-bottom {
     position: absolute;
@@ -743,7 +646,6 @@ body {
     display: flex;
 
     justify-content: space-between;
-
     align-items: flex-end;
 
     z-index: 100;
@@ -784,9 +686,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    MOBILE
-   ========================================= */
+   ===================================================== */
 
 @media (max-width: 600px) {
 
@@ -822,7 +724,6 @@ body {
     .candle-stage {
         width: 100vw;
         height: 520px;
-
         top: 50%;
     }
 
@@ -845,9 +746,19 @@ body {
         left: 20px;
     }
 
+    .high-label i {
+        width: 75px;
+        left: 38px;
+    }
+
     .open-label {
         top: 205px;
         left: 15px;
+    }
+
+    .open-label i {
+        width: 75px;
+        left: 38px;
     }
 
     .close-label {
@@ -855,9 +766,19 @@ body {
         right: 15px;
     }
 
+    .close-label i {
+        width: 75px;
+        right: 40px;
+    }
+
     .low-label {
         bottom: 55px;
         right: 20px;
+    }
+
+    .low-label i {
+        width: 75px;
+        right: 25px;
     }
 
     .upper-label {
@@ -865,9 +786,17 @@ body {
         right: 15px;
     }
 
+    .upper-label::before {
+        width: 55px;
+    }
+
     .body-label {
         top: 270px;
         right: 15px;
+    }
+
+    .body-label::before {
+        width: 60px;
     }
 
     .lower-label {
@@ -875,9 +804,13 @@ body {
         left: 15px;
     }
 
+    .lower-label::after {
+        width: 55px;
+    }
+
     .lab-bottom {
         left: 20px;
         right: 20px;
         bottom: 20px;
     }
-    }
+}
