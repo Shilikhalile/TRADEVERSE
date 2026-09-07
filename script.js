@@ -1,283 +1,169 @@
-const startBtn =
-    document.getElementById("startBtn");
+const home = document.getElementById("home");
+const lab = document.getElementById("lab");
 
-const backBtn =
-    document.getElementById("backBtn");
+const startBtn = document.getElementById("startBtn");
+const backBtn = document.getElementById("backBtn");
 
-const home =
-    document.getElementById("home");
-
-const lab =
-    document.getElementById("lab");
-
-const candleStage =
-    document.getElementById("candleStage");
-
-const candleScene =
-    document.getElementById("candleScene");
+const candleScene = document.getElementById("candleScene");
 
 
-/* =====================================================
-   VARIABLES
-===================================================== */
+/* =========================================
+   OPEN LAB
+   ========================================= */
+
+startBtn.addEventListener("click", () => {
+    home.style.display = "none";
+    lab.classList.add("active");
+});
+
+
+/* =========================================
+   BACK
+   ========================================= */
+
+backBtn.addEventListener("click", () => {
+    lab.classList.remove("active");
+    home.style.display = "block";
+});
+
+
+/* =========================================
+   CANDLE MOVEMENT
+   ========================================= */
+
+let rotateX = 0;
+let rotateY = 0;
+
+let zoom = 1;
 
 let dragging = false;
 
 let lastX = 0;
 let lastY = 0;
 
-let rotateX = -8;
-let rotateY = -25;
-
-let zoom = 1;
-
-let velocity = 0;
+let velocityX = 0;
+let velocityY = 0;
 
 
-/* =====================================================
-   START LAB
-===================================================== */
+/* =========================================
+   UPDATE CANDLE
+   ========================================= */
 
-startBtn.addEventListener(
-    "click",
-    function () {
+function updateCandle() {
 
-        home.style.display = "none";
-
-        lab.style.display = "block";
-
-    }
-);
-
-
-/* =====================================================
-   BACK
-===================================================== */
-
-backBtn.addEventListener(
-    "click",
-    function () {
-
-        lab.style.display = "none";
-
-        home.style.display = "flex";
-
-    }
-);
-
-
-/* =====================================================
-   UPDATE SCENE
-===================================================== */
-
-function updateScene() {
-
-    candleScene.style.transform = `
-
-        translate(-50%, -50%)
-
-        scale(${zoom})
-
-        rotateX(${rotateX}deg)
-
-        rotateY(${rotateY}deg)
-
-    `;
-
+    candleScene.style.transform =
+        `translate(-50%, -50%)
+         scale(${zoom})
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)`;
 }
 
 
-/* =====================================================
-   DRAG START
-===================================================== */
+/* =========================================
+   POINTER DOWN
+   ========================================= */
 
-candleStage.addEventListener(
-    "pointerdown",
-    function (event) {
+candleScene.addEventListener("pointerdown", (e) => {
 
-        dragging = true;
+    dragging = true;
 
-        lastX =
-            event.clientX;
+    lastX = e.clientX;
+    lastY = e.clientY;
 
-        lastY =
-            event.clientY;
+    velocityX = 0;
+    velocityY = 0;
 
-        velocity = 0;
-
-        candleStage.setPointerCapture(
-            event.pointerId
-        );
-
-    }
-);
+    candleScene.setPointerCapture(e.pointerId);
+});
 
 
-/* =====================================================
-   DRAG MOVE
-===================================================== */
+/* =========================================
+   POINTER MOVE
+   ========================================= */
 
-candleStage.addEventListener(
-    "pointermove",
-    function (event) {
+candleScene.addEventListener("pointermove", (e) => {
 
-        if (!dragging) {
-            return;
-        }
+    if (!dragging) return;
 
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
 
-        const dx =
-            event.clientX -
-            lastX;
+    rotateY += dx * 0.8;
+    rotateX -= dy * 0.8;
 
+    velocityY = dx * 0.8;
+    velocityX = -dy * 0.8;
 
-        const dy =
-            event.clientY -
-            lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
 
-
-        /* HORIZONTAL ROTATION */
-
-        rotateY +=
-            dx * 1.8;
+    updateCandle();
+});
 
 
-        /* VERTICAL ROTATION */
+/* =========================================
+   POINTER UP
+   ========================================= */
 
-        rotateX -=
-            dy * 1.2;
-
-
-        /* LIMIT */
-
-        rotateX =
-            Math.max(
-                -70,
-                Math.min(
-                    70,
-                    rotateX
-                )
-            );
-
-
-        /* MOMENTUM */
-
-        velocity =
-            dx * 0.5;
-
-
-        lastX =
-            event.clientX;
-
-        lastY =
-            event.clientY;
-
-
-        updateScene();
-
-    }
-);
-
-
-/* =====================================================
-   DRAG END
-===================================================== */
-
-function stopDrag() {
+candleScene.addEventListener("pointerup", (e) => {
 
     dragging = false;
 
-}
+    candleScene.releasePointerCapture(e.pointerId);
+});
 
 
-candleStage.addEventListener(
-    "pointerup",
-    stopDrag
-);
+candleScene.addEventListener("pointercancel", () => {
+
+    dragging = false;
+});
 
 
-candleStage.addEventListener(
-    "pointercancel",
-    stopDrag
-);
-
-
-/* =====================================================
+/* =========================================
    ZOOM
-===================================================== */
+   ========================================= */
 
-candleStage.addEventListener(
+candleScene.addEventListener(
     "wheel",
-    function (event) {
+    (e) => {
 
-        event.preventDefault();
+        e.preventDefault();
 
+        if (e.deltaY < 0) {
+            zoom += 0.08;
+        } else {
+            zoom -= 0.08;
+        }
 
-        zoom -=
-            event.deltaY * 0.001;
+        zoom = Math.max(.55, Math.min(1.8, zoom));
 
-
-        zoom =
-            Math.max(
-                0.6,
-                Math.min(
-                    1.5,
-                    zoom
-                )
-            );
-
-
-        updateScene();
-
+        updateCandle();
     },
-    {
-        passive: false
-    }
+    { passive: false }
 );
 
 
-/* =====================================================
-   AUTO ROTATION
-===================================================== */
+/* =========================================
+   AUTO ROTATION + MOMENTUM
+   ========================================= */
 
 function animate() {
 
     if (!dragging) {
 
-        /* MOMENTUM */
+        rotateY += 0.12;
 
-        rotateY += velocity;
+        rotateY += velocityY * 0.03;
+        rotateX += velocityX * 0.03;
 
-        velocity *= 0.94;
+        velocityX *= 0.94;
+        velocityY *= 0.94;
 
-
-        /* AUTO ROTATION */
-
-        if (
-            Math.abs(velocity) < 0.03
-        ) {
-
-            rotateY += 0.25;
-
-        }
-
-
-        updateScene();
-
+        updateCandle();
     }
 
-
-    requestAnimationFrame(
-        animate
-    );
-
+    requestAnimationFrame(animate);
 }
 
-
-/* =====================================================
-   START
-===================================================== */
-
-updateScene();
 
 animate();
