@@ -9,20 +9,19 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-
     background: #03050a;
     color: white;
-
     font-family: Arial, Helvetica, sans-serif;
 }
 
 
 /* =========================
-   MAIN PAGE
+   HOME
 ========================= */
 
 .page {
     position: relative;
+    z-index: 5;
 
     width: 100vw;
     height: 100vh;
@@ -35,11 +34,6 @@ body {
 
     overflow: hidden;
 }
-
-
-/* =========================
-   BACKGROUND
-========================= */
 
 .page::before {
     content: "";
@@ -58,10 +52,6 @@ body {
 }
 
 
-/* =========================
-   HEADER
-========================= */
-
 header {
     position: relative;
     z-index: 2;
@@ -74,29 +64,21 @@ header {
 .logo {
     font-size: 18px;
     font-weight: 700;
-
     letter-spacing: 4px;
 }
 
 .status {
     font-size: 10px;
-
     letter-spacing: 3px;
-
     opacity: 0.45;
 }
 
-
-/* =========================
-   MAIN
-========================= */
 
 main {
     position: relative;
     z-index: 2;
 
     max-width: 900px;
-
     margin-top: 80px;
 }
 
@@ -104,27 +86,18 @@ main {
     margin-bottom: 20px;
 
     font-size: 10px;
-
     letter-spacing: 5px;
-
     opacity: 0.35;
 }
 
-
 h1 {
-    font-size: clamp(
-        55px,
-        8vw,
-        125px
-    );
+    font-size: clamp(55px, 8vw, 125px);
 
     line-height: 0.88;
-
     font-weight: 600;
 
     letter-spacing: -6px;
 }
-
 
 p {
     margin-top: 30px;
@@ -132,16 +105,11 @@ p {
     max-width: 500px;
 
     font-size: 15px;
-
     line-height: 1.7;
 
     opacity: 0.55;
 }
 
-
-/* =========================
-   BUTTON
-========================= */
 
 #startBtn {
     margin-top: 35px;
@@ -152,11 +120,9 @@ p {
 
     color: white;
 
-    border: 1px solid
-        rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.35);
 
     font-size: 10px;
-
     letter-spacing: 3px;
 
     cursor: pointer;
@@ -167,36 +133,167 @@ p {
         transform 0.3s ease;
 }
 
-
 #startBtn:hover {
     background: white;
-
     color: #03050a;
 
-    transform:
-        translateX(6px);
+    transform: translateX(6px);
 }
 
-
-/* =========================
-   FOOTER
-========================= */
 
 footer {
     position: relative;
     z-index: 2;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     font-size: 9px;
-
     letter-spacing: 3px;
 
     opacity: 0.35;
+}
+
+
+/* =========================
+   3D LAB
+========================= */
+
+#lab {
+    position: fixed;
+    inset: 0;
+
+    z-index: 20;
+
+    display: none;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: #02040a;
+
+    overflow: hidden;
+}
+
+
+#space {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+
+/* =========================
+   LAB UI
+========================= */
+
+.lab-ui {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    padding: 35px 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.lab-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.65;
+}
+
+
+#backBtn {
+    pointer-events: auto;
+
+    padding: 12px 20px;
+
+    background: transparent;
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+#backBtn:hover {
+    background: white;
+    color: #02040a;
+}
+
+
+.lab-center {
+    text-align: center;
+
+    margin-top: -20px;
+}
+
+
+.lesson-number {
+    margin-bottom: 15px;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    opacity: 0.4;
+}
+
+
+.lab-center h2 {
+    font-size: clamp(45px, 7vw, 90px);
+
+    font-weight: 500;
+
+    letter-spacing: -4px;
+
+    line-height: 0.9;
+}
+
+
+.lab-center p {
+    margin: 20px auto 0;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.4;
+}
+
+
+.lab-bottom {
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.3;
 }
 
 
@@ -212,24 +309,46 @@ footer {
 
     .status {
         font-size: 7px;
-
         letter-spacing: 2px;
     }
 
     h1 {
         font-size: 55px;
-
         letter-spacing: -3px;
     }
 
-    p {
+    main {
+        margin-top: 40px;
+    }
+
+    main p {
         font-size: 13px;
     }
 
     footer {
         font-size: 6px;
-
         letter-spacing: 2px;
     }
 
+    .lab-ui {
+        padding: 25px;
+    }
+
+    .lab-top {
+        font-size: 7px;
+    }
+
+    #backBtn {
+        padding: 10px 14px;
+        font-size: 7px;
+    }
+
+    .lab-center h2 {
+        font-size: 48px;
+        letter-spacing: -3px;
+    }
+
+    .lab-center p {
+        font-size: 9px;
+    }
 }
