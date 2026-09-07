@@ -9,7 +9,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: #03050a;
+    background: #02040a;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -51,7 +51,6 @@ body {
     pointer-events: none;
 }
 
-
 header {
     position: relative;
     z-index: 2;
@@ -73,7 +72,6 @@ header {
     opacity: 0.45;
 }
 
-
 main {
     position: relative;
     z-index: 2;
@@ -92,14 +90,12 @@ main {
 
 h1 {
     font-size: clamp(55px, 8vw, 125px);
-
     line-height: 0.88;
     font-weight: 600;
-
     letter-spacing: -6px;
 }
 
-p {
+main p {
     margin-top: 30px;
 
     max-width: 500px;
@@ -109,7 +105,6 @@ p {
 
     opacity: 0.55;
 }
-
 
 #startBtn {
     margin-top: 35px;
@@ -127,26 +122,20 @@ p {
 
     cursor: pointer;
 
-    transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        transform 0.3s ease;
+    transition: 0.3s ease;
 }
 
 #startBtn:hover {
     background: white;
     color: #03050a;
-
     transform: translateX(6px);
 }
-
 
 footer {
     position: relative;
     z-index: 2;
 
     display: flex;
-    align-items: center;
     justify-content: space-between;
 
     font-size: 9px;
@@ -157,7 +146,7 @@ footer {
 
 
 /* =========================
-   3D LAB
+   CANDLE LAB
 ========================= */
 
 #lab {
@@ -171,11 +160,19 @@ footer {
     width: 100vw;
     height: 100vh;
 
-    background: #02040a;
-
     overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(20, 80, 55, 0.12),
+            transparent 42%
+        ),
+        #02040a;
 }
 
+
+/* THREE.JS CANVAS */
 
 #space {
     position: absolute;
@@ -186,11 +183,17 @@ footer {
     height: 100%;
 
     display: block;
+
+    cursor: grab;
+}
+
+#space:active {
+    cursor: grabbing;
 }
 
 
 /* =========================
-   LAB UI
+   LAB INTERFACE
 ========================= */
 
 .lab-ui {
@@ -198,20 +201,27 @@ footer {
 
     inset: 0;
 
+    z-index: 10;
+
+    padding: 32px 42px;
+
     pointer-events: none;
 
-    padding: 35px 45px;
-
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
 }
 
+
+/* TOP */
 
 .lab-top {
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     font-size: 10px;
@@ -221,13 +231,12 @@ footer {
     opacity: 0.65;
 }
 
-
 #backBtn {
     pointer-events: auto;
 
-    padding: 12px 20px;
+    padding: 11px 19px;
 
-    background: transparent;
+    background: rgba(0,0,0,0.2);
 
     color: white;
 
@@ -248,15 +257,27 @@ footer {
 }
 
 
+/* =========================
+   CENTER TEXT
+========================= */
+
 .lab-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+
     text-align: center;
 
-    margin-top: -20px;
+    pointer-events: none;
 }
 
-
-.lesson-number {
-    margin-bottom: 15px;
+.lab-center .lesson-number {
+    margin-bottom: 13px;
 
     font-size: 9px;
 
@@ -265,30 +286,64 @@ footer {
     opacity: 0.4;
 }
 
-
 .lab-center h2 {
-    font-size: clamp(45px, 7vw, 90px);
+    font-size: clamp(35px, 5vw, 65px);
 
     font-weight: 500;
 
-    letter-spacing: -4px;
+    letter-spacing: 8px;
 
-    line-height: 0.9;
+    opacity: 0.9;
+
+    text-shadow:
+        0 0 25px rgba(255,255,255,0.12);
 }
 
 
+/* Description */
+
 .lab-center p {
-    margin: 20px auto 0;
+    margin: 18px auto 0;
 
-    font-size: 12px;
+    font-size: 10px;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 
     opacity: 0.4;
 }
 
 
+/* =========================
+   CANDLE INFORMATION
+========================= */
+
+.lab-center::after {
+    content:
+        "OPEN  108.40    HIGH  112.80    LOW  106.20    CLOSE  111.70";
+
+    display: block;
+
+    margin-top: 28px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.35;
+}
+
+
+/* =========================
+   BOTTOM
+========================= */
+
 .lab-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
     font-size: 8px;
 
     letter-spacing: 3px;
@@ -331,7 +386,7 @@ footer {
     }
 
     .lab-ui {
-        padding: 25px;
+        padding: 24px;
     }
 
     .lab-top {
@@ -339,16 +394,25 @@ footer {
     }
 
     #backBtn {
-        padding: 10px 14px;
+        padding: 9px 13px;
         font-size: 7px;
     }
 
     .lab-center h2 {
-        font-size: 48px;
-        letter-spacing: -3px;
+        font-size: 34px;
+        letter-spacing: 5px;
+    }
+
+    .lab-center::after {
+        font-size: 6px;
+        letter-spacing: 1px;
     }
 
     .lab-center p {
-        font-size: 9px;
+        font-size: 8px;
+    }
+
+    .lab-bottom {
+        font-size: 6px;
     }
 }
