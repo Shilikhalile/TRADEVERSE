@@ -1,7 +1,7 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
 
 /* =========================================
-   BASIC SETUP
+BASIC SETUP
 ========================================= */
 
 const canvas = document.getElementById("scene");
@@ -11,188 +11,186 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x03050a);
 
 const camera = new THREE.PerspectiveCamera(
-  55,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
+55,
+window.innerWidth / window.innerHeight,
+0.1,
+1000
 );
 
 camera.position.set(0, 1.5, 9);
 
 const renderer = new THREE.WebGLRenderer({
-  canvas,
-  antialias: true,
-  alpha: true
+canvas,
+antialias: true,
+alpha: true
 });
 
 renderer.setPixelRatio(
-  Math.min(window.devicePixelRatio, 2)
+Math.min(window.devicePixelRatio, 2)
 );
 
 renderer.setSize(
-  window.innerWidth,
-  window.innerHeight
+window.innerWidth,
+window.innerHeight
 );
 
 /* =========================================
-   LIGHT
+LIGHT
 ========================================= */
 
 const ambientLight = new THREE.AmbientLight(
-  0xffffff,
-  0.35
+0xffffff,
+0.35
 );
 
 scene.add(ambientLight);
 
 const mainLight = new THREE.PointLight(
-  0xffffff,
-  35,
-  30
+0xffffff,
+35,
+30
 );
 
 mainLight.position.set(0, 4, 3);
 
 scene.add(mainLight);
 
-
 /* =========================================
-   FLOOR
+FLOOR
 ========================================= */
 
 const floorGeometry = new THREE.PlaneGeometry(
-  40,
-  40
+40,
+40
 );
 
 const floorMaterial = new THREE.MeshStandardMaterial({
-  color: 0x050811,
-  metalness: 0.8,
-  roughness: 0.55
+color: 0x050811,
+metalness: 0.8,
+roughness: 0.55
 });
 
 const floor = new THREE.Mesh(
-  floorGeometry,
-  floorMaterial
+floorGeometry,
+floorMaterial
 );
 
 floor.rotation.x = -Math.PI / 2;
+
 floor.position.y = -2;
 
 scene.add(floor);
 
-
 /* =========================================
-   GRID
+GRID
 ========================================= */
 
 const grid = new THREE.GridHelper(
-  40,
-  40,
-  0x263044,
-  0x101624
+40,
+40,
+0x263044,
+0x101624
 );
 
 grid.position.y = -1.98;
 
 scene.add(grid);
 
-
 /* =========================================
-   FLOATING PARTICLES
+FLOATING PARTICLES
 ========================================= */
 
 const particleCount = 900;
 
 const particleGeometry =
-  new THREE.BufferGeometry();
+new THREE.BufferGeometry();
 
-const positions = new Float32Array(
-  particleCount * 3
+const positions =
+new Float32Array(
+particleCount * 3
 );
 
 for (let i = 0; i < particleCount; i++) {
 
-  positions[i * 3] =
-    (Math.random() - 0.5) * 30;
+positions[i * 3] =
+(Math.random() - 0.5) * 30;
 
-  positions[i * 3 + 1] =
-    Math.random() * 15 - 4;
+positions[i * 3 + 1] =
+Math.random() * 15 - 4;
 
-  positions[i * 3 + 2] =
-    (Math.random() - 0.5) * 25;
+positions[i * 3 + 2] =
+(Math.random() - 0.5) * 25;
 }
 
 particleGeometry.setAttribute(
-  "position",
-  new THREE.BufferAttribute(
-    positions,
-    3
-  )
+"position",
+new THREE.BufferAttribute(
+positions,
+3
+)
 );
 
 const particleMaterial =
-  new THREE.PointsMaterial({
-    color: 0x8fa4c7,
-    size: 0.025,
-    transparent: true,
-    opacity: 0.7
-  });
+new THREE.PointsMaterial({
+color: 0x8fa4c7,
+size: 0.025,
+transparent: true,
+opacity: 0.7
+});
 
-const particles = new THREE.Points(
-  particleGeometry,
-  particleMaterial
+const particles =
+new THREE.Points(
+particleGeometry,
+particleMaterial
 );
 
 scene.add(particles);
 
-
 /* =========================================
-   FLOATING RINGS
+FLOATING RINGS
 ========================================= */
 
 const rings = [];
 
 for (let i = 0; i < 5; i++) {
 
-  const geometry =
-    new THREE.TorusGeometry(
-      1.5 + i * 0.5,
-      0.008,
-      12,
-      100
-    );
+const geometry =
+new THREE.TorusGeometry(
+1.5 + i * 0.5,
+0.008,
+12,
+100
+);
 
-  const material =
-    new THREE.MeshBasicMaterial({
-      color: 0x50688f,
-      transparent: true,
-      opacity: 0.18
-    });
+const material =
+new THREE.MeshBasicMaterial({
+color: 0x50688f,
+transparent: true,
+opacity: 0.18
+});
 
-  const ring =
-    new THREE.Mesh(
-      geometry,
-      material
-    );
+const ring =
+new THREE.Mesh(
+geometry,
+material
+);
 
-  ring.position.set(
-    2,
-    -0.2 + i * 0.15,
-    -2 - i * 0.4
-  );
+ring.position.set(
+2,
+-0.2 + i * 0.15,
+-2 - i * 0.4
+);
 
-  ring.rotation.x =
-    Math.PI / 2 + i * 0.1;
+ring.rotation.x =
+Math.PI / 2 + i * 0.1;
 
-  scene.add(ring);
+scene.add(ring);
 
-  rings.push(ring);
+rings.push(ring);
 }
 
-
 /* =========================================
-   MOUSE
+MOUSE
 ========================================= */
 
 let mouseX = 0;
@@ -202,163 +200,216 @@ let targetX = 0;
 let targetY = 0;
 
 window.addEventListener(
-  "mousemove",
-  (event) => {
+"mousemove",
+(event) => {
 
-    mouseX =
-      (event.clientX / window.innerWidth - 0.5);
+mouseX =
+  (event.clientX /
+    window.innerWidth) - 0.5;
 
-    mouseY =
-      (event.clientY / window.innerHeight - 0.5);
-  }
+mouseY =
+  (event.clientY /
+    window.innerHeight) - 0.5;
+
+}
 );
 
-
 /* =========================================
-   START BUTTON
+PAGE ELEMENTS
 ========================================= */
 
 const startButton =
-  document.getElementById("startBtn");
+document.getElementById("startBtn");
 
 const intro =
-  document.getElementById("intro");
+document.getElementById("intro");
 
-startButton.addEventListener(
-  "click",
-  () => {
+const homeUI =
+document.getElementById("homeUI");
 
-    intro.style.display = "flex";
+const candleLab =
+document.getElementById("candleLab");
 
-    requestAnimationFrame(() => {
-      intro.style.opacity = "1";
-    });
-
-    setTimeout(() => {
-
-      intro.style.opacity = "0";
-
-      setTimeout(() => {
-        intro.style.display = "none";
-      }, 1000);
-
-    }, 2200);
-  }
-);
-
+const backButton =
+document.getElementById("backBtn");
 
 /* =========================================
-   ANIMATION
+START LEARNING
 ========================================= */
 
-const clock = new THREE.Clock();
+startButton.addEventListener(
+"click",
+() => {
+
+intro.style.display = "flex";
+
+requestAnimationFrame(() => {
+  intro.style.opacity = "1";
+});
+
+
+setTimeout(() => {
+
+  intro.style.opacity = "0";
+
+  setTimeout(() => {
+
+    intro.style.display = "none";
+
+    homeUI.style.opacity = "0";
+    homeUI.style.pointerEvents = "none";
+
+    candleLab.style.display = "flex";
+
+    requestAnimationFrame(() => {
+      candleLab.style.opacity = "1";
+    });
+
+  }, 800);
+
+}, 1800);
+
+}
+);
+
+/* =========================================
+BACK BUTTON
+========================================= */
+
+backButton.addEventListener(
+"click",
+() => {
+
+candleLab.style.opacity = "0";
+
+setTimeout(() => {
+
+  candleLab.style.display = "none";
+
+  homeUI.style.opacity = "1";
+  homeUI.style.pointerEvents = "auto";
+
+}, 800);
+
+}
+);
+
+/* =========================================
+ANIMATION
+========================================= */
+
+const clock =
+new THREE.Clock();
 
 function animate() {
 
-  requestAnimationFrame(animate);
+requestAnimationFrame(animate);
 
-  const elapsed =
-    clock.getElapsedTime();
+const elapsed =
+clock.getElapsedTime();
 
+/* Smooth mouse */
 
-  /* Smooth mouse movement */
+targetX +=
+(mouseX * 0.8 - targetX) *
+0.035;
 
-  targetX +=
-    (mouseX * 0.8 - targetX) * 0.035;
+targetY +=
+(mouseY * 0.45 - targetY) *
+0.035;
 
-  targetY +=
-    (mouseY * 0.45 - targetY) * 0.035;
+camera.position.x =
+targetX;
 
+camera.position.y =
+1.5 - targetY;
 
-  camera.position.x =
-    targetX;
+camera.lookAt(
+targetX * 0.3,
+0,
+-1
+);
 
-  camera.position.y =
-    1.5 - targetY;
+/* Particles */
 
+particles.rotation.y =
+elapsed * 0.015;
 
-  camera.lookAt(
-    targetX * 0.3,
-    0,
-    -1
-  );
+particles.rotation.x =
+Math.sin(
+elapsed * 0.08
+) * 0.03;
 
+/* Rings */
 
-  /* Particles */
+rings.forEach(
+(ring, index) => {
 
-  particles.rotation.y =
-    elapsed * 0.015;
+  ring.rotation.z =
+    elapsed *
+    (0.08 + index * 0.015);
 
-  particles.rotation.x =
-    Math.sin(elapsed * 0.08) * 0.03;
+  ring.position.y =
+    -0.2 +
+    index * 0.15 +
+    Math.sin(
+      elapsed * 0.6 + index
+    ) * 0.05;
 
+}
 
-  /* Rings */
+);
 
-  rings.forEach((ring, index) => {
-
-    ring.rotation.z =
-      elapsed * (0.08 + index * 0.015);
-
-    ring.position.y =
-      -0.2 +
-      index * 0.15 +
-      Math.sin(
-        elapsed * 0.6 + index
-      ) * 0.05;
-  });
-
-
-  renderer.render(
-    scene,
-    camera
-  );
+renderer.render(
+scene,
+camera
+);
 }
 
 animate();
 
-
 /* =========================================
-   RESIZE
+RESIZE
 ========================================= */
 
 window.addEventListener(
-  "resize",
-  () => {
+"resize",
+() => {
 
-    camera.aspect =
-      window.innerWidth /
-      window.innerHeight;
+camera.aspect =
+  window.innerWidth /
+  window.innerHeight;
 
-    camera.updateProjectionMatrix();
+camera.updateProjectionMatrix();
 
-    renderer.setSize(
-      window.innerWidth,
-      window.innerHeight
-    );
-  }
+renderer.setSize(
+  window.innerWidth,
+  window.innerHeight
 );
 
+}
+);
 
 /* =========================================
-   REMOVE LOADING SCREEN
+REMOVE LOADING
 ========================================= */
 
 window.addEventListener(
-  "load",
-  () => {
+"load",
+() => {
 
-    setTimeout(() => {
+setTimeout(() => {
 
-      const loading =
-        document.getElementById("loading");
+  const loading =
+    document.getElementById("loading");
 
-      loading.style.opacity = "0";
+  loading.style.opacity = "0";
 
-      setTimeout(() => {
-        loading.style.display = "none";
-      }, 800);
+  setTimeout(() => {
+    loading.style.display = "none";
+  }, 800);
 
-    }, 900);
-  }
+}, 900);
+
+}
 );
