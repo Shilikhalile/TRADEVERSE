@@ -8,7 +8,7 @@ const candleScene = document.getElementById("candleScene");
 
 
 // ================================
-// OPEN MARKET LAB
+// OPEN LAB
 // ================================
 
 startBtn.addEventListener("click", () => {
@@ -18,7 +18,7 @@ startBtn.addEventListener("click", () => {
 
 
 // ================================
-// BACK TO HOME
+// BACK
 // ================================
 
 backBtn.addEventListener("click", () => {
@@ -28,7 +28,7 @@ backBtn.addEventListener("click", () => {
 
 
 // ================================
-// CANDLE 3D MOVEMENT
+// CANDLE MOVEMENT
 // ================================
 
 let rotateX = 0;
@@ -46,11 +46,10 @@ let velocityY = 0;
 
 
 // ================================
-// UPDATE CANDLE
+// UPDATE
 // ================================
 
 function updateCandle() {
-
     candleScene.style.transform =
         `translate(-50%, -50%)
          scale(${zoom})
@@ -60,7 +59,7 @@ function updateCandle() {
 
 
 // ================================
-// START DRAG
+// TOUCH / MOUSE DOWN
 // ================================
 
 candleScene.addEventListener("pointerdown", (e) => {
@@ -80,7 +79,7 @@ candleScene.addEventListener("pointerdown", (e) => {
 
 
 // ================================
-// DRAG CANDLE
+// MOVE
 // ================================
 
 candleScene.addEventListener("pointermove", (e) => {
@@ -90,14 +89,14 @@ candleScene.addEventListener("pointermove", (e) => {
     const dx = e.clientX - lastX;
     const dy = e.clientY - lastY;
 
-    rotateY += dx * 0.9;
-    rotateX -= dy * 0.9;
+    // أسرع
+    rotateY += dx * 1.5;
+    rotateX -= dy * 1.5;
 
-    // Prevent extreme vertical rotation
     rotateX = Math.max(-70, Math.min(70, rotateX));
 
-    velocityY = dx * 0.9;
-    velocityX = -dy * 0.9;
+    velocityY = dx * 1.5;
+    velocityX = -dy * 1.5;
 
     lastX = e.clientX;
     lastY = e.clientY;
@@ -107,7 +106,7 @@ candleScene.addEventListener("pointermove", (e) => {
 
 
 // ================================
-// END DRAG
+// RELEASE
 // ================================
 
 candleScene.addEventListener("pointerup", (e) => {
@@ -118,9 +117,7 @@ candleScene.addEventListener("pointerup", (e) => {
 
     try {
         candleScene.releasePointerCapture(e.pointerId);
-    } catch (error) {
-        // Nothing
-    }
+    } catch (error) {}
 });
 
 
@@ -136,46 +133,42 @@ candleScene.addEventListener("pointercancel", () => {
 // ZOOM
 // ================================
 
-candleScene.addEventListener(
-    "wheel",
-    (e) => {
+candleScene.addEventListener("wheel", (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
-        if (e.deltaY < 0) {
-            zoom += 0.08;
-        } else {
-            zoom -= 0.08;
-        }
+    if (e.deltaY < 0) {
+        zoom += 0.10;
+    } else {
+        zoom -= 0.10;
+    }
 
-        zoom = Math.max(0.55, Math.min(1.8, zoom));
+    zoom = Math.max(0.55, Math.min(1.8, zoom));
 
-        updateCandle();
-    },
-    { passive: false }
-);
+    updateCandle();
+
+}, { passive: false });
 
 
 // ================================
-// AUTO ROTATION + MOMENTUM
+// AUTO ROTATION
 // ================================
 
 function animate() {
 
     if (!dragging) {
 
-        // Slow automatic rotation
-        rotateY += 0.12;
+        // دوران أسرع شوية
+        rotateY += 0.20;
 
-        // Continue movement after releasing
-        rotateY += velocityY * 0.03;
-        rotateX += velocityX * 0.03;
+        // Momentum
+        rotateY += velocityY * 0.04;
+        rotateX += velocityX * 0.04;
 
         rotateX = Math.max(-70, Math.min(70, rotateX));
 
-        // Slowly stop momentum
-        velocityX *= 0.94;
-        velocityY *= 0.94;
+        velocityX *= 0.92;
+        velocityY *= 0.92;
 
         updateCandle();
     }
@@ -183,6 +176,4 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-
-// Start animation
 animate();
