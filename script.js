@@ -1,55 +1,65 @@
-const button = document.getElementById("startBtn");
 const home = document.getElementById("home");
 const lab = document.getElementById("lab");
+const startBtn = document.getElementById("startBtn");
 const backBtn = document.getElementById("backBtn");
 const canvas = document.getElementById("space");
+
 
 let scene;
 let camera;
 let renderer;
+
 let candleGroup;
+let stars;
+
+let initialized = false;
 
 let isDragging = false;
+
 let previousX = 0;
 let previousY = 0;
 
-let targetRotX = 0.15;
-let targetRotY = 0.35;
+let targetRotationX = 0.12;
+let targetRotationY = 0.35;
 
-let zoom = 7;
+let targetZoom = 7;
+let currentZoom = 7;
 
 
 /* =========================
-   OPEN LAB
+   START LAB
 ========================= */
 
-button.addEventListener("click", function () {
+startBtn.addEventListener("click", function () {
 
     home.style.display = "none";
     lab.style.display = "block";
 
-    if (!scene) {
-        create3D();
+    if (!initialized) {
+        createLab();
+        initialized = true;
     }
+
 });
 
 
 /* =========================
-   BACK
+   BACK HOME
 ========================= */
 
 backBtn.addEventListener("click", function () {
 
     lab.style.display = "none";
     home.style.display = "flex";
+
 });
 
 
 /* =========================
-   CREATE 3D
+   CREATE LAB
 ========================= */
 
-function create3D() {
+function createLab() {
 
     scene = new THREE.Scene();
 
@@ -59,7 +69,7 @@ function create3D() {
     /* CAMERA */
 
     camera = new THREE.PerspectiveCamera(
-        45,
+        42,
         window.innerWidth / window.innerHeight,
         0.1,
         100
@@ -68,7 +78,7 @@ function create3D() {
     camera.position.set(
         0,
         0,
-        zoom
+        currentZoom
     );
 
 
@@ -90,12 +100,12 @@ function create3D() {
     );
 
 
-    /* LIGHT */
+    /* LIGHTS */
 
     const ambientLight =
         new THREE.AmbientLight(
             0xffffff,
-            1.4
+            1.8
         );
 
     scene.add(ambientLight);
@@ -104,13 +114,13 @@ function create3D() {
     const greenLight =
         new THREE.PointLight(
             0x20ff88,
-            12,
-            15
+            18,
+            18
         );
 
     greenLight.position.set(
-        2,
         3,
+        4,
         4
     );
 
@@ -120,67 +130,101 @@ function create3D() {
     const whiteLight =
         new THREE.PointLight(
             0xffffff,
-            8,
-            12
+            10,
+            16
         );
 
     whiteLight.position.set(
-        -3,
-        2,
-        4
+        -4,
+        3,
+        5
     );
 
     scene.add(whiteLight);
 
 
-    /* CANDLE */
+    const backLight =
+        new THREE.PointLight(
+            0x0aff85,
+            8,
+            14
+        );
 
-    createCandle();
+    backLight.position.set(
+        0,
+        1,
+        -4
+    );
 
+    scene.add(backLight);
 
-    /* STARS */
 
     createStars();
 
+    createCandle();
 
-    /* EVENTS */
+    createFloor();
 
-    canvas.addEventListener(
-        "pointerdown",
-        pointerDown
-    );
-
-    canvas.addEventListener(
-        "pointermove",
-        pointerMove
-    );
-
-    canvas.addEventListener(
-        "pointerup",
-        pointerUp
-    );
-
-    canvas.addEventListener(
-        "pointercancel",
-        pointerUp
-    );
-
-    canvas.addEventListener(
-        "wheel",
-        wheel,
-        {
-            passive: false
-        }
-    );
-
+    setupControls();
 
     window.addEventListener(
         "resize",
         resize
     );
 
+    animate(0);
+}
 
-    animate();
+
+/* =========================
+   STARS
+========================= */
+
+function createStars() {
+
+    const geometry =
+        new THREE.BufferGeometry();
+
+    const positions = [];
+
+    for (let i = 0; i < 2200; i++) {
+
+        positions.push(
+            (Math.random() - 0.5) * 50,
+            (Math.random() - 0.5) * 32,
+            (Math.random() - 0.5) * 45
+        );
+    }
+
+    geometry.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(
+            positions,
+            3
+        )
+    );
+
+
+    const material =
+        new THREE.PointsMaterial({
+
+            color: 0xb6cbe5,
+
+            size: 0.035,
+
+            transparent: true,
+
+            opacity: 0.8
+        });
+
+
+    stars =
+        new THREE.Points(
+            geometry,
+            material
+        );
+
+    scene.add(stars);
 }
 
 
@@ -198,25 +242,24 @@ function createCandle() {
 
     const bodyGeometry =
         new THREE.BoxGeometry(
-            1.45,
-            2.8,
-            1.45
+            1.55,
+            3.2,
+            1.55
         );
 
 
     const bodyMaterial =
         new THREE.MeshStandardMaterial({
 
-            color: 0x16d978,
+            color: 0x12d875,
 
-            roughness: 0.28,
+            roughness: 0.25,
 
-            metalness: 0.25,
+            metalness: 0.2,
 
             emissive: 0x06351f,
 
-            emissiveIntensity: 0.5
-
+            emissiveIntensity: 0.65
         });
 
 
@@ -226,7 +269,6 @@ function createCandle() {
             bodyMaterial
         );
 
-
     candleGroup.add(body);
 
 
@@ -234,9 +276,9 @@ function createCandle() {
 
     const topGeometry =
         new THREE.CylinderGeometry(
-            0.73,
-            0.73,
-            0.06,
+            0.775,
+            0.775,
+            0.08,
             64
         );
 
@@ -244,16 +286,15 @@ function createCandle() {
     const topMaterial =
         new THREE.MeshStandardMaterial({
 
-            color: 0x31ff91,
+            color: 0x38ff98,
 
-            roughness: 0.2,
+            roughness: 0.18,
 
-            metalness: 0.2,
+            metalness: 0.15,
 
             emissive: 0x0b542f,
 
-            emissiveIntensity: 0.5
-
+            emissiveIntensity: 0.6
         });
 
 
@@ -263,8 +304,7 @@ function createCandle() {
             topMaterial
         );
 
-
-    top.position.y = 1.43;
+    top.position.y = 1.64;
 
     candleGroup.add(top);
 
@@ -273,8 +313,8 @@ function createCandle() {
 
     const wickGeometry =
         new THREE.CylinderGeometry(
-            0.07,
-            0.07,
+            0.065,
+            0.065,
             0.65,
             20
         );
@@ -282,7 +322,9 @@ function createCandle() {
 
     const wickMaterial =
         new THREE.MeshStandardMaterial({
-            color: 0xd8e8df,
+
+            color: 0xd8e4de,
+
             roughness: 0.8
         });
 
@@ -293,17 +335,16 @@ function createCandle() {
             wickMaterial
         );
 
-
-    wick.position.y = 1.78;
+    wick.position.y = 2.0;
 
     candleGroup.add(wick);
 
 
-    /* SMALL GLOW */
+    /* FLAME GLOW */
 
     const glowGeometry =
         new THREE.SphereGeometry(
-            0.16,
+            0.18,
             32,
             32
         );
@@ -312,12 +353,11 @@ function createCandle() {
     const glowMaterial =
         new THREE.MeshBasicMaterial({
 
-            color: 0x55ffaa,
+            color: 0x39ff91,
 
             transparent: true,
 
             opacity: 0.7
-
         });
 
 
@@ -327,83 +367,182 @@ function createCandle() {
             glowMaterial
         );
 
-
-    glow.position.y = 2.1;
+    glow.position.y = 2.38;
 
     candleGroup.add(glow);
 
 
-    candleGroup.position.y = 0;
+    /* GLOW LIGHT */
+
+    const candleLight =
+        new THREE.PointLight(
+            0x32ff91,
+            3,
+            5
+        );
+
+    candleLight.position.y = 2.35;
+
+    candleGroup.add(candleLight);
+
+
+    /* FLOOR SHADOW */
+
+    const shadowGeometry =
+        new THREE.CircleGeometry(
+            1.6,
+            64
+        );
+
+
+    const shadowMaterial =
+        new THREE.MeshBasicMaterial({
+
+            color: 0x000000,
+
+            transparent: true,
+
+            opacity: 0.35,
+
+            depthWrite: false
+        });
+
+
+    const shadow =
+        new THREE.Mesh(
+            shadowGeometry,
+            shadowMaterial
+        );
+
+    shadow.rotation.x =
+        -Math.PI / 2;
+
+    shadow.position.y =
+        -1.65;
+
+    candleGroup.add(shadow);
+
+
+    candleGroup.position.set(
+        0,
+        0,
+        0
+    );
+
 
     scene.add(candleGroup);
 }
 
 
 /* =========================
-   STARS
+   FLOOR
 ========================= */
 
-function createStars() {
+function createFloor() {
 
-    const geometry =
-        new THREE.BufferGeometry();
-
-    const positions = [];
-
-    for (let i = 0; i < 1600; i++) {
-
-        positions.push(
-            (Math.random() - 0.5) * 40,
-            (Math.random() - 0.5) * 25,
-            (Math.random() - 0.5) * 30
+    const floorGeometry =
+        new THREE.PlaneGeometry(
+            30,
+            30
         );
-    }
 
 
-    geometry.setAttribute(
-        "position",
-        new THREE.Float32BufferAttribute(
-            positions,
-            3
-        )
-    );
+    const floorMaterial =
+        new THREE.MeshStandardMaterial({
 
+            color: 0x02050a,
 
-    const material =
-        new THREE.PointsMaterial({
+            roughness: 0.7,
 
-            color: 0x9db9d6,
-
-            size: 0.035,
-
-            transparent: true,
-
-            opacity: 0.75
-
+            metalness: 0.1
         });
 
 
-    const stars =
-        new THREE.Points(
-            geometry,
-            material
+    const floor =
+        new THREE.Mesh(
+            floorGeometry,
+            floorMaterial
         );
 
 
-    scene.add(stars);
+    floor.rotation.x =
+        -Math.PI / 2;
+
+    floor.position.y =
+        -1.7;
+
+    scene.add(floor);
+
+
+    /* GRID */
+
+    const grid =
+        new THREE.GridHelper(
+            30,
+            30,
+            0x12352a,
+            0x08140f
+        );
+
+    grid.position.y =
+        -1.69;
+
+    grid.material.transparent = true;
+
+    grid.material.opacity = 0.18;
+
+    scene.add(grid);
 }
 
 
 /* =========================
-   DRAG
+   CONTROLS
 ========================= */
 
-function pointerDown(event) {
+function setupControls() {
+
+    canvas.addEventListener(
+        "pointerdown",
+        onPointerDown
+    );
+
+    canvas.addEventListener(
+        "pointermove",
+        onPointerMove
+    );
+
+    canvas.addEventListener(
+        "pointerup",
+        onPointerUp
+    );
+
+    canvas.addEventListener(
+        "pointercancel",
+        onPointerUp
+    );
+
+    canvas.addEventListener(
+        "wheel",
+        onWheel,
+        {
+            passive: false
+        }
+    );
+}
+
+
+/* =========================
+   DRAG START
+========================= */
+
+function onPointerDown(event) {
 
     isDragging = true;
 
     previousX = event.clientX;
     previousY = event.clientY;
+
+    canvas.classList.add("dragging");
 
     canvas.setPointerCapture(
         event.pointerId
@@ -411,12 +550,15 @@ function pointerDown(event) {
 }
 
 
-function pointerMove(event) {
+/* =========================
+   DRAG MOVE
+========================= */
 
-    if (!isDragging || !candleGroup) {
+function onPointerMove(event) {
+
+    if (!isDragging) {
         return;
     }
-
 
     const movementX =
         event.clientX - previousX;
@@ -425,28 +567,48 @@ function pointerMove(event) {
         event.clientY - previousY;
 
 
-    targetRotY +=
+    targetRotationY +=
         movementX * 0.012;
 
-    targetRotX +=
+    targetRotationX +=
         movementY * 0.008;
 
 
-    targetRotX =
+    targetRotationX =
         Math.max(
-            -1.2,
-            Math.min(1.2, targetRotX)
+            -1.1,
+            Math.min(
+                1.1,
+                targetRotationX
+            )
         );
 
 
-    previousX = event.clientX;
-    previousY = event.clientY;
+    previousX =
+        event.clientX;
+
+    previousY =
+        event.clientY;
 }
 
 
-function pointerUp() {
+/* =========================
+   DRAG END
+========================= */
+
+function onPointerUp(event) {
 
     isDragging = false;
+
+    canvas.classList.remove("dragging");
+
+    try {
+        canvas.releasePointerCapture(
+            event.pointerId
+        );
+    } catch (error) {
+        /* Nothing */
+    }
 }
 
 
@@ -454,16 +616,21 @@ function pointerUp() {
    ZOOM
 ========================= */
 
-function wheel(event) {
+function onWheel(event) {
 
     event.preventDefault();
 
-    zoom += event.deltaY * 0.004;
+    targetZoom +=
+        event.deltaY * 0.006;
 
-    zoom =
+
+    targetZoom =
         Math.max(
-            4.5,
-            Math.min(10, zoom)
+            4.2,
+            Math.min(
+                10,
+                targetZoom
+            )
         );
 }
 
@@ -482,29 +649,30 @@ function animate(time) {
     }
 
 
-    /* CANDLE ROTATION */
+    /* CANDLE */
 
     if (candleGroup) {
 
         if (!isDragging) {
 
-            targetRotY += 0.0025;
+            targetRotationY +=
+                0.0018;
         }
 
 
         candleGroup.rotation.x +=
-            (targetRotX -
-            candleGroup.rotation.x) *
-            0.08;
+            (
+                targetRotationX -
+                candleGroup.rotation.x
+            ) * 0.08;
 
 
         candleGroup.rotation.y +=
-            (targetRotY -
-            candleGroup.rotation.y) *
-            0.08;
+            (
+                targetRotationY -
+                candleGroup.rotation.y
+            ) * 0.08;
 
-
-        /* FLOATING */
 
         candleGroup.position.y =
             Math.sin(
@@ -513,12 +681,29 @@ function animate(time) {
     }
 
 
-    /* CAMERA ZOOM */
+    /* ZOOM */
 
-    camera.position.z +=
-        (zoom -
-        camera.position.z) *
-        0.08;
+    currentZoom +=
+        (
+            targetZoom -
+            currentZoom
+        ) * 0.08;
+
+
+    camera.position.z =
+        currentZoom;
+
+
+    /* STARS */
+
+    if (stars) {
+
+        stars.rotation.y +=
+            0.00015;
+
+        stars.rotation.x +=
+            0.00003;
+    }
 
 
     renderer.render(
