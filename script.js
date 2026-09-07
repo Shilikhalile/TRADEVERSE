@@ -1,60 +1,116 @@
 const button = document.getElementById("startBtn");
 
-button.addEventListener("click", function () {
+let canvas;
+let ctx;
 
-    document.body.innerHTML = `
-        <div style="
-            width:100vw;
-            height:100vh;
-            background:#03050a;
-            color:white;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            flex-direction:column;
-            font-family:Arial, sans-serif;
-            text-align:center;
-        ">
+function createSpace() {
 
-            <div style="
-                font-size:10px;
-                letter-spacing:5px;
-                opacity:0.4;
-                margin-bottom:20px;
-            ">
-                MARKET LAB / 01
-            </div>
+    canvas = document.createElement("canvas");
 
-            <h1 style="
-                font-size:55px;
-                letter-spacing:-4px;
-                font-weight:500;
-            ">
-                CANDLESTICKS
-            </h1>
+    canvas.style.position = "fixed";
+    canvas.style.inset = "0";
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.zIndex = "-1";
 
-            <p style="
-                margin-top:20px;
-                opacity:0.5;
-                font-size:12px;
-                letter-spacing:2px;
-            ">
-                ANATOMY OF A CANDLE
-            </p>
+    document.body.appendChild(canvas);
 
-            <button onclick="location.reload()" style="
-                margin-top:40px;
-                padding:12px 20px;
-                background:white;
-                color:#03050a;
-                border:none;
-                cursor:pointer;
-                letter-spacing:2px;
-            ">
-                ← BACK
-            </button>
+    ctx = canvas.getContext("2d");
 
-        </div>
-    `;
+    resize();
 
-});
+    window.addEventListener("resize", resize);
+
+    animate();
+}
+
+
+function resize() {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+
+const stars = [];
+
+for (let i = 0; i < 500; i++) {
+
+    stars.push({
+
+        x: Math.random(),
+        y: Math.random(),
+
+        size:
+            Math.random() * 2 + 0.3,
+
+        speed:
+            Math.random() * 0.0005 + 0.0002
+    });
+}
+
+
+function animate() {
+
+    requestAnimationFrame(animate);
+
+    ctx.fillStyle = "#03050a";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    for (const star of stars) {
+
+        star.y += star.speed;
+
+        if (star.y > 1) {
+            star.y = 0;
+        }
+
+        const x =
+            star.x * canvas.width;
+
+        const y =
+            star.y * canvas.height;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            star.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "rgba(150,180,220,0.7)";
+
+        ctx.fill();
+    }
+}
+
+
+createSpace();
+
+
+/* =========================
+   START LEARNING
+========================= */
+
+button.addEventListener(
+    "click",
+    function () {
+
+        alert(
+            "3D SPACE READY"
+        );
+
+    }
+);
