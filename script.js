@@ -1,25 +1,36 @@
 const button = document.getElementById("startBtn");
+const home = document.getElementById("home");
+const lab = document.getElementById("lab");
+const backBtn = document.getElementById("backBtn");
+const canvas = document.getElementById("space");
 
-let canvas;
 let ctx;
+let stars = [];
+let animation;
 
-function createSpace() {
 
-    canvas = document.createElement("canvas");
+/* =========================
+   3D SPACE
+========================= */
 
-    canvas.style.position = "fixed";
-    canvas.style.inset = "0";
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-    canvas.style.zIndex = "-1";
-
-    document.body.appendChild(canvas);
+function startSpace() {
 
     ctx = canvas.getContext("2d");
 
     resize();
 
-    window.addEventListener("resize", resize);
+    stars = [];
+
+    for (let i = 0; i < 700; i++) {
+
+        stars.push({
+            x: Math.random(),
+            y: Math.random(),
+            z: Math.random(),
+            size: Math.random() * 2 + 0.2,
+            speed: Math.random() * 0.004 + 0.001
+        });
+    }
 
     animate();
 }
@@ -32,29 +43,18 @@ function resize() {
 }
 
 
-const stars = [];
+window.addEventListener("resize", resize);
 
-for (let i = 0; i < 500; i++) {
 
-    stars.push({
-
-        x: Math.random(),
-        y: Math.random(),
-
-        size:
-            Math.random() * 2 + 0.3,
-
-        speed:
-            Math.random() * 0.0005 + 0.0002
-    });
-}
-
+/* =========================
+   ANIMATION
+========================= */
 
 function animate() {
 
-    requestAnimationFrame(animate);
+    animation = requestAnimationFrame(animate);
 
-    ctx.fillStyle = "#03050a";
+    ctx.fillStyle = "#02040a";
 
     ctx.fillRect(
         0,
@@ -66,17 +66,48 @@ function animate() {
 
     for (const star of stars) {
 
-        star.y += star.speed;
+        star.z -= star.speed;
 
-        if (star.y > 1) {
-            star.y = 0;
+
+        if (star.z <= 0) {
+
+            star.x = Math.random();
+            star.y = Math.random();
+            star.z = 1;
         }
 
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+
         const x =
-            star.x * canvas.width;
+            centerX +
+            (star.x - 0.5) *
+            canvas.width /
+            star.z;
+
 
         const y =
-            star.y * canvas.height;
+            centerY +
+            (star.y - 0.5) *
+            canvas.height /
+            star.z;
+
+
+        const size =
+            star.size /
+            star.z;
+
+
+        if (
+            x < 0 ||
+            x > canvas.width ||
+            y < 0 ||
+            y > canvas.height
+        ) {
+            continue;
+        }
 
 
         ctx.beginPath();
@@ -84,20 +115,25 @@ function animate() {
         ctx.arc(
             x,
             y,
-            star.size,
+            Math.min(size, 4),
             0,
             Math.PI * 2
         );
 
+
+        const alpha =
+            Math.min(
+                1,
+                (1 - star.z) * 1.5
+            );
+
+
         ctx.fillStyle =
-            "rgba(150,180,220,0.7)";
+            `rgba(180,210,255,${alpha})`;
 
         ctx.fill();
     }
 }
-
-
-createSpace();
 
 
 /* =========================
@@ -108,9 +144,34 @@ button.addEventListener(
     "click",
     function () {
 
-        alert(
-            "3D SPACE READY"
-        );
+        home.style.display = "none";
+
+        lab.style.display = "block";
+
+        startSpace();
 
     }
 );
+
+
+/* =========================
+   BACK
+========================= */
+
+backBtn.addEventListener(
+    "click",
+    function () {
+
+        lab.style.display = "none";
+
+        home.style.display = "flex";
+
+    }
+);
+
+
+/* =========================
+   START
+========================= */
+
+startSpace();
