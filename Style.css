@@ -1,7 +1,4 @@
-@import url(
-    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
-);
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -9,29 +6,22 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
     background: #03050a;
-
     color: white;
-
     font-family: 'Inter', sans-serif;
 }
 
-
 /* =========================================
-   HOME
+   HOME 3D SPACE
 ========================================= */
 
 #scene {
     position: fixed;
-
     inset: 0;
 
     width: 100vw;
@@ -42,10 +32,12 @@ body {
     z-index: 1;
 }
 
+/* =========================================
+   HOME UI
+========================================= */
 
 #homeUI {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
@@ -54,76 +46,51 @@ body {
     z-index: 10;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
 
     padding: 35px 45px;
 }
 
-
 .home-header {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 }
 
-
 .logo {
     font-size: 18px;
-
     font-weight: 700;
-
     letter-spacing: 4px;
 }
 
-
 .status {
     font-size: 10px;
-
     letter-spacing: 3px;
-
     opacity: 0.5;
 }
 
-
 .hero {
     max-width: 900px;
-
     margin-top: 80px;
 }
 
-
 .hero h1 {
-    font-size: clamp(
-        55px,
-        8vw,
-        125px
-    );
-
+    font-size: clamp(55px, 8vw, 125px);
     line-height: 0.88;
-
     font-weight: 600;
-
     letter-spacing: -6px;
 }
 
-
 .hero p {
     margin-top: 30px;
-
     max-width: 500px;
 
     font-size: 15px;
-
     line-height: 1.7;
 
     opacity: 0.6;
 }
-
 
 #startBtn {
     margin-top: 35px;
@@ -132,8 +99,7 @@ body {
 
     background: transparent;
 
-    border: 1px solid
-        rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.35);
 
     color: white;
 
@@ -148,21 +114,16 @@ body {
     transition: 0.3s;
 }
 
-
 #startBtn:hover {
     background: white;
-
     color: #03050a;
-
     transform: translateX(5px);
 }
-
 
 .home-footer {
     display: flex;
 
     justify-content: space-between;
-
     align-items: center;
 
     font-size: 9px;
@@ -172,20 +133,17 @@ body {
     opacity: 0.4;
 }
 
-
 /* =========================================
    LOADING
 ========================================= */
 
 #loading {
     position: fixed;
-
     inset: 0;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background: #03050a;
@@ -195,15 +153,11 @@ body {
     transition: opacity 0.8s ease;
 }
 
-
 .loading-text {
     font-size: 10px;
-
     letter-spacing: 4px;
-
     opacity: 0.6;
 }
-
 
 /* =========================================
    INTRO
@@ -211,13 +165,11 @@ body {
 
 #intro {
     position: fixed;
-
     inset: 0;
 
     display: none;
 
     align-items: center;
-
     justify-content: center;
 
     background: #03050a;
@@ -226,14 +178,12 @@ body {
 
     opacity: 0;
 
-    transition: opacity 0.8s;
+    transition: opacity 0.8s ease;
 }
-
 
 .intro-content {
     text-align: center;
 }
-
 
 .intro-content h2 {
     font-size: 10px;
@@ -245,58 +195,55 @@ body {
     margin-bottom: 18px;
 }
 
-
 .intro-content p {
     font-size: 25px;
 
     letter-spacing: -1px;
 }
 
-
 /* =========================================
-   CANDLE LAB
+   CANDLE LAB — FULL SCREEN
 ========================================= */
 
 #candleLab {
+    position: fixed !important;
 
-    position: fixed;
+    inset: 0 !important;
 
-    inset: 0;
+    width: 100vw !important;
+    height: 100vh !important;
 
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
 
     display: none;
 
     flex-direction: column;
 
     background:
-
         radial-gradient(
-            circle at 50% 50%,
-            rgba(30,60,90,0.18),
+            circle at 50% 45%,
+            rgba(30, 65, 100, 0.20),
             transparent 35%
         ),
-
         radial-gradient(
-            circle at 50% 50%,
-            rgba(10,20,40,0.25),
+            circle at 50% 45%,
+            rgba(15, 35, 60, 0.20),
             transparent 70%
         ),
-
         #03050a;
 
-    z-index: 999999;
+    z-index: 999999 !important;
 
     overflow: hidden;
 }
 
-
 /* =========================================
-   HEADER
+   CANDLE HEADER
 ========================================= */
 
 .candle-header {
+    position: relative;
 
     width: 100%;
 
@@ -313,15 +260,12 @@ body {
     padding: 0 45px;
 
     border-bottom:
-        1px solid
-        rgba(255,255,255,0.08);
+        1px solid rgba(255,255,255,0.08);
 
-    z-index: 20;
+    z-index: 100;
 }
 
-
 .candle-header-left {
-
     display: flex;
 
     align-items: center;
@@ -329,9 +273,7 @@ body {
     gap: 30px;
 }
 
-
 .candle-header-title {
-
     font-size: 9px;
 
     letter-spacing: 4px;
@@ -339,9 +281,7 @@ body {
     opacity: 0.4;
 }
 
-
 .candle-header h2 {
-
     font-size: 18px;
 
     font-weight: 500;
@@ -349,16 +289,13 @@ body {
     letter-spacing: 3px;
 }
 
-
 #backBtn {
-
     padding: 11px 18px;
 
     background: transparent;
 
     border:
-        1px solid
-        rgba(255,255,255,0.25);
+        1px solid rgba(255,255,255,0.25);
 
     color: white;
 
@@ -370,97 +307,90 @@ body {
 
     cursor: pointer;
 
-    z-index: 30;
+    z-index: 200;
 }
 
-
 #backBtn:hover {
-
     background: white;
 
     color: #03050a;
 }
 
-
 /* =========================================
-   MAIN
+   FULL SCREEN CANDLE MAIN
 ========================================= */
 
 .candle-main {
+    position: absolute;
 
-    position: relative;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 55px;
 
-    flex: 1;
+    width: 100vw;
+    height: calc(100vh - 135px);
 
-    width: 100%;
+    padding: 0;
 
     overflow: hidden;
 }
 
-
 /* =========================================
-   BIG 3D VIEW
+   3D SPACE
 ========================================= */
 
 .candle-view {
-
     position: absolute;
 
     inset: 0;
 
     width: 100%;
-
     height: 100%;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
+
+    z-index: 1;
 }
-
-
-.candle-view-label {
-
-    position: absolute;
-
-    top: 25px;
-
-    left: 45px;
-
-    font-size: 9px;
-
-    letter-spacing: 3px;
-
-    opacity: 0.35;
-
-    z-index: 10;
-}
-
 
 #candle3D {
-
     position: absolute;
 
     inset: 0;
 
-    width: 100%;
+    width: 100vw !important;
 
-    height: 100%;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    max-height: none !important;
+
+    border: none !important;
 
     overflow: hidden;
 
     cursor: grab;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(50, 90, 125, 0.12),
+            transparent 40%
+        );
 }
 
-
 #candle3D:active {
-
     cursor: grabbing;
 }
 
-
 #candle3D canvas {
+    position: absolute;
+
+    inset: 0;
 
     display: block;
 
@@ -469,16 +399,35 @@ body {
     height: 100% !important;
 }
 
+/* =========================================
+   LABEL
+========================================= */
+
+.candle-view-label {
+    position: absolute;
+
+    top: 25px;
+    left: 45px;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.35;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
 
 /* =========================================
-   INFORMATION ABOVE CANDLE
+   INFORMATION
 ========================================= */
 
 .candle-info {
-
     position: absolute;
 
-    top: 38px;
+    top: 30px;
 
     left: 50%;
 
@@ -486,51 +435,45 @@ body {
 
     width: 90%;
 
-    max-width: 800px;
+    max-width: 900px;
 
     text-align: center;
 
-    z-index: 15;
+    z-index: 30;
 
     pointer-events: none;
 }
 
-
 .candle-number {
-
     font-size: 9px;
 
     letter-spacing: 5px;
 
-    opacity: 0.5;
+    opacity: 0.45;
 
     margin-bottom: 12px;
 }
 
-
 .candle-info h1 {
-
     font-size: clamp(
         35px,
         5vw,
-        72px
+        75px
     );
 
-    line-height: 0.9;
+    line-height: 0.88;
 
     font-weight: 500;
 
-    letter-spacing: -4px;
+    letter-spacing: -5px;
 
     margin-bottom: 15px;
 
     text-shadow:
-        0 4px 30px rgba(0,0,0,0.9);
+        0 4px 35px rgba(0,0,0,0.9);
 }
 
-
 .candle-description {
-
     max-width: 420px;
 
     margin: auto;
@@ -539,16 +482,14 @@ body {
 
     line-height: 1.6;
 
-    opacity: 0.55;
+    opacity: 0.5;
 }
-
 
 /* =========================================
    OHLC
 ========================================= */
 
 .ohlc {
-
     position: absolute;
 
     top: 155px;
@@ -562,29 +503,24 @@ body {
     display: grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+        repeat(4, 1fr);
 
     gap: 5px;
 }
 
-
 .ohlc-item {
-
     padding: 9px 7px;
 
     background:
-        rgba(3,5,10,0.65);
+        rgba(3,5,10,0.72);
 
     border:
-        1px solid
-        rgba(255,255,255,0.08);
+        1px solid rgba(255,255,255,0.08);
 
     backdrop-filter: blur(8px);
 }
 
-
 .ohlc-label {
-
     display: block;
 
     font-size: 7px;
@@ -596,26 +532,22 @@ body {
     margin-bottom: 5px;
 }
 
-
 .ohlc-value {
-
     font-size: 12px;
 
     letter-spacing: 1px;
 }
-
 
 /* =========================================
    LESSON
 ========================================= */
 
 .lesson {
-
     position: absolute;
 
-    bottom: -230px;
-
     left: 50%;
+
+    bottom: -230px;
 
     transform: translateX(-50%);
 
@@ -626,8 +558,7 @@ body {
     text-align: left;
 
     border-left:
-        2px solid
-        #4cffb0;
+        2px solid #4cffb0;
 
     background:
         rgba(3,5,10,0.75);
@@ -635,9 +566,7 @@ body {
     backdrop-filter: blur(8px);
 }
 
-
 .lesson-title {
-
     font-size: 8px;
 
     letter-spacing: 3px;
@@ -647,9 +576,7 @@ body {
     margin-bottom: 5px;
 }
 
-
 .lesson p {
-
     font-size: 10px;
 
     line-height: 1.5;
@@ -657,18 +584,16 @@ body {
     opacity: 0.65;
 }
 
-
 /* =========================================
-   NEXT
+   NEXT LESSON
 ========================================= */
 
 #nextLesson {
-
     position: absolute;
 
-    bottom: -290px;
-
     left: 50%;
+
+    bottom: -290px;
 
     transform: translateX(-50%);
 
@@ -691,29 +616,27 @@ body {
     pointer-events: auto;
 }
 
-
 #nextLesson:hover {
-
     transform:
         translateX(
-            calc(-50% + 5px)
+            calc(-50% + 6px)
         );
 }
 
-
 /* =========================================
-   HINT
+   ROTATE HINT
 ========================================= */
 
 .rotate-hint {
-
     position: absolute;
 
-    bottom: 22px;
+    bottom: 20px;
 
     left: 50%;
 
     transform: translateX(-50%);
+
+    margin: 0;
 
     font-size: 8px;
 
@@ -721,21 +644,27 @@ body {
 
     opacity: 0.3;
 
-    z-index: 20;
-}
+    white-space: nowrap;
 
+    z-index: 50;
+
+    pointer-events: none;
+}
 
 /* =========================================
    FOOTER
 ========================================= */
 
 .candle-footer {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
 
     width: 100%;
 
     height: 55px;
-
-    flex-shrink: 0;
 
     display: flex;
 
@@ -746,8 +675,7 @@ body {
     padding: 0 45px;
 
     border-top:
-        1px solid
-        rgba(255,255,255,0.08);
+        1px solid rgba(255,255,255,0.08);
 
     font-size: 8px;
 
@@ -755,9 +683,8 @@ body {
 
     opacity: 0.35;
 
-    z-index: 20;
+    z-index: 100;
 }
-
 
 /* =========================================
    MOBILE
@@ -769,94 +696,80 @@ body {
         padding: 25px;
     }
 
-
     .hero h1 {
-
         font-size: 55px;
 
         letter-spacing: -3px;
     }
 
-
     .home-footer {
-
         font-size: 7px;
 
         gap: 10px;
     }
 
-
     .candle-header {
-
         height: 65px;
 
         padding: 0 20px;
     }
 
-
     .candle-header-title {
-
         display: none;
     }
 
-
     .candle-header h2 {
-
         font-size: 14px;
     }
 
+    .candle-main {
+        top: 65px;
+
+        bottom: 45px;
+
+        height:
+            calc(100vh - 110px);
+    }
 
     .candle-view-label {
+        top: 18px;
 
         left: 20px;
-
-        top: 18px;
     }
-
 
     .candle-info {
+        top: 25px;
 
-        top: 30px;
+        width: 95%;
     }
 
-
     .candle-info h1 {
-
         font-size: 38px;
 
         letter-spacing: -3px;
     }
 
-
     .candle-description {
-
         display: none;
     }
 
-
     .ohlc {
-
-        top: 125px;
+        top: 120px;
 
         width: 310px;
     }
 
-
     .rotate-hint {
+        bottom: 15px;
 
-        bottom: 18px;
-
-        white-space: nowrap;
+        font-size: 7px;
     }
 
-
     .candle-footer {
-
         height: 45px;
 
         padding: 0 20px;
 
         font-size: 7px;
     }
-
-        }
+}
