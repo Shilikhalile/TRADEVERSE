@@ -67,7 +67,7 @@ backBtn.addEventListener(
 
 
 /* =========================
-   UPDATE
+   UPDATE CANDLE
 ========================= */
 
 function updateCandle() {
@@ -119,7 +119,6 @@ candleStage.addEventListener(
     function (event) {
 
         if (!dragging) {
-
             return;
         }
 
@@ -134,9 +133,7 @@ candleStage.addEventListener(
             lastY;
 
 
-        /*
-           VERY SENSITIVE
-        */
+        /* VERY SENSITIVE */
 
         rotateY +=
             dx * 1.8;
@@ -145,6 +142,8 @@ candleStage.addEventListener(
         rotateX -=
             dy * 1.2;
 
+
+        /* LIMIT X */
 
         rotateX =
             Math.max(
@@ -238,18 +237,14 @@ function animate() {
 
     if (!dragging) {
 
-        /*
-           MOMENTUM
-        */
+        /* MOMENTUM */
 
         rotateY += velocity;
 
         velocity *= 0.94;
 
 
-        /*
-           AUTO ROTATION
-        */
+        /* AUTO ROTATION */
 
         if (
             Math.abs(velocity) < 0.03
