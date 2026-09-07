@@ -13,8 +13,8 @@ const lab =
 const candleStage =
     document.getElementById("candleStage");
 
-const candle =
-    document.querySelector(".candle");
+const candleScene =
+    document.getElementById("candleScene");
 
 
 /* =====================================================
@@ -67,12 +67,12 @@ backBtn.addEventListener(
 
 
 /* =====================================================
-   UPDATE CANDLE
+   UPDATE SCENE
 ===================================================== */
 
-function updateCandle() {
+function updateScene() {
 
-    candle.style.transform = `
+    candleScene.style.transform = `
 
         translate(-50%, -50%)
 
@@ -136,17 +136,19 @@ candleStage.addEventListener(
             lastY;
 
 
-        /* ROTATION */
+        /* HORIZONTAL ROTATION */
 
         rotateY +=
             dx * 1.8;
 
 
+        /* VERTICAL ROTATION */
+
         rotateX -=
             dy * 1.2;
 
 
-        /* LIMIT VERTICAL ROTATION */
+        /* LIMIT */
 
         rotateX =
             Math.max(
@@ -171,7 +173,7 @@ candleStage.addEventListener(
             event.clientY;
 
 
-        updateCandle();
+        updateScene();
 
     }
 );
@@ -225,7 +227,7 @@ candleStage.addEventListener(
             );
 
 
-        updateCandle();
+        updateScene();
 
     },
     {
@@ -255,12 +257,12 @@ function animate() {
             Math.abs(velocity) < 0.03
         ) {
 
-            rotateY += 0.35;
+            rotateY += 0.25;
 
         }
 
 
-        updateCandle();
+        updateScene();
 
     }
 
@@ -271,5 +273,11 @@ function animate() {
 
 }
 
+
+/* =====================================================
+   START
+===================================================== */
+
+updateScene();
 
 animate();
