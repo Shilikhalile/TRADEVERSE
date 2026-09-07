@@ -7,9 +7,9 @@ const backBtn = document.getElementById("backBtn");
 const candleScene = document.getElementById("candleScene");
 
 
-/* =========================================
-   OPEN LAB
-   ========================================= */
+// ================================
+// OPEN MARKET LAB
+// ================================
 
 startBtn.addEventListener("click", () => {
     home.style.display = "none";
@@ -17,9 +17,9 @@ startBtn.addEventListener("click", () => {
 });
 
 
-/* =========================================
-   BACK
-   ========================================= */
+// ================================
+// BACK TO HOME
+// ================================
 
 backBtn.addEventListener("click", () => {
     lab.classList.remove("active");
@@ -27,9 +27,9 @@ backBtn.addEventListener("click", () => {
 });
 
 
-/* =========================================
-   CANDLE MOVEMENT
-   ========================================= */
+// ================================
+// CANDLE 3D MOVEMENT
+// ================================
 
 let rotateX = 0;
 let rotateY = 0;
@@ -45,9 +45,9 @@ let velocityX = 0;
 let velocityY = 0;
 
 
-/* =========================================
-   UPDATE CANDLE
-   ========================================= */
+// ================================
+// UPDATE CANDLE
+// ================================
 
 function updateCandle() {
 
@@ -59,9 +59,9 @@ function updateCandle() {
 }
 
 
-/* =========================================
-   POINTER DOWN
-   ========================================= */
+// ================================
+// START DRAG
+// ================================
 
 candleScene.addEventListener("pointerdown", (e) => {
 
@@ -73,13 +73,15 @@ candleScene.addEventListener("pointerdown", (e) => {
     velocityX = 0;
     velocityY = 0;
 
+    candleScene.style.cursor = "grabbing";
+
     candleScene.setPointerCapture(e.pointerId);
 });
 
 
-/* =========================================
-   POINTER MOVE
-   ========================================= */
+// ================================
+// DRAG CANDLE
+// ================================
 
 candleScene.addEventListener("pointermove", (e) => {
 
@@ -88,11 +90,14 @@ candleScene.addEventListener("pointermove", (e) => {
     const dx = e.clientX - lastX;
     const dy = e.clientY - lastY;
 
-    rotateY += dx * 0.8;
-    rotateX -= dy * 0.8;
+    rotateY += dx * 0.9;
+    rotateX -= dy * 0.9;
 
-    velocityY = dx * 0.8;
-    velocityX = -dy * 0.8;
+    // Prevent extreme vertical rotation
+    rotateX = Math.max(-70, Math.min(70, rotateX));
+
+    velocityY = dx * 0.9;
+    velocityX = -dy * 0.9;
 
     lastX = e.clientX;
     lastY = e.clientY;
@@ -101,27 +106,35 @@ candleScene.addEventListener("pointermove", (e) => {
 });
 
 
-/* =========================================
-   POINTER UP
-   ========================================= */
+// ================================
+// END DRAG
+// ================================
 
 candleScene.addEventListener("pointerup", (e) => {
 
     dragging = false;
 
-    candleScene.releasePointerCapture(e.pointerId);
+    candleScene.style.cursor = "grab";
+
+    try {
+        candleScene.releasePointerCapture(e.pointerId);
+    } catch (error) {
+        // Nothing
+    }
 });
 
 
 candleScene.addEventListener("pointercancel", () => {
 
     dragging = false;
+
+    candleScene.style.cursor = "grab";
 });
 
 
-/* =========================================
-   ZOOM
-   ========================================= */
+// ================================
+// ZOOM
+// ================================
 
 candleScene.addEventListener(
     "wheel",
@@ -135,7 +148,7 @@ candleScene.addEventListener(
             zoom -= 0.08;
         }
 
-        zoom = Math.max(.55, Math.min(1.8, zoom));
+        zoom = Math.max(0.55, Math.min(1.8, zoom));
 
         updateCandle();
     },
@@ -143,19 +156,24 @@ candleScene.addEventListener(
 );
 
 
-/* =========================================
-   AUTO ROTATION + MOMENTUM
-   ========================================= */
+// ================================
+// AUTO ROTATION + MOMENTUM
+// ================================
 
 function animate() {
 
     if (!dragging) {
 
+        // Slow automatic rotation
         rotateY += 0.12;
 
+        // Continue movement after releasing
         rotateY += velocityY * 0.03;
         rotateX += velocityX * 0.03;
 
+        rotateX = Math.max(-70, Math.min(70, rotateX));
+
+        // Slowly stop momentum
         velocityX *= 0.94;
         velocityY *= 0.94;
 
@@ -166,4 +184,5 @@ function animate() {
 }
 
 
+// Start animation
 animate();
