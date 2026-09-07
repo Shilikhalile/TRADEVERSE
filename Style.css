@@ -46,9 +46,7 @@ body {
 header {
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 }
 
@@ -56,9 +54,7 @@ header {
 .logo {
 
     font-size: 18px;
-
     font-weight: 700;
-
     letter-spacing: 4px;
 }
 
@@ -66,15 +62,12 @@ header {
 .status {
 
     font-size: 10px;
-
     letter-spacing: 3px;
-
     opacity: 0.45;
 }
 
 
 main {
-
     max-width: 900px;
 }
 
@@ -84,7 +77,6 @@ main {
     margin-bottom: 20px;
 
     font-size: 10px;
-
     letter-spacing: 5px;
 
     opacity: 0.35;
@@ -185,7 +177,7 @@ footer {
 
     background:
         radial-gradient(
-            circle at 50% 43%,
+            circle at 50% 45%,
             rgba(0,255,130,0.10),
             transparent 32%
         ),
@@ -200,8 +192,6 @@ footer {
     position: absolute;
 
     inset: 0;
-
-    padding: 32px 42px;
 }
 
 
@@ -216,7 +206,6 @@ footer {
     top: 32px;
 
     left: 42px;
-
     right: 42px;
 
     display: flex;
@@ -270,66 +259,67 @@ footer {
 
 
 /* =====================================================
-   CANDLE AREA
-===================================================== */
-
-.candle-area {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 43%;
-
-    width: 700px;
-
-    height: 560px;
-
-    transform:
-        translate(-50%, -50%);
-
-    z-index: 10;
-
-    pointer-events: none;
-}
-
-
-/* =====================================================
    CANDLE STAGE
 ===================================================== */
+
+/*
+   IMPORTANT:
+   All labels are INSIDE candle-scene.
+   Therefore they rotate with the candle.
+*/
 
 .candle-stage {
 
     position: absolute;
 
     left: 50%;
+    top: 42%;
 
-    top: 50%;
-
-    width: 360px;
-
-    height: 440px;
+    width: 720px;
+    height: 560px;
 
     transform:
         translate(-50%, -50%);
 
-    perspective: 1000px;
+    perspective: 1200px;
 
     transform-style: preserve-3d;
 
     cursor: grab;
 
-    pointer-events: auto;
-
     touch-action: none;
 
-    z-index: 10;
+    z-index: 20;
 }
 
 
 .candle-stage:active {
 
     cursor: grabbing;
+}
+
+
+/* =====================================================
+   CANDLE SCENE
+===================================================== */
+
+.candle-scene {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 360px;
+    height: 420px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1)
+        rotateX(-8deg)
+        rotateY(-25deg);
+
+    transform-style: preserve-3d;
 }
 
 
@@ -342,22 +332,13 @@ footer {
     position: absolute;
 
     left: 50%;
-
     top: 50%;
 
     width: 130px;
-
     height: 250px;
 
     transform:
-
-        translate(-50%, -50%)
-
-        scale(1)
-
-        rotateX(-8deg)
-
-        rotateY(-25deg);
+        translate(-50%, -50%);
 
     transform-style: preserve-3d;
 
@@ -365,6 +346,8 @@ footer {
         candleFloat 3.5s
         ease-in-out
         infinite;
+
+    z-index: 10;
 }
 
 
@@ -375,7 +358,7 @@ footer {
     }
 
     50% {
-        margin-top: -14px;
+        margin-top: -12px;
     }
 
     100% {
@@ -397,7 +380,6 @@ footer {
     top: 5px;
 
     width: 6px;
-
     height: 215px;
 
     transform:
@@ -430,11 +412,9 @@ footer {
     position: absolute;
 
     left: 0;
-
     top: 55px;
 
     width: 130px;
-
     height: 155px;
 
     transform-style: preserve-3d;
@@ -448,7 +428,6 @@ footer {
     position: absolute;
 
     width: 130px;
-
     height: 155px;
 
     border:
@@ -473,14 +452,12 @@ footer {
 
 
 .front {
-
     transform:
         translateZ(65px);
 }
 
 
 .back {
-
     transform:
         rotateY(180deg)
         translateZ(65px);
@@ -488,7 +465,6 @@ footer {
 
 
 .left {
-
     transform:
         rotateY(-90deg)
         translateZ(65px);
@@ -496,7 +472,6 @@ footer {
 
 
 .right {
-
     transform:
         rotateY(90deg)
         translateZ(65px);
@@ -541,7 +516,6 @@ footer {
     position: absolute;
 
     left: 50%;
-
     top: -10px;
 
     width: 75px;
@@ -603,10 +577,22 @@ footer {
 
 
 /* =====================================================
-   MAIN PRICE LABELS
+   ANNOTATIONS
 ===================================================== */
 
-.candle-label {
+/*
+   Candle geometry:
+
+   HIGH  = y 5
+   OPEN  = y 55
+   CLOSE = y 210
+   LOW   = y 220
+
+   The labels use the same coordinate system.
+*/
+
+
+.annotation {
 
     position: absolute;
 
@@ -614,15 +600,19 @@ footer {
 
     align-items: center;
 
-    gap: 12px;
+    height: 35px;
 
     z-index: 30;
 
     white-space: nowrap;
+
+    pointer-events: none;
+
+    transform-style: preserve-3d;
 }
 
 
-.label-text {
+.annotation-text {
 
     display: flex;
 
@@ -632,59 +622,55 @@ footer {
 }
 
 
-.label-text strong {
+.annotation-text strong {
 
     font-size: 9px;
 
-    letter-spacing: 3px;
-
     font-weight: 500;
 
-    opacity: 0.75;
+    letter-spacing: 3px;
+
+    opacity: 0.85;
 }
 
 
-.label-text span {
+.annotation-text span {
 
-    font-size: 11px;
+    font-size: 9px;
 
     letter-spacing: 2px;
 
-    opacity: 0.38;
+    opacity: 0.40;
 }
 
 
-.label-line {
+.annotation-line {
 
     width: 100px;
 
     height: 1px;
 
     background:
-        rgba(255,255,255,0.42);
+        rgba(255,255,255,0.55);
 
     position: relative;
 }
 
 
-.label-line::after {
+.annotation-dot {
 
-    content: "";
-
-    position: absolute;
-
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
 
     border-radius: 50%;
 
     background: white;
 
-    top: -2px;
+    box-shadow:
+        0 0 8px
+        rgba(255,255,255,0.6);
 
-    right: 0;
-
-    opacity: 0.75;
+    flex-shrink: 0;
 }
 
 
@@ -692,17 +678,25 @@ footer {
    HIGH
 ===================================================== */
 
-.high-label {
+.high {
 
-    left: 50px;
+    left: -120px;
 
-    top: 78px;
+    top: 0px;
+
+    gap: 12px;
 }
 
 
-.high-label .label-line {
+.high .annotation-line {
 
     order: 2;
+}
+
+
+.high .annotation-dot {
+
+    order: 3;
 }
 
 
@@ -710,17 +704,25 @@ footer {
    OPEN
 ===================================================== */
 
-.open-label {
+.open {
 
-    left: 72px;
+    left: -105px;
 
-    top: 180px;
+    top: 50px;
+
+    gap: 12px;
 }
 
 
-.open-label .label-line {
+.open .annotation-line {
 
     order: 2;
+}
+
+
+.open .annotation-dot {
+
+    order: 3;
 }
 
 
@@ -728,25 +730,31 @@ footer {
    CLOSE
 ===================================================== */
 
-.close-label {
+.close {
 
-    right: 65px;
+    left: 130px;
 
-    top: 137px;
+    top: 205px;
+
+    gap: 12px;
 }
 
 
-.close-label .label-line {
+.close .annotation-dot {
 
     order: 1;
 }
 
 
-.close-label .label-line::after {
+.close .annotation-line {
 
-    left: 0;
+    order: 2;
+}
 
-    right: auto;
+
+.close .annotation-text {
+
+    order: 3;
 }
 
 
@@ -754,25 +762,31 @@ footer {
    LOW
 ===================================================== */
 
-.low-label {
+.low {
 
-    right: 45px;
+    left: 130px;
 
-    top: 285px;
+    top: 215px;
+
+    gap: 12px;
 }
 
 
-.low-label .label-line {
+.low .annotation-dot {
 
     order: 1;
 }
 
 
-.low-label .label-line::after {
+.low .annotation-line {
 
-    left: 0;
+    order: 2;
+}
 
-    right: auto;
+
+.low .annotation-text {
+
+    order: 3;
 }
 
 
@@ -780,74 +794,90 @@ footer {
    PART LABELS
 ===================================================== */
 
-.part-label {
+.part {
 
     position: absolute;
 
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
     z-index: 25;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+}
+
+
+.part span {
 
     font-size: 7px;
 
     letter-spacing: 3px;
 
-    opacity: 0.45;
-
-    white-space: nowrap;
+    opacity: 0.50;
 }
 
 
-.part-label::before {
+.part-line {
 
-    content: "";
-
-    display: inline-block;
-
-    width: 30px;
+    width: 42px;
 
     height: 1px;
-
-    margin-right: 8px;
-
-    vertical-align: middle;
 
     background:
         rgba(255,255,255,0.35);
 }
 
 
-/* UPPER WICK */
+/* =====================================================
+   UPPER WICK LABEL
+===================================================== */
 
 .upper-wick-label {
 
-    left: 225px;
+    left: 75px;
 
-    top: 63px;
+    top: 23px;
 }
 
 
-/* LOWER WICK */
+.upper-wick-label .part-line {
 
-.lower-wick-label {
-
-    left: 225px;
-
-    top: 315px;
+    order: 1;
 }
 
 
-/* BODY */
+/* =====================================================
+   BODY LABEL
+===================================================== */
 
 .body-label {
 
-    left: 420px;
+    left: 145px;
 
-    top: 205px;
+    top: 130px;
 }
 
 
-.body-label::before {
+.body-label .part-line {
 
-    width: 45px;
+    width: 50px;
+}
+
+
+/* =====================================================
+   LOWER WICK LABEL
+===================================================== */
+
+.lower-wick-label {
+
+    left: 75px;
+
+    top: 235px;
 }
 
 
@@ -920,7 +950,6 @@ footer {
     position: absolute;
 
     left: 42px;
-
     right: 42px;
 
     bottom: 28px;
@@ -971,7 +1000,7 @@ footer {
     }
 
 
-    .candle-area {
+    .candle-stage {
 
         width: 390px;
 
@@ -981,103 +1010,91 @@ footer {
     }
 
 
-    .candle-stage {
+    .candle-scene {
 
-        width: 250px;
+        width: 300px;
 
-        height: 350px;
-    }
-
-
-    .candle {
+        height: 360px;
 
         transform:
             translate(-50%, -50%)
-            scale(0.72)
+            scale(0.78)
             rotateX(-8deg)
             rotateY(-25deg);
     }
 
 
-    .candle-label {
-
-        gap: 7px;
-    }
-
-
-    .label-text strong {
-
-        font-size: 7px;
-
-        letter-spacing: 2px;
-    }
-
-
-    .label-text span {
+    .annotation-text strong {
 
         font-size: 8px;
     }
 
 
-    .label-line {
+    .annotation-text span {
 
-        width: 45px;
+        font-size: 8px;
     }
 
 
-    .high-label {
+    .annotation-line {
 
-        left: 0;
-
-        top: 62px;
+        width: 65px;
     }
 
 
-    .open-label {
+    .high {
 
-        left: 5px;
+        left: -70px;
 
-        top: 157px;
+        top: 0;
     }
 
 
-    .close-label {
+    .open {
 
-        right: 0;
+        left: -60px;
 
-        top: 122px;
+        top: 50px;
     }
 
 
-    .low-label {
+    .close {
 
-        right: 0;
+        left: 120px;
 
-        top: 268px;
+        top: 205px;
+    }
+
+
+    .low {
+
+        left: 120px;
+
+        top: 215px;
     }
 
 
     .upper-wick-label {
 
-        left: 135px;
+        left: 70px;
 
-        top: 48px;
-    }
-
-
-    .lower-wick-label {
-
-        left: 135px;
-
-        top: 305px;
+        top: 20px;
     }
 
 
     .body-label {
 
-        left: 250px;
+        left: 125px;
 
-        top: 185px;
+        top: 130px;
+    }
+
+
+    .lower-wick-label {
+
+        left: 70px;
+
+        top: 235px;
     }
 
 
@@ -1106,7 +1123,6 @@ footer {
     .lab-bottom {
 
         left: 24px;
-
         right: 24px;
 
         bottom: 18px;
@@ -1114,4 +1130,4 @@ footer {
         font-size: 5px;
     }
 
-    }
+}
