@@ -59,24 +59,23 @@ scene.add(mainLight);
 FLOOR
 ========================================= */
 
-const floorGeometry = new THREE.PlaneGeometry(
-40,
-40
-);
+const floorGeometry =
+new THREE.PlaneGeometry(40, 40);
 
-const floorMaterial = new THREE.MeshStandardMaterial({
+const floorMaterial =
+new THREE.MeshStandardMaterial({
 color: 0x050811,
 metalness: 0.8,
 roughness: 0.55
 });
 
-const floor = new THREE.Mesh(
+const floor =
+new THREE.Mesh(
 floorGeometry,
 floorMaterial
 );
 
 floor.rotation.x = -Math.PI / 2;
-
 floor.position.y = -2;
 
 scene.add(floor);
@@ -85,7 +84,8 @@ scene.add(floor);
 GRID
 ========================================= */
 
-const grid = new THREE.GridHelper(
+const grid =
+new THREE.GridHelper(
 40,
 40,
 0x263044,
@@ -97,7 +97,7 @@ grid.position.y = -1.98;
 scene.add(grid);
 
 /* =========================================
-FLOATING PARTICLES
+PARTICLES
 ========================================= */
 
 const particleCount = 900;
@@ -204,18 +204,18 @@ window.addEventListener(
 (event) => {
 
 mouseX =
-  (event.clientX /
-    window.innerWidth) - 0.5;
+  event.clientX /
+  window.innerWidth - 0.5;
 
 mouseY =
-  (event.clientY /
-    window.innerHeight) - 0.5;
+  event.clientY /
+  window.innerHeight - 0.5;
 
 }
 );
 
 /* =========================================
-PAGE ELEMENTS
+ELEMENTS
 ========================================= */
 
 const startButton =
@@ -241,12 +241,16 @@ startButton.addEventListener(
 "click",
 () => {
 
+/* Intro screen */
+
 intro.style.display = "flex";
 
 requestAnimationFrame(() => {
   intro.style.opacity = "1";
 });
 
+
+/* Go to Candlestick Lab */
 
 setTimeout(() => {
 
@@ -256,8 +260,18 @@ setTimeout(() => {
 
     intro.style.display = "none";
 
-    homeUI.style.opacity = "0";
-    homeUI.style.pointerEvents = "none";
+
+    /* Hide HOME completely */
+
+    homeUI.style.display = "none";
+
+
+    /* Hide 3D space */
+
+    canvas.style.display = "none";
+
+
+    /* Show Lab */
 
     candleLab.style.display = "flex";
 
@@ -273,12 +287,14 @@ setTimeout(() => {
 );
 
 /* =========================================
-BACK BUTTON
+BACK TO HOME
 ========================================= */
 
 backButton.addEventListener(
 "click",
 () => {
+
+/* Hide Lab */
 
 candleLab.style.opacity = "0";
 
@@ -286,8 +302,24 @@ setTimeout(() => {
 
   candleLab.style.display = "none";
 
+
+  /* Show 3D */
+
+  canvas.style.display = "block";
+
+
+  /* Show HOME */
+
+  homeUI.style.display = "block";
   homeUI.style.opacity = "1";
-  homeUI.style.pointerEvents = "auto";
+  homeUI.style.pointerEvents = "none";
+
+
+  /* Small delay then enable button */
+
+  setTimeout(() => {
+    homeUI.style.pointerEvents = "auto";
+  }, 100);
 
 }, 800);
 
@@ -295,7 +327,7 @@ setTimeout(() => {
 );
 
 /* =========================================
-ANIMATION
+3D ANIMATION
 ========================================= */
 
 const clock =
@@ -391,7 +423,7 @@ renderer.setSize(
 );
 
 /* =========================================
-REMOVE LOADING
+LOADING SCREEN
 ========================================= */
 
 window.addEventListener(
@@ -406,7 +438,9 @@ setTimeout(() => {
   loading.style.opacity = "0";
 
   setTimeout(() => {
+
     loading.style.display = "none";
+
   }, 800);
 
 }, 900);
