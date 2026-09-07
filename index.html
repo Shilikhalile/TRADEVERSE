@@ -1,157 +1,328 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRADEVERSE — Trading Interactive Lab</title>
-  <link rel="stylesheet" href="style.css">
-</head><body>  <div id="loading">
-    <div class="loader"></div>
-    <p>INITIALIZING TRADEVERSE...</p>
-  </div><canvas id="scene"></canvas>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- HOME -->  <div class="ui" id="homeUI"><header>
-  <div class="logo">TRADE<span>VERSE</span></div>
+    <title>TRADEVERSE — MARKET LAB</title>
 
-  <div class="status">
-    <span class="dot"></span>
-    MARKET LAB ONLINE
-  </div>
-</header>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<main>
-  <div class="hero">
+<body>
 
-    <div class="eyebrow">INTERACTIVE TRADING LAB</div>
+    <!-- =====================================
+         LOADING
+    ====================================== -->
 
-    <h1>
-      UNDERSTAND<br>
-      <span>THE MARKET.</span>
-    </h1>
-
-    <p>
-      Explore price action, candlesticks and market structure
-      through an interactive 3D experience.
-    </p>
-
-    <button id="startBtn">
-      <span>START LEARNING</span>
-      <b>→</b>
-    </button>
-
-  </div>
-</main>
-
-<footer>
-  <div>MOVE YOUR MOUSE</div>
-  <div>SCROLL TO EXPLORE</div>
-  <div>v0.1</div>
-</footer>
-
-  </div>  <!-- INTRO -->  <div id="intro">
-    <div class="intro-content">
-      <small>WELCOME TO</small>
-      <h2>TRADEVERSE</h2>
-      <p>Your journey into the market starts here.</p>
-    </div>
-  </div>  <!-- CANDLESTICK LAB -->  <section id="candleLab"><div class="lab-header">
-  <div>
-    <div class="lab-eyebrow">MARKET LAB / 01</div>
-    <h2>CANDLESTICKS</h2>
-    <p>Learn how a single candle tells the story of price.</p>
-  </div>
-
-  <button id="backBtn">← BACK</button>
-</div>
-
-
-<div class="candle-container">
-
-  <div class="candle-stage">
-
-    <div class="price-line line-high">
-      <span>HIGH</span>
+    <div id="loading">
+        <div class="loading-text">
+            INITIALIZING MARKET LAB...
+        </div>
     </div>
 
-    <div class="price-line line-open">
-      <span>OPEN</span>
-    </div>
 
-    <div class="price-line line-close">
-      <span>CLOSE</span>
-    </div>
+    <!-- =====================================
+         3D SPACE
+    ====================================== -->
 
-    <div class="price-line line-low">
-      <span>LOW</span>
-    </div>
-
-    <div class="wick"></div>
-    <div class="candle-body"></div>
-
-  </div>
+    <canvas id="scene"></canvas>
 
 
-  <div class="candle-info">
+    <!-- =====================================
+         HOME
+    ====================================== -->
 
-    <div class="info-top">
-      <span class="badge">01</span>
-      <span>ANATOMY OF A CANDLE</span>
-    </div>
+    <div class="ui" id="homeUI">
 
-    <h3>One candle.<br><span>Four prices.</span></h3>
+        <header class="home-header">
 
-    <p>
-      Every candlestick represents the movement of price
-      during a specific period of time.
-    </p>
+            <div class="logo">
+                TRADEVERSE
+            </div>
 
-    <div class="ohlc">
+            <div class="status">
+                MARKET LAB ONLINE
+            </div>
 
-      <div>
-        <small>OPEN</small>
-        <strong>100.00</strong>
-      </div>
+        </header>
 
-      <div>
-        <small>HIGH</small>
-        <strong>108.00</strong>
-      </div>
 
-      <div>
-        <small>LOW</small>
-        <strong>97.00</strong>
-      </div>
+        <main class="hero">
 
-      <div>
-        <small>CLOSE</small>
-        <strong>105.00</strong>
-      </div>
+            <h1>
+                UNDERSTAND<br>
+                THE MARKET.
+            </h1>
+
+            <p>
+                Learn how price moves, one concept at a time.
+            </p>
+
+            <button id="startBtn">
+                START LEARNING →
+            </button>
+
+        </main>
+
+
+        <footer class="home-footer">
+
+            <span>
+                MOVE YOUR MOUSE
+            </span>
+
+            <span>
+                SCROLL TO EXPLORE
+            </span>
+
+            <span>
+                v0.1
+            </span>
+
+        </footer>
 
     </div>
 
-    <div class="lesson">
-      <span class="lesson-dot"></span>
-      <div>
-        <strong>BULLISH CANDLE</strong>
-        <p>
-          Close is higher than Open.
-          Buyers pushed price upward.
-        </p>
-      </div>
+
+    <!-- =====================================
+         INTRO
+    ====================================== -->
+
+    <div id="intro">
+
+        <div class="intro-content">
+
+            <h2>
+                MARKET LAB / 01
+            </h2>
+
+            <p>
+                ENTERING CANDLESTICK LAB
+            </p>
+
+        </div>
+
     </div>
 
-    <button id="nextLesson">
-      NEXT LESSON <b>→</b>
-    </button>
 
-  </div>
+    <!-- =====================================
+         CANDLESTICK LAB
+    ====================================== -->
 
-</div>
+    <section id="candleLab">
 
-<div class="lab-footer">
-  <span>TRADEVERSE</span>
-  <span>CANDLESTICK LAB</span>
-  <span>01 / 05</span>
-</div>
 
-  </section>  <script type="module" src="script.js"></script></body>
+        <!-- HEADER -->
+
+        <header class="candle-header">
+
+            <div class="candle-header-left">
+
+                <div class="candle-header-title">
+                    MARKET LAB / 01
+                </div>
+
+                <h2>
+                    CANDLESTICKS
+                </h2>
+
+            </div>
+
+
+            <button id="backBtn">
+                ← BACK
+            </button>
+
+        </header>
+
+
+        <!-- MAIN -->
+
+        <main class="candle-main">
+
+
+            <!-- =================================
+                 3D CANDLE AREA
+            ================================== -->
+
+            <div class="candle-view">
+
+                <div class="candle-view-label">
+                    LIVE PRICE ACTION
+                </div>
+
+
+                <div
+                    id="candle3D"
+                    class="candle-3d"
+                >
+
+                    <!-- THREE.JS WILL RENDER HERE -->
+
+                </div>
+
+
+                <div class="rotate-hint">
+                    DRAG TO ROTATE · SCROLL TO ZOOM
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 INFORMATION
+            ================================== -->
+
+            <div class="candle-info">
+
+                <div class="candle-number">
+                    01 / 05
+                </div>
+
+
+                <h1>
+                    ANATOMY<br>
+                    OF A CANDLE
+                </h1>
+
+
+                <p class="candle-description">
+                    One candle.
+                    Four prices.
+                    <br><br>
+
+                    Every candlestick represents
+                    the movement of price during
+                    a specific period of time.
+                </p>
+
+
+                <!-- OHLC -->
+
+                <div class="ohlc">
+
+
+                    <div class="ohlc-item">
+
+                        <span class="ohlc-label">
+                            OPEN
+                        </span>
+
+                        <span
+                            class="ohlc-value"
+                            id="openValue"
+                        >
+                            100.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="ohlc-item">
+
+                        <span class="ohlc-label">
+                            HIGH
+                        </span>
+
+                        <span
+                            class="ohlc-value"
+                            id="highValue"
+                        >
+                            108.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="ohlc-item">
+
+                        <span class="ohlc-label">
+                            LOW
+                        </span>
+
+                        <span
+                            class="ohlc-value"
+                            id="lowValue"
+                        >
+                            97.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="ohlc-item">
+
+                        <span class="ohlc-label">
+                            CLOSE
+                        </span>
+
+                        <span
+                            class="ohlc-value"
+                            id="closeValue"
+                        >
+                            105.00
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LESSON -->
+
+                <div class="lesson">
+
+                    <div class="lesson-title">
+                        BULLISH CANDLE
+                    </div>
+
+                    <p>
+                        Close is higher than Open.
+                        Buyers pushed price upward.
+                    </p>
+
+                </div>
+
+
+                <button id="nextLesson">
+                    NEXT LESSON →
+                </button>
+
+            </div>
+
+        </main>
+
+
+        <!-- FOOTER -->
+
+        <footer class="candle-footer">
+
+            <span>
+                TRADEVERSE
+            </span>
+
+            <span>
+                CANDLESTICK LAB
+            </span>
+
+            <span>
+                01 / 05
+            </span>
+
+        </footer>
+
+    </section>
+
+
+    <!-- =====================================
+         SCRIPT
+    ====================================== -->
+
+    <script
+        type="module"
+        src="script.js">
+    </script>
+
+</body>
 </html>
