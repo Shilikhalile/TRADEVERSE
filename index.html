@@ -11,42 +11,22 @@
 
 <body>
 
-    <!-- =====================================
-         LOADING
-    ====================================== -->
-
     <div id="loading">
         <div class="loading-text">
             INITIALIZING MARKET LAB...
         </div>
     </div>
 
-
-    <!-- =====================================
-         3D SPACE
-    ====================================== -->
-
+    <!-- HOME 3D SPACE -->
     <canvas id="scene"></canvas>
 
-
-    <!-- =====================================
-         HOME
-    ====================================== -->
-
+    <!-- HOME UI -->
     <div class="ui" id="homeUI">
 
         <header class="home-header">
-
-            <div class="logo">
-                TRADEVERSE
-            </div>
-
-            <div class="status">
-                MARKET LAB ONLINE
-            </div>
-
+            <div class="logo">TRADEVERSE</div>
+            <div class="status">MARKET LAB ONLINE</div>
         </header>
-
 
         <main class="hero">
 
@@ -65,30 +45,16 @@
 
         </main>
 
-
         <footer class="home-footer">
-
-            <span>
-                MOVE YOUR MOUSE
-            </span>
-
-            <span>
-                SCROLL TO EXPLORE
-            </span>
-
-            <span>
-                v0.1
-            </span>
-
+            <span>MOVE YOUR MOUSE</span>
+            <span>SCROLL TO EXPLORE</span>
+            <span>v0.1</span>
         </footer>
 
     </div>
 
 
-    <!-- =====================================
-         INTRO
-    ====================================== -->
-
+    <!-- INTRO -->
     <div id="intro">
 
         <div class="intro-content">
@@ -106,14 +72,11 @@
     </div>
 
 
-    <!-- =====================================
+    <!-- =========================================
          CANDLESTICK LAB
-    ====================================== -->
+    ========================================== -->
 
     <section id="candleLab">
-
-
-        <!-- HEADER -->
 
         <header class="candle-header">
 
@@ -129,7 +92,6 @@
 
             </div>
 
-
             <button id="backBtn">
                 ← BACK
             </button>
@@ -137,14 +99,9 @@
         </header>
 
 
-        <!-- MAIN -->
-
         <main class="candle-main">
 
-
-            <!-- =================================
-                 3D CANDLE AREA
-            ================================== -->
+            <!-- 3D SPACE + CANDLE -->
 
             <div class="candle-view">
 
@@ -152,16 +109,7 @@
                     LIVE PRICE ACTION
                 </div>
 
-
-                <div
-                    id="candle3D"
-                    class="candle-3d"
-                >
-
-                    <!-- THREE.JS WILL RENDER HERE -->
-
-                </div>
-
+                <div id="candle3D"></div>
 
                 <div class="rotate-hint">
                     DRAG TO ROTATE · SCROLL TO ZOOM
@@ -170,106 +118,76 @@
             </div>
 
 
-            <!-- =================================
-                 INFORMATION
-            ================================== -->
+            <!-- INFORMATION -->
 
             <div class="candle-info">
 
                 <div class="candle-number">
-                    01 / 05
+                    LESSON 01 / 05
                 </div>
-
 
                 <h1>
                     ANATOMY<br>
                     OF A CANDLE
                 </h1>
 
-
                 <p class="candle-description">
-                    One candle.
-                    Four prices.
-                    <br><br>
-
-                    Every candlestick represents
-                    the movement of price during
-                    a specific period of time.
+                    One candle represents the movement
+                    of price during a specific period of time.
                 </p>
-
-
-                <!-- OHLC -->
 
                 <div class="ohlc">
 
-
                     <div class="ohlc-item">
-
                         <span class="ohlc-label">
                             OPEN
                         </span>
 
                         <span
                             class="ohlc-value"
-                            id="openValue"
-                        >
+                            id="openValue">
                             100.00
                         </span>
-
                     </div>
 
-
                     <div class="ohlc-item">
-
                         <span class="ohlc-label">
                             HIGH
                         </span>
 
                         <span
                             class="ohlc-value"
-                            id="highValue"
-                        >
+                            id="highValue">
                             108.00
                         </span>
-
                     </div>
 
-
                     <div class="ohlc-item">
-
                         <span class="ohlc-label">
                             LOW
                         </span>
 
                         <span
                             class="ohlc-value"
-                            id="lowValue"
-                        >
+                            id="lowValue">
                             97.00
                         </span>
-
                     </div>
 
-
                     <div class="ohlc-item">
-
                         <span class="ohlc-label">
                             CLOSE
                         </span>
 
                         <span
                             class="ohlc-value"
-                            id="closeValue"
-                        >
+                            id="closeValue">
                             105.00
                         </span>
-
                     </div>
 
                 </div>
 
-
-                <!-- LESSON -->
 
                 <div class="lesson">
 
@@ -294,8 +212,6 @@
         </main>
 
 
-        <!-- FOOTER -->
-
         <footer class="candle-footer">
 
             <span>
@@ -314,10 +230,6 @@
 
     </section>
 
-
-    <!-- =====================================
-         SCRIPT
-    ====================================== -->
 
     <script
         type="module"
