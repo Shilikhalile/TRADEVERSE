@@ -1,78 +1,44 @@
-import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
 
-
-/* =========================================
+/* =====================================================
    ELEMENTS
-========================================= */
+===================================================== */
 
-const canvas =
-    document.getElementById("scene");
+const canvas = document.getElementById("scene");
+const homeUI = document.getElementById("homeUI");
+const startBtn = document.getElementById("startBtn");
+const intro = document.getElementById("intro");
 
-const homeUI =
-    document.getElementById("homeUI");
-
-const startBtn =
-    document.getElementById("startBtn");
-
-const intro =
-    document.getElementById("intro");
-
-const candleLab =
-    document.getElementById("candleLab");
-
-const candle3D =
-    document.getElementById("candle3D");
-
-const backBtn =
-    document.getElementById("backBtn");
+const candleLab = document.getElementById("candleLab");
+const candle3D = document.getElementById("candle3D");
+const backBtn = document.getElementById("backBtn");
 
 
-/* =========================================
+/* =====================================================
    HOME 3D SPACE
-========================================= */
+===================================================== */
 
-const scene =
-    new THREE.Scene();
+const scene = new THREE.Scene();
 
-scene.background =
-    new THREE.Color(0x03050a);
+scene.background = new THREE.Color(0x03050a);
 
-
-const camera =
-    new THREE.PerspectiveCamera(
-        55,
-        window.innerWidth /
-        window.innerHeight,
-        0.1,
-        1000
-    );
-
-
-camera.position.set(
-    0,
-    1.5,
-    9
+const camera = new THREE.PerspectiveCamera(
+    55,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
 );
 
+camera.position.set(0, 1.5, 9);
 
-const renderer =
-    new THREE.WebGLRenderer({
-
-        canvas: canvas,
-
-        antialias: true
-
-    });
-
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true
+});
 
 renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio,
-        2
-    )
+    Math.min(window.devicePixelRatio, 2)
 );
-
 
 renderer.setSize(
     window.innerWidth,
@@ -80,233 +46,154 @@ renderer.setSize(
 );
 
 
-/* =========================================
+/* =====================================================
    HOME LIGHT
-========================================= */
+===================================================== */
 
-const ambient =
-    new THREE.AmbientLight(
-        0xffffff,
-        0.5
-    );
+const ambient = new THREE.AmbientLight(
+    0xffffff,
+    0.5
+);
 
 scene.add(ambient);
 
-
-const light =
-    new THREE.PointLight(
-        0xffffff,
-        30,
-        40
-    );
-
-light.position.set(
-    0,
-    5,
-    5
+const light = new THREE.PointLight(
+    0xffffff,
+    30,
+    40
 );
+
+light.position.set(0, 5, 5);
 
 scene.add(light);
 
 
-/* =========================================
-   FLOOR
-========================================= */
+/* =====================================================
+   HOME FLOOR
+===================================================== */
 
-const floor =
-    new THREE.Mesh(
+const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(40, 40),
+    new THREE.MeshStandardMaterial({
+        color: 0x050811,
+        metalness: 0.8,
+        roughness: 0.55
+    })
+);
 
-        new THREE.PlaneGeometry(
-            40,
-            40
-        ),
-
-        new THREE.MeshStandardMaterial({
-
-            color: 0x050811,
-
-            metalness: 0.8,
-
-            roughness: 0.55
-
-        })
-
-    );
-
-
-floor.rotation.x =
-    -Math.PI / 2;
-
-floor.position.y =
-    -2;
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -2;
 
 scene.add(floor);
 
 
-/* =========================================
-   GRID
-========================================= */
+/* =====================================================
+   HOME GRID
+===================================================== */
 
-const grid =
-    new THREE.GridHelper(
-        40,
-        40,
-        0x263044,
-        0x101624
-    );
+const grid = new THREE.GridHelper(
+    40,
+    40,
+    0x263044,
+    0x101624
+);
 
-
-grid.position.y =
-    -1.98;
+grid.position.y = -1.98;
 
 scene.add(grid);
 
 
-/* =========================================
-   PARTICLES
-========================================= */
+/* =====================================================
+   HOME PARTICLES
+===================================================== */
 
 const particleCount = 1000;
 
+const particlePositions =
+    new Float32Array(particleCount * 3);
 
-const positions =
-    new Float32Array(
-        particleCount * 3
-    );
+for (let i = 0; i < particleCount; i++) {
 
-
-for (
-    let i = 0;
-    i < particleCount;
-    i++
-) {
-
-    positions[i * 3] =
+    particlePositions[i * 3] =
         (Math.random() - 0.5) * 35;
 
-    positions[i * 3 + 1] =
+    particlePositions[i * 3 + 1] =
         Math.random() * 18 - 5;
 
-    positions[i * 3 + 2] =
+    particlePositions[i * 3 + 2] =
         (Math.random() - 0.5) * 30;
-
 }
-
 
 const particleGeometry =
     new THREE.BufferGeometry();
 
-
 particleGeometry.setAttribute(
-
     "position",
-
     new THREE.BufferAttribute(
-        positions,
+        particlePositions,
         3
     )
-
 );
-
 
 const particleMaterial =
     new THREE.PointsMaterial({
-
         color: 0x8fa4c7,
-
         size: 0.025,
-
         transparent: true,
-
         opacity: 0.75
-
     });
-
 
 const particles =
     new THREE.Points(
-
         particleGeometry,
-
         particleMaterial
-
     );
-
 
 scene.add(particles);
 
 
-/* =========================================
-   RINGS
-========================================= */
+/* =====================================================
+   HOME RINGS
+===================================================== */
 
 const rings = [];
 
+for (let i = 0; i < 6; i++) {
 
-for (
-    let i = 0;
-    i < 6;
-    i++
-) {
-
-    const ring =
-        new THREE.Mesh(
-
-            new THREE.TorusGeometry(
-
-                1.5 + i * 0.55,
-
-                0.008,
-
-                12,
-
-                100
-
-            ),
-
-            new THREE.MeshBasicMaterial({
-
-                color: 0x50688f,
-
-                transparent: true,
-
-                opacity: 0.18
-
-            })
-
-        );
-
-
-    ring.position.set(
-
-        2,
-
-        -0.2 + i * 0.15,
-
-        -2 - i * 0.4
-
+    const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(
+            1.5 + i * 0.55,
+            0.008,
+            12,
+            100
+        ),
+        new THREE.MeshBasicMaterial({
+            color: 0x50688f,
+            transparent: true,
+            opacity: 0.18
+        })
     );
 
+    ring.position.set(
+        2,
+        -0.2 + i * 0.15,
+        -2 - i * 0.4
+    );
 
-    ring.rotation.x =
-        Math.PI / 2;
-
+    ring.rotation.x = Math.PI / 2;
 
     scene.add(ring);
 
     rings.push(ring);
-
 }
 
 
-/* =========================================
+/* =====================================================
    HOME MOUSE
-========================================= */
+===================================================== */
 
 let mouseX = 0;
-
 let mouseY = 0;
-
 
 window.addEventListener(
     "mousemove",
@@ -321,84 +208,84 @@ window.addEventListener(
             event.clientY /
             window.innerHeight -
             0.5;
-
     }
 );
 
 
-/* =========================================
+/* =====================================================
    CANDLE VARIABLES
-========================================= */
+===================================================== */
 
 let candleScene = null;
-
 let candleCamera = null;
-
 let candleRenderer = null;
-
 let candleGroup = null;
 
 let candleRotation = 0;
 
 let dragging = false;
-
 let lastX = 0;
 
-let candleStarted = false;
 
-
-/* =========================================
-   CREATE CANDLE
-========================================= */
+/* =====================================================
+   CREATE BIG CANDLE
+===================================================== */
 
 function createCandle() {
+
+    console.log("CREATING BIG CANDLE...");
+
+    if (!candle3D) {
+
+        console.error(
+            "ERROR: candle3D NOT FOUND"
+        );
+
+        return;
+    }
+
+
+    /* CLEAR OLD */
 
     candle3D.innerHTML = "";
 
 
-    /* -------------------------------------
-       SCENE
-    ------------------------------------- */
+    /* =================================================
+       CANDLE SCENE
+    ================================================= */
 
     candleScene =
         new THREE.Scene();
 
-
     candleScene.background =
-        new THREE.Color(
-            0x03050a
-        );
+        new THREE.Color(0x03050a);
 
 
-    /* -------------------------------------
+    /* =================================================
        CAMERA
-    ------------------------------------- */
+    ================================================= */
 
     const width =
         candle3D.clientWidth ||
         window.innerWidth;
 
-
     const height =
         candle3D.clientHeight ||
         window.innerHeight;
 
-
     candleCamera =
         new THREE.PerspectiveCamera(
-
-            42,
-
+            38,
             width / height,
-
             0.1,
-
             100
-
         );
 
 
-    /* CAMERA CLOSE TO CANDLE */
+    /*
+       CAMERA CLOSE
+       → makes candle BIG
+    */
 
     candleCamera.position.set(
         4,
@@ -406,157 +293,136 @@ function createCandle() {
         6
     );
 
-
     candleCamera.lookAt(
         0,
-        0,
+        -0.3,
         0
     );
 
 
-    /* -------------------------------------
+    /* =================================================
        RENDERER
-    ------------------------------------- */
+    ================================================= */
 
     candleRenderer =
         new THREE.WebGLRenderer({
-
-            antialias: true,
-
-            alpha: false
-
+            antialias: true
         });
 
-
     candleRenderer.setPixelRatio(
-
         Math.min(
             window.devicePixelRatio,
             2
         )
-
     );
-
 
     candleRenderer.setSize(
         width,
         height
     );
 
-
     candle3D.appendChild(
         candleRenderer.domElement
     );
 
 
-    /* =====================================
-       LIGHTS
-    ===================================== */
+    /* =================================================
+       LIGHTING
+    ================================================= */
 
-    const ambient =
+    const candleAmbient =
         new THREE.AmbientLight(
             0xffffff,
-            1
+            1.2
         );
 
-
     candleScene.add(
-        ambient
+        candleAmbient
     );
 
 
-    const mainLight =
+    const candleMainLight =
         new THREE.DirectionalLight(
             0xffffff,
-            4
+            5
         );
 
-
-    mainLight.position.set(
+    candleMainLight.position.set(
         5,
         8,
-        7
+        8
     );
-
 
     candleScene.add(
-        mainLight
+        candleMainLight
     );
 
 
-    const greenLight =
+    const candleGreenLight =
         new THREE.PointLight(
             0x4cffb0,
-            20,
+            25,
             20
         );
 
-
-    greenLight.position.set(
+    candleGreenLight.position.set(
         -4,
-        3,
-        3
+        2,
+        4
     );
-
 
     candleScene.add(
-        greenLight
+        candleGreenLight
     );
 
 
-    /* =====================================
-       CANDLE GROUP
-    ===================================== */
+    /* =================================================
+       BIG CANDLE GROUP
+    ================================================= */
 
     candleGroup =
         new THREE.Group();
-
 
     candleScene.add(
         candleGroup
     );
 
 
-    /* =====================================
-       BODY
-    ===================================== */
+    /* =================================================
+       CANDLE BODY
+    ================================================= */
 
     const bodyGeometry =
         new THREE.BoxGeometry(
-
             2.2,
-
-            3.8,
-
+            4.0,
             2.2
-
         );
 
 
     const bodyMaterial =
         new THREE.MeshStandardMaterial({
 
-            color: 0x35ff9f,
+            color: 0x28ff91,
 
-            metalness: 0.15,
+            metalness: 0.1,
 
             roughness: 0.25,
 
-            emissive: 0x073d26,
+            emissive: 0x064d2b,
 
-            emissiveIntensity: 0.55
-
+            emissiveIntensity: 0.7
         });
 
 
     const body =
         new THREE.Mesh(
-
             bodyGeometry,
-
             bodyMaterial
-
         );
+
+
+    body.position.y = 0;
 
 
     candleGroup.add(
@@ -564,46 +430,37 @@ function createCandle() {
     );
 
 
-    /* =====================================
+    /* =================================================
        TOP WICK
-    ===================================== */
+    ================================================= */
 
     const wickGeometry =
         new THREE.CylinderGeometry(
-
-            0.07,
-
-            0.07,
-
-            2.5,
-
-            16
-
+            0.075,
+            0.075,
+            2.6,
+            20
         );
 
 
     const wickMaterial =
         new THREE.MeshStandardMaterial({
 
-            color: 0xdce4ec,
+            color: 0xdde5ed,
 
             roughness: 0.5
-
         });
 
 
     const topWick =
         new THREE.Mesh(
-
             wickGeometry,
-
             wickMaterial
-
         );
 
 
     topWick.position.y =
-        3.1;
+        3.3;
 
 
     candleGroup.add(
@@ -611,22 +468,19 @@ function createCandle() {
     );
 
 
-    /* =====================================
+    /* =================================================
        BOTTOM WICK
-    ===================================== */
+    ================================================= */
 
     const bottomWick =
         new THREE.Mesh(
-
             wickGeometry,
-
             wickMaterial
-
         );
 
 
     bottomWick.position.y =
-        -3.1;
+        -3.3;
 
 
     candleGroup.add(
@@ -634,48 +488,35 @@ function createCandle() {
     );
 
 
-    /* =====================================
+    /* =================================================
        OPEN MARKER
-    ===================================== */
+    ================================================= */
 
     const markerGeometry =
         new THREE.BoxGeometry(
-
-            0.9,
-
-            0.04,
-
-            0.04
-
+            1.0,
+            0.045,
+            0.045
         );
 
 
     const markerMaterial =
         new THREE.MeshBasicMaterial({
-
             color: 0xffffff
-
         });
 
 
     const openMarker =
         new THREE.Mesh(
-
             markerGeometry,
-
             markerMaterial
-
         );
 
 
     openMarker.position.set(
-
-        1.45,
-
-        -1.9,
-
+        1.5,
+        -2.0,
         0
-
     );
 
 
@@ -684,28 +525,21 @@ function createCandle() {
     );
 
 
-    /* =====================================
+    /* =================================================
        CLOSE MARKER
-    ===================================== */
+    ================================================= */
 
     const closeMarker =
         new THREE.Mesh(
-
             markerGeometry,
-
             markerMaterial
-
         );
 
 
     closeMarker.position.set(
-
-        1.45,
-
-        1.9,
-
+        1.5,
+        2.0,
         0
-
     );
 
 
@@ -714,134 +548,104 @@ function createCandle() {
     );
 
 
-    /* =====================================
-       GLOW RING
-    ===================================== */
+    /* =================================================
+       GLOW
+    ================================================= */
 
     const glow =
         new THREE.Mesh(
-
             new THREE.TorusGeometry(
-
-                2.7,
-
-                0.015,
-
-                12,
-
+                2.8,
+                0.018,
+                16,
                 100
-
             ),
-
             new THREE.MeshBasicMaterial({
-
                 color: 0x4cffb0,
-
                 transparent: true,
-
-                opacity: 0.22
-
+                opacity: 0.25
             })
-
         );
 
 
     glow.rotation.x =
         Math.PI / 2;
 
-
     glow.position.y =
-        -3.05;
-
+        -3.8;
 
     candleScene.add(
         glow
     );
 
 
-    /* =====================================
+    /* =================================================
        FLOOR
-    ===================================== */
+    ================================================= */
 
-    const ground =
+    const candleFloor =
         new THREE.Mesh(
-
             new THREE.CircleGeometry(
                 5,
                 64
             ),
-
             new THREE.MeshBasicMaterial({
-
                 color: 0x08111d,
-
                 transparent: true,
-
-                opacity: 0.55
-
+                opacity: 0.6
             })
-
         );
 
 
-    ground.rotation.x =
+    candleFloor.rotation.x =
         -Math.PI / 2;
 
-
-    ground.position.y =
-        -4.5;
-
+    candleFloor.position.y =
+        -4.6;
 
     candleScene.add(
-        ground
+        candleFloor
     );
 
 
-    /* =====================================
+    /* =================================================
        GRID
-    ===================================== */
+    ================================================= */
 
     const candleGrid =
         new THREE.GridHelper(
-
             12,
-
             24,
-
             0x263044,
-
             0x101624
-
         );
 
 
     candleGrid.position.y =
-        -4.48;
-
+        -4.58;
 
     candleScene.add(
         candleGrid
     );
 
 
-    /* =====================================
-       MOUSE ROTATION
-    ===================================== */
+    /* =================================================
+       MOUSE DRAG
+    ================================================= */
 
     candle3D.onmousedown =
-        (event) => {
+        function(event) {
 
             dragging = true;
 
             lastX =
                 event.clientX;
-
         };
 
 
     window.addEventListener(
         "mouseup",
-        () => {
+        function() {
 
             dragging = false;
 
@@ -851,39 +655,60 @@ function createCandle() {
 
     window.addEventListener(
         "mousemove",
-        (event) => {
+        function(event) {
 
             if (!dragging)
                 return;
 
-
             const dx =
                 event.clientX - lastX;
-
 
             candleRotation +=
                 dx * 0.012;
 
-
             lastX =
                 event.clientX;
-
         }
     );
 
 
-    /* =====================================
+    /* =================================================
        TOUCH
-    ===================================== */
+    ================================================= */
 
     candle3D.addEventListener(
         "touchstart",
-        (event) => {
+        function(event) {
 
             dragging = true;
 
             lastX =
                 event.touches[0].clientX;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    candle3D.addEventListener(
+        "touchmove",
+        function(event) {
+
+            if (!dragging)
+                return;
+
+            const x =
+                event.touches[0].clientX;
+
+            const dx =
+                x - lastX;
+
+            candleRotation +=
+                dx * 0.012;
+
+            lastX = x;
 
         },
         {
@@ -894,7 +719,7 @@ function createCandle() {
 
     candle3D.addEventListener(
         "touchend",
-        () => {
+        function() {
 
             dragging = false;
 
@@ -902,60 +727,24 @@ function createCandle() {
     );
 
 
-    candle3D.addEventListener(
-        "touchmove",
-        (event) => {
-
-            if (!dragging)
-                return;
-
-
-            const x =
-                event.touches[0].clientX;
-
-
-            const dx =
-                x - lastX;
-
-
-            candleRotation +=
-                dx * 0.012;
-
-
-            lastX =
-                x;
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    /* =====================================
+    /* =================================================
        ZOOM
-    ===================================== */
+    ================================================= */
 
     candle3D.addEventListener(
         "wheel",
-        (event) => {
+        function(event) {
 
             event.preventDefault();
-
 
             candleCamera.position.z +=
                 event.deltaY * 0.005;
 
-
             candleCamera.position.z =
                 THREE.MathUtils.clamp(
-
                     candleCamera.position.z,
-
                     4.5,
-
                     10
-
                 );
 
         },
@@ -966,14 +755,14 @@ function createCandle() {
 
 
     console.log(
-        "TRADEVERSE CANDLE READY"
+        "BIG 3D CANDLE CREATED SUCCESSFULLY"
     );
 }
 
 
-/* =========================================
+/* =====================================================
    CANDLE ANIMATION
-========================================= */
+===================================================== */
 
 function animateCandle() {
 
@@ -983,15 +772,10 @@ function animateCandle() {
 
 
     if (
-
         !candleRenderer ||
-
         !candleScene ||
-
         !candleCamera ||
-
         !candleGroup
-
     ) {
 
         return;
@@ -1003,15 +787,15 @@ function animateCandle() {
         performance.now() * 0.001;
 
 
-    /* FLOATING */
+    /* FLOAT */
 
     candleGroup.position.y =
         Math.sin(
-            time * 1.4
+            time * 1.3
         ) * 0.12;
 
 
-    /* ROTATION */
+    /* ROTATE */
 
     candleGroup.rotation.y =
         candleRotation;
@@ -1024,74 +808,78 @@ function animateCandle() {
 
 
     candleRenderer.render(
-
         candleScene,
-
         candleCamera
-
     );
-
 }
 
 
-/* =========================================
-   START BUTTON
-========================================= */
+/* =====================================================
+   START LEARNING
+===================================================== */
 
 startBtn.addEventListener(
     "click",
-    () => {
+    function() {
 
-        if (candleStarted)
-            return;
+        console.log(
+            "START LEARNING CLICKED"
+        );
 
 
-        candleStarted = true;
-
+        /* INTRO */
 
         intro.style.display =
             "flex";
 
-
-        setTimeout(
-            () => {
-
-                intro.style.opacity =
-                    "1";
-
-            },
-            20
-        );
+        intro.style.opacity =
+            "1";
 
 
         setTimeout(
-            () => {
+            function() {
 
                 intro.style.opacity =
                     "0";
 
 
                 setTimeout(
-                    () => {
+                    function() {
 
                         intro.style.display =
                             "none";
 
 
+                        /* HIDE HOME */
+
                         homeUI.style.display =
                             "none";
-
 
                         canvas.style.display =
                             "none";
 
 
+                        /* SHOW CANDLE LAB */
+
                         candleLab.style.display =
                             "flex";
 
+                        candleLab.style.visibility =
+                            "visible";
+
+                        candleLab.style.opacity =
+                            "1";
+
+                        candleLab.style.pointerEvents =
+                            "auto";
+
+
+                        /* CREATE CANDLE */
 
                         createCandle();
 
+
+                        /* START ANIMATION */
 
                         animateCandle();
 
@@ -1100,22 +888,31 @@ startBtn.addEventListener(
                 );
 
             },
-            1000
+            900
         );
 
     }
 );
 
 
-/* =========================================
+/* =====================================================
    BACK
-========================================= */
+===================================================== */
 
 backBtn.addEventListener(
     "click",
-    () => {
+    function() {
 
         candleLab.style.display =
+            "none";
+
+        candleLab.style.visibility =
+            "hidden";
+
+        candleLab.style.opacity =
+            "0";
+
+        candleLab.style.pointerEvents =
             "none";
 
 
@@ -1126,16 +923,19 @@ backBtn.addEventListener(
         homeUI.style.display =
             "flex";
 
+        homeUI.style.visibility =
+            "visible";
 
-        candleStarted = false;
+        homeUI.style.opacity =
+            "1";
 
     }
 );
 
 
-/* =========================================
+/* =====================================================
    HOME ANIMATION
-========================================= */
+===================================================== */
 
 const clock =
     new THREE.Clock();
@@ -1152,24 +952,19 @@ function animateHome() {
         clock.getElapsedTime();
 
 
-    camera.position.x += (
-
-        mouseX * 0.8 -
-
-        camera.position.x
-
-    ) * 0.02;
+    camera.position.x +=
+        (
+            mouseX * 0.8 -
+            camera.position.x
+        ) * 0.02;
 
 
-    camera.position.y += (
-
-        1.5 -
-
-        mouseY * 0.45 -
-
-        camera.position.y
-
-    ) * 0.02;
+    camera.position.y +=
+        (
+            1.5 -
+            mouseY * 0.45 -
+            camera.position.y
+        ) * 0.02;
 
 
     camera.lookAt(
@@ -1190,7 +985,7 @@ function animateHome() {
 
 
     rings.forEach(
-        (ring, index) => {
+        function(ring, index) {
 
             ring.rotation.z =
                 time *
@@ -1216,85 +1011,74 @@ function animateHome() {
         scene,
         camera
     );
-
 }
 
 
 animateHome();
 
 
-/* =========================================
+/* =====================================================
    RESIZE
-========================================= */
+===================================================== */
 
 window.addEventListener(
     "resize",
-    () => {
+    function() {
 
         camera.aspect =
             window.innerWidth /
             window.innerHeight;
 
-
         camera.updateProjectionMatrix();
 
 
         renderer.setSize(
-
             window.innerWidth,
-
             window.innerHeight
-
         );
 
 
         if (
-
             candleRenderer &&
-
-            candleCamera
-
+            candleCamera &&
+            candle3D
         ) {
 
             const width =
-                candle3D.clientWidth;
-
+                candle3D.clientWidth ||
+                window.innerWidth;
 
             const height =
-                candle3D.clientHeight;
+                candle3D.clientHeight ||
+                window.innerHeight;
 
 
             candleCamera.aspect =
                 width / height;
 
-
             candleCamera.updateProjectionMatrix();
 
 
             candleRenderer.setSize(
-
                 width,
-
                 height
-
             );
-
         }
 
     }
 );
 
 
-/* =========================================
+/* =====================================================
    LOADING
-========================================= */
+===================================================== */
 
 window.addEventListener(
     "load",
-    () => {
+    function() {
 
         setTimeout(
-            () => {
+            function() {
 
                 const loading =
                     document.getElementById(
@@ -1302,19 +1086,22 @@ window.addEventListener(
                     );
 
 
-                loading.style.opacity =
-                    "0";
+                if (loading) {
+
+                    loading.style.opacity =
+                        "0";
 
 
-                setTimeout(
-                    () => {
+                    setTimeout(
+                        function() {
 
-                        loading.style.display =
-                            "none";
+                            loading.style.display =
+                                "none";
 
-                    },
-                    800
-                );
+                        },
+                        800
+                    );
+                }
 
             },
             900
