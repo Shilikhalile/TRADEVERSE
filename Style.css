@@ -30,7 +30,6 @@ body {
     height: 100vh;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: space-between;
@@ -190,7 +189,6 @@ footer {
     display: none;
 
     width: 100vw;
-
     height: 100vh;
 
     overflow: hidden;
@@ -210,7 +208,7 @@ footer {
 
 
 /* =========================
-   UI
+   LAB UI
 ========================= */
 
 .lab-ui {
@@ -274,6 +272,8 @@ footer {
     letter-spacing: 2px;
 
     cursor: pointer;
+
+    transition: 0.3s;
 }
 
 
@@ -294,12 +294,10 @@ footer {
     position: absolute;
 
     left: 50%;
-
     top: 43%;
 
-    width: 300px;
-
-    height: 380px;
+    width: 360px;
+    height: 420px;
 
     transform:
         translate(-50%, -50%);
@@ -331,11 +329,9 @@ footer {
     position: absolute;
 
     left: 50%;
-
     top: 50%;
 
     width: 130px;
-
     height: 250px;
 
     transform:
@@ -360,17 +356,14 @@ footer {
 @keyframes candleFloat {
 
     0% {
-
         margin-top: 0;
     }
 
     50% {
-
         margin-top: -14px;
     }
 
     100% {
-
         margin-top: 0;
     }
 }
@@ -415,7 +408,7 @@ footer {
 
 
 /* =========================
-   BODY
+   CANDLE BODY
 ========================= */
 
 .candle-body {
@@ -423,11 +416,9 @@ footer {
     position: absolute;
 
     left: 0;
-
     top: 55px;
 
     width: 130px;
-
     height: 155px;
 
     transform-style: preserve-3d;
@@ -441,7 +432,6 @@ footer {
     position: absolute;
 
     width: 130px;
-
     height: 155px;
 
     border:
@@ -469,7 +459,6 @@ footer {
 /* FRONT */
 
 .front {
-
     transform:
         translateZ(65px);
 }
@@ -478,7 +467,6 @@ footer {
 /* BACK */
 
 .back {
-
     transform:
         rotateY(180deg)
         translateZ(65px);
@@ -488,7 +476,6 @@ footer {
 /* LEFT */
 
 .left {
-
     transform:
         rotateY(-90deg)
         translateZ(65px);
@@ -498,7 +485,6 @@ footer {
 /* RIGHT */
 
 .right {
-
     transform:
         rotateY(90deg)
         translateZ(65px);
@@ -548,11 +534,9 @@ footer {
     position: absolute;
 
     left: 50%;
-
     top: -10px;
 
     width: 70px;
-
     height: 70px;
 
     transform:
@@ -612,6 +596,132 @@ footer {
 
 
 /* =========================
+   PRICE MARKERS
+========================= */
+
+.price-marker {
+
+    position: absolute;
+
+    width: 250px;
+
+    height: 1px;
+
+    border-top:
+        1px dashed
+        rgba(255,255,255,0.35);
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+.price-marker span {
+
+    position: absolute;
+
+    top: -9px;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.45;
+}
+
+
+.open-marker {
+
+    left: -65px;
+
+    top: 50%;
+
+    transform:
+        translateY(0);
+}
+
+
+.open-marker span {
+
+    left: 0;
+}
+
+
+.close-marker {
+
+    right: -65px;
+
+    top: 32%;
+
+}
+
+
+.close-marker span {
+
+    right: 0;
+}
+
+
+/* =========================
+   BODY LABEL
+========================= */
+
+.body-label {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 58%;
+
+    transform:
+        translateX(65px);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+
+.body-line {
+
+    width: 45px;
+
+    height: 1px;
+
+    background:
+        rgba(255,255,255,0.4);
+}
+
+
+.body-label span {
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.5;
+}
+
+
+.body-label small {
+
+    font-size: 6px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.25;
+}
+
+
+/* =========================
    INFO CARDS
 ========================= */
 
@@ -636,41 +746,38 @@ footer {
         );
 
     z-index: 20;
-
-    transition:
-        transform 0.3s ease;
 }
 
 
-.left-card {
+.open-card {
 
-    left: 7%;
+    left: 6%;
 
-    top: 31%;
+    top: 29%;
 }
 
 
-.right-card {
+.high-card {
 
-    right: 7%;
+    right: 6%;
 
-    top: 31%;
+    top: 29%;
 }
 
 
 .low-card {
 
-    left: 10%;
+    left: 9%;
 
-    bottom: 22%;
+    bottom: 21%;
 }
 
 
 .close-card {
 
-    right: 10%;
+    right: 9%;
 
-    bottom: 22%;
+    bottom: 21%;
 }
 
 
@@ -820,7 +927,6 @@ footer {
 @media (max-width: 700px) {
 
     .page {
-
         padding: 25px;
     }
 
@@ -834,24 +940,22 @@ footer {
 
 
     .status {
-
         font-size: 7px;
     }
 
 
     footer {
-
         font-size: 6px;
     }
 
 
     .candle-stage {
 
-        width: 230px;
+        width: 260px;
 
-        height: 330px;
+        height: 350px;
 
-        top: 40%;
+        top: 39%;
     }
 
 
@@ -861,7 +965,7 @@ footer {
 
             translate(-50%, -50%)
 
-            scale(0.82)
+            scale(0.72)
 
             rotateX(-8deg)
 
@@ -871,59 +975,69 @@ footer {
 
     .info-card {
 
-        width: 115px;
+        width: 110px;
 
-        padding: 10px;
+        padding: 9px;
     }
 
 
     .info-value {
-
-        font-size: 15px;
+        font-size: 14px;
     }
 
 
     .info-description {
-
         font-size: 6px;
     }
 
 
-    .left-card {
+    .open-card {
 
-        left: 3%;
+        left: 2%;
 
-        top: 25%;
+        top: 22%;
     }
 
 
-    .right-card {
+    .high-card {
 
-        right: 3%;
+        right: 2%;
 
-        top: 25%;
+        top: 22%;
     }
 
 
     .low-card {
 
-        left: 3%;
+        left: 2%;
 
-        bottom: 20%;
+        bottom: 19%;
     }
 
 
     .close-card {
 
-        right: 3%;
+        right: 2%;
 
-        bottom: 20%;
+        bottom: 19%;
+    }
+
+
+    .price-marker {
+
+        width: 130px;
+    }
+
+
+    .body-label {
+
+        display: none;
     }
 
 
     .lab-center {
 
-        bottom: 60px;
+        bottom: 55px;
 
         width: 100%;
     }
@@ -931,7 +1045,7 @@ footer {
 
     .lab-center h2 {
 
-        font-size: 29px;
+        font-size: 27px;
 
         letter-spacing: 4px;
     }
@@ -939,7 +1053,7 @@ footer {
 
     .lab-center p {
 
-        font-size: 7px;
+        font-size: 6px;
     }
 
 
@@ -949,7 +1063,7 @@ footer {
 
         right: 24px;
 
-        bottom: 20px;
+        bottom: 18px;
 
         font-size: 5px;
     }
