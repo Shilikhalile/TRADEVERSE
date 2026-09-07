@@ -1,72 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TRADEVERSE — Trading Interactive Lab</title>
   <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-  <div id="loading">
+</head><body>  <div id="loading">
     <div class="loader"></div>
     <p>INITIALIZING TRADEVERSE...</p>
+  </div><canvas id="scene"></canvas>
+
+  <!-- HOME -->  <div class="ui" id="homeUI"><header>
+  <div class="logo">TRADE<span>VERSE</span></div>
+
+  <div class="status">
+    <span class="dot"></span>
+    MARKET LAB ONLINE
   </div>
+</header>
 
-  <canvas id="scene"></canvas>
+<main>
+  <div class="hero">
 
-  <div class="ui">
+    <div class="eyebrow">INTERACTIVE TRADING LAB</div>
 
-    <header>
-      <div class="logo">TRADE<span>VERSE</span></div>
+    <h1>
+      UNDERSTAND<br>
+      <span>THE MARKET.</span>
+    </h1>
 
-      <div class="status">
-        <span class="dot"></span>
-        MARKET LAB ONLINE
-      </div>
-    </header>
+    <p>
+      Explore price action, candlesticks and market structure
+      through an interactive 3D experience.
+    </p>
 
-    <main>
-      <div class="hero">
-
-        <div class="eyebrow">INTERACTIVE TRADING LAB</div>
-
-        <h1>
-          UNDERSTAND<br>
-          <span>THE MARKET.</span>
-        </h1>
-
-        <p>
-          Explore price action, candlesticks and market structure
-          through an interactive 3D experience.
-        </p>
-
-        <button id="startBtn">
-          <span>START LEARNING</span>
-          <b>→</b>
-        </button>
-
-      </div>
-    </main>
-
-    <footer>
-      <div>MOVE YOUR MOUSE</div>
-      <div>SCROLL TO EXPLORE</div>
-      <div>v0.1</div>
-    </footer>
+    <button id="startBtn">
+      <span>START LEARNING</span>
+      <b>→</b>
+    </button>
 
   </div>
+</main>
 
-  <div id="intro">
+<footer>
+  <div>MOVE YOUR MOUSE</div>
+  <div>SCROLL TO EXPLORE</div>
+  <div>v0.1</div>
+</footer>
+
+  </div>  <!-- INTRO -->  <div id="intro">
     <div class="intro-content">
       <small>WELCOME TO</small>
       <h2>TRADEVERSE</h2>
       <p>Your journey into the market starts here.</p>
     </div>
+  </div>  <!-- CANDLESTICK LAB -->  <section id="candleLab"><div class="lab-header">
+  <div>
+    <div class="lab-eyebrow">MARKET LAB / 01</div>
+    <h2>CANDLESTICKS</h2>
+    <p>Learn how a single candle tells the story of price.</p>
   </div>
 
-  <script type="module" src="script.js"></script>
+  <button id="backBtn">← BACK</button>
+</div>
 
-</body>
+
+<div class="candle-container">
+
+  <div class="candle-stage">
+
+    <div class="price-line line-high">
+      <span>HIGH</span>
+    </div>
+
+    <div class="price-line line-open">
+      <span>OPEN</span>
+    </div>
+
+    <div class="price-line line-close">
+      <span>CLOSE</span>
+    </div>
+
+    <div class="price-line line-low">
+      <span>LOW</span>
+    </div>
+
+    <div class="wick"></div>
+    <div class="candle-body"></div>
+
+  </div>
+
+
+  <div class="candle-info">
+
+    <div class="info-top">
+      <span class="badge">01</span>
+      <span>ANATOMY OF A CANDLE</span>
+    </div>
+
+    <h3>One candle.<br><span>Four prices.</span></h3>
+
+    <p>
+      Every candlestick represents the movement of price
+      during a specific period of time.
+    </p>
+
+    <div class="ohlc">
+
+      <div>
+        <small>OPEN</small>
+        <strong>100.00</strong>
+      </div>
+
+      <div>
+        <small>HIGH</small>
+        <strong>108.00</strong>
+      </div>
+
+      <div>
+        <small>LOW</small>
+        <strong>97.00</strong>
+      </div>
+
+      <div>
+        <small>CLOSE</small>
+        <strong>105.00</strong>
+      </div>
+
+    </div>
+
+    <div class="lesson">
+      <span class="lesson-dot"></span>
+      <div>
+        <strong>BULLISH CANDLE</strong>
+        <p>
+          Close is higher than Open.
+          Buyers pushed price upward.
+        </p>
+      </div>
+    </div>
+
+    <button id="nextLesson">
+      NEXT LESSON <b>→</b>
+    </button>
+
+  </div>
+
+</div>
+
+<div class="lab-footer">
+  <span>TRADEVERSE</span>
+  <span>CANDLESTICK LAB</span>
+  <span>01 / 05</span>
+</div>
+
+  </section>  <script type="module" src="script.js"></script></body>
 </html>
