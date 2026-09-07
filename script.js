@@ -4,420 +4,551 @@ const lab = document.getElementById("lab");
 const backBtn = document.getElementById("backBtn");
 const canvas = document.getElementById("space");
 
-let ctx;
-let stars = [];
-let animation;
+let scene;
+let camera;
+let renderer;
+let candleGroup;
 
-let candle = {
-    x: 0,
-    y: 0,
-    rotation: 0,
-    targetRotation: 0
-};
+let isDragging = false;
+let previousX = 0;
+let previousY = 0;
 
+let targetRotX = 0.15;
+let targetRotY = 0.35;
 
-/* =========================
-   SPACE
-========================= */
-
-function startSpace() {
-
-    ctx = canvas.getContext("2d");
-
-    resize();
-
-    stars = [];
-
-    for (let i = 0; i < 700; i++) {
-
-        stars.push({
-            x: Math.random(),
-            y: Math.random(),
-            z: Math.random(),
-            size: Math.random() * 2 + 0.2,
-            speed: Math.random() * 0.004 + 0.001
-        });
-    }
-
-    animate();
-}
-
-
-function resize() {
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-
-
-window.addEventListener("resize", resize);
+let zoom = 7;
 
 
 /* =========================
-   SPACE ANIMATION
+   OPEN LAB
 ========================= */
 
-function animate() {
+button.addEventListener("click", function () {
 
-    animation = requestAnimationFrame(animate);
+    home.style.display = "none";
+    lab.style.display = "block";
 
-    ctx.fillStyle = "#02040a";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    for (const star of stars) {
-
-        star.z -= star.speed;
-
-        if (star.z <= 0) {
-
-            star.x = Math.random();
-            star.y = Math.random();
-            star.z = 1;
-        }
-
-
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-
-
-        const x =
-            centerX +
-            (star.x - 0.5) *
-            canvas.width /
-            star.z;
-
-
-        const y =
-            centerY +
-            (star.y - 0.5) *
-            canvas.height /
-            star.z;
-
-
-        const size =
-            star.size /
-            star.z;
-
-
-        if (
-            x < 0 ||
-            x > canvas.width ||
-            y < 0 ||
-            y > canvas.height
-        ) {
-            continue;
-        }
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            x,
-            y,
-            Math.min(size, 4),
-            0,
-            Math.PI * 2
-        );
-
-
-        const alpha =
-            Math.min(
-                1,
-                (1 - star.z) * 1.5
-            );
-
-
-        ctx.fillStyle =
-            `rgba(180,210,255,${alpha})`;
-
-        ctx.fill();
+    if (!scene) {
+        create3D();
     }
-
-
-    /* Candle */
-
-    if (lab.style.display === "block") {
-
-        drawCandle();
-    }
-}
-
-
-/* =========================
-   3D CANDLE
-========================= */
-
-function drawCandle() {
-
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
-
-
-    candle.rotation +=
-        (candle.targetRotation -
-        candle.rotation) * 0.08;
-
-
-    const rot =
-        Math.sin(candle.rotation) * 25;
-
-
-    /* Glow */
-
-    const glow =
-        ctx.createRadialGradient(
-            cx,
-            cy,
-            10,
-            cx,
-            cy,
-            180
-        );
-
-    glow.addColorStop(
-        0,
-        "rgba(30,255,140,0.16)"
-    );
-
-    glow.addColorStop(
-        1,
-        "rgba(30,255,140,0)"
-    );
-
-    ctx.fillStyle = glow;
-
-    ctx.beginPath();
-
-    ctx.arc(
-        cx,
-        cy,
-        180,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    /* Shadow */
-
-    ctx.fillStyle =
-        "rgba(0,0,0,0.5)";
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        cx,
-        cy + 100,
-        100,
-        25,
-        0,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    /* Wick */
-
-    ctx.strokeStyle =
-        "#d9fff0";
-
-    ctx.lineWidth = 4;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        cx + rot * 0.25,
-        cy - 135
-    );
-
-    ctx.lineTo(
-        cx + rot * 0.25,
-        cy - 75
-    );
-
-    ctx.stroke();
-
-
-    /* Candle body */
-
-    const width = 100;
-    const height = 150;
-
-    const left =
-        cx - width / 2 + rot;
-
-    const top =
-        cy - height / 2;
-
-
-    /* Front */
-
-    const gradient =
-        ctx.createLinearGradient(
-            left,
-            top,
-            left + width,
-            top
-        );
-
-    gradient.addColorStop(
-        0,
-        "#0b8f52"
-    );
-
-    gradient.addColorStop(
-        0.5,
-        "#20e982"
-    );
-
-    gradient.addColorStop(
-        1,
-        "#075a37"
-    );
-
-
-    ctx.fillStyle = gradient;
-
-    ctx.fillRect(
-        left,
-        top,
-        width,
-        height
-    );
-
-
-    /* Right side */
-
-    ctx.fillStyle =
-        "#06452b";
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        left + width,
-        top
-    );
-
-    ctx.lineTo(
-        left + width + 28,
-        top - 15
-    );
-
-    ctx.lineTo(
-        left + width + 28,
-        top + height - 15
-    );
-
-    ctx.lineTo(
-        left + width,
-        top + height
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-
-    /* Top */
-
-    ctx.fillStyle =
-        "#31ff91";
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        left + width / 2,
-        top,
-        width / 2,
-        15,
-        0,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    /* Bottom shadow */
-
-    ctx.fillStyle =
-        "#04351f";
-
-    ctx.fillRect(
-        left,
-        top + height - 12,
-        width,
-        12
-    );
-}
-
-
-/* =========================
-   MOUSE ROTATION
-========================= */
-
-document.addEventListener(
-    "mousemove",
-    function (event) {
-
-        if (lab.style.display !== "block") {
-            return;
-        }
-
-        const mouse =
-            (event.clientX /
-            window.innerWidth) - 0.5;
-
-        candle.targetRotation =
-            mouse * 2;
-    }
-);
-
-
-/* =========================
-   START
-========================= */
-
-button.addEventListener(
-    "click",
-    function () {
-
-        home.style.display = "none";
-
-        lab.style.display = "block";
-
-    }
-);
+});
 
 
 /* =========================
    BACK
 ========================= */
 
-backBtn.addEventListener(
-    "click",
-    function () {
+backBtn.addEventListener("click", function () {
 
-        lab.style.display = "none";
-
-        home.style.display = "flex";
-
-    }
-);
+    lab.style.display = "none";
+    home.style.display = "flex";
+});
 
 
 /* =========================
-   INIT
+   CREATE 3D
 ========================= */
 
-startSpace();
+function create3D() {
+
+    scene = new THREE.Scene();
+
+    scene.background = new THREE.Color(0x02040a);
+
+
+    /* CAMERA */
+
+    camera = new THREE.PerspectiveCamera(
+        45,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+    );
+
+    camera.position.set(
+        0,
+        0,
+        zoom
+    );
+
+
+    /* RENDERER */
+
+    renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: false
+    });
+
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, 2)
+    );
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+
+    /* LIGHT */
+
+    const ambientLight =
+        new THREE.AmbientLight(
+            0xffffff,
+            1.4
+        );
+
+    scene.add(ambientLight);
+
+
+    const greenLight =
+        new THREE.PointLight(
+            0x20ff88,
+            12,
+            15
+        );
+
+    greenLight.position.set(
+        2,
+        3,
+        4
+    );
+
+    scene.add(greenLight);
+
+
+    const whiteLight =
+        new THREE.PointLight(
+            0xffffff,
+            8,
+            12
+        );
+
+    whiteLight.position.set(
+        -3,
+        2,
+        4
+    );
+
+    scene.add(whiteLight);
+
+
+    /* CANDLE */
+
+    createCandle();
+
+
+    /* STARS */
+
+    createStars();
+
+
+    /* EVENTS */
+
+    canvas.addEventListener(
+        "pointerdown",
+        pointerDown
+    );
+
+    canvas.addEventListener(
+        "pointermove",
+        pointerMove
+    );
+
+    canvas.addEventListener(
+        "pointerup",
+        pointerUp
+    );
+
+    canvas.addEventListener(
+        "pointercancel",
+        pointerUp
+    );
+
+    canvas.addEventListener(
+        "wheel",
+        wheel,
+        {
+            passive: false
+        }
+    );
+
+
+    window.addEventListener(
+        "resize",
+        resize
+    );
+
+
+    animate();
+}
+
+
+/* =========================
+   CANDLE
+========================= */
+
+function createCandle() {
+
+    candleGroup =
+        new THREE.Group();
+
+
+    /* BODY */
+
+    const bodyGeometry =
+        new THREE.BoxGeometry(
+            1.45,
+            2.8,
+            1.45
+        );
+
+
+    const bodyMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color: 0x16d978,
+
+            roughness: 0.28,
+
+            metalness: 0.25,
+
+            emissive: 0x06351f,
+
+            emissiveIntensity: 0.5
+
+        });
+
+
+    const body =
+        new THREE.Mesh(
+            bodyGeometry,
+            bodyMaterial
+        );
+
+
+    candleGroup.add(body);
+
+
+    /* TOP */
+
+    const topGeometry =
+        new THREE.CylinderGeometry(
+            0.73,
+            0.73,
+            0.06,
+            64
+        );
+
+
+    const topMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color: 0x31ff91,
+
+            roughness: 0.2,
+
+            metalness: 0.2,
+
+            emissive: 0x0b542f,
+
+            emissiveIntensity: 0.5
+
+        });
+
+
+    const top =
+        new THREE.Mesh(
+            topGeometry,
+            topMaterial
+        );
+
+
+    top.position.y = 1.43;
+
+    candleGroup.add(top);
+
+
+    /* WICK */
+
+    const wickGeometry =
+        new THREE.CylinderGeometry(
+            0.07,
+            0.07,
+            0.65,
+            20
+        );
+
+
+    const wickMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0xd8e8df,
+            roughness: 0.8
+        });
+
+
+    const wick =
+        new THREE.Mesh(
+            wickGeometry,
+            wickMaterial
+        );
+
+
+    wick.position.y = 1.78;
+
+    candleGroup.add(wick);
+
+
+    /* SMALL GLOW */
+
+    const glowGeometry =
+        new THREE.SphereGeometry(
+            0.16,
+            32,
+            32
+        );
+
+
+    const glowMaterial =
+        new THREE.MeshBasicMaterial({
+
+            color: 0x55ffaa,
+
+            transparent: true,
+
+            opacity: 0.7
+
+        });
+
+
+    const glow =
+        new THREE.Mesh(
+            glowGeometry,
+            glowMaterial
+        );
+
+
+    glow.position.y = 2.1;
+
+    candleGroup.add(glow);
+
+
+    candleGroup.position.y = 0;
+
+    scene.add(candleGroup);
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+function createStars() {
+
+    const geometry =
+        new THREE.BufferGeometry();
+
+    const positions = [];
+
+    for (let i = 0; i < 1600; i++) {
+
+        positions.push(
+            (Math.random() - 0.5) * 40,
+            (Math.random() - 0.5) * 25,
+            (Math.random() - 0.5) * 30
+        );
+    }
+
+
+    geometry.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(
+            positions,
+            3
+        )
+    );
+
+
+    const material =
+        new THREE.PointsMaterial({
+
+            color: 0x9db9d6,
+
+            size: 0.035,
+
+            transparent: true,
+
+            opacity: 0.75
+
+        });
+
+
+    const stars =
+        new THREE.Points(
+            geometry,
+            material
+        );
+
+
+    scene.add(stars);
+}
+
+
+/* =========================
+   DRAG
+========================= */
+
+function pointerDown(event) {
+
+    isDragging = true;
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+
+    canvas.setPointerCapture(
+        event.pointerId
+    );
+}
+
+
+function pointerMove(event) {
+
+    if (!isDragging || !candleGroup) {
+        return;
+    }
+
+
+    const movementX =
+        event.clientX - previousX;
+
+    const movementY =
+        event.clientY - previousY;
+
+
+    targetRotY +=
+        movementX * 0.012;
+
+    targetRotX +=
+        movementY * 0.008;
+
+
+    targetRotX =
+        Math.max(
+            -1.2,
+            Math.min(1.2, targetRotX)
+        );
+
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+}
+
+
+function pointerUp() {
+
+    isDragging = false;
+}
+
+
+/* =========================
+   ZOOM
+========================= */
+
+function wheel(event) {
+
+    event.preventDefault();
+
+    zoom += event.deltaY * 0.004;
+
+    zoom =
+        Math.max(
+            4.5,
+            Math.min(10, zoom)
+        );
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+function animate(time) {
+
+    requestAnimationFrame(animate);
+
+
+    if (!renderer) {
+        return;
+    }
+
+
+    /* CANDLE ROTATION */
+
+    if (candleGroup) {
+
+        if (!isDragging) {
+
+            targetRotY += 0.0025;
+        }
+
+
+        candleGroup.rotation.x +=
+            (targetRotX -
+            candleGroup.rotation.x) *
+            0.08;
+
+
+        candleGroup.rotation.y +=
+            (targetRotY -
+            candleGroup.rotation.y) *
+            0.08;
+
+
+        /* FLOATING */
+
+        candleGroup.position.y =
+            Math.sin(
+                time * 0.0015
+            ) * 0.12;
+    }
+
+
+    /* CAMERA ZOOM */
+
+    camera.position.z +=
+        (zoom -
+        camera.position.z) *
+        0.08;
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+}
+
+
+/* =========================
+   RESIZE
+========================= */
+
+function resize() {
+
+    if (!camera || !renderer) {
+        return;
+    }
+
+
+    camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
+
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+}
