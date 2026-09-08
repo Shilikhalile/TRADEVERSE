@@ -4,419 +4,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>TRADEVERSE — Market Lab</title>
-
     <link rel="stylesheet" href="Style.css">
 </head>
 
 <body>
 
-    <!-- =================================================
-         HOME
-    ================================================== -->
+<!-- ================= HOME ================= -->
 
-    <section id="home" class="home">
+<section id="home" class="home">
 
-        <header class="topbar">
-            <div class="logo">
-                TRADEVERSE
+    <header class="topbar">
+        <div class="logo">TRADEVERSE</div>
+        <div class="subtitle">MARKET LAB ONLINE</div>
+    </header>
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-label">
+                MARKET LAB / 001
             </div>
 
-            <div class="subtitle">
-                MARKET LAB ONLINE
-            </div>
-        </header>
+            <h1>TRADEVERSE</h1>
 
+            <div class="hero-line"></div>
 
-        <main class="hero">
+            <h2>UNDERSTAND THE MARKET.</h2>
 
-            <div class="hero-content">
+            <p>
+                Learn how price moves,
+                one concept at a time.
+            </p>
 
-                <div class="small-label">
-                    MARKET LAB / 001
-                </div>
-
-                <h1>
-                    TRADEVERSE
-                </h1>
-
-                <div class="hero-line"></div>
-
-                <h2>
-                    UNDERSTAND THE MARKET.
-                </h2>
-
-                <p>
-                    Learn how price moves,
-                    one concept at a time.
-                </p>
-
-                <button id="startBtn" class="start-btn">
-                    START LEARNING →
-                </button>
-
-            </div>
-
-        </main>
-
-
-        <footer class="home-footer">
-
-            <div>
-                MOVE YOUR MOUSE
-            </div>
-
-            <div>
-                SCROLL TO EXPLORE
-            </div>
-
-            <div>
-                v0.1
-            </div>
-
-        </footer>
-
-    </section>
-
-
-
-    <!-- =================================================
-         LESSON 01 — CANDLESTICKS
-    ================================================== -->
-
-    <section id="lab" class="lab">
-
-        <header class="lab-header">
-
-            <div>
-
-                <div class="lab-title">
-                    MARKET LAB
-                </div>
-
-                <div class="lab-number">
-                    LESSON 01 / 05
-                </div>
-
-            </div>
-
-
-            <button id="backBtn" class="back-btn">
-                ← BACK
+            <button id="startBtn" class="start-btn">
+                START LEARNING →
             </button>
-
-        </header>
-
-
-
-        <main class="lab-main">
-
-            <!-- 3D CANDLE -->
-
-            <div class="candle-stage">
-
-                <div
-                    id="candleScene"
-                    class="candle-scene"
-                >
-
-                    <div class="candle-shadow"></div>
-
-                    <div class="wick"></div>
-
-                    <div class="candle-body">
-
-                        <div class="body-front"></div>
-                        <div class="body-back"></div>
-                        <div class="body-left"></div>
-                        <div class="body-right"></div>
-                        <div class="body-top"></div>
-                        <div class="body-bottom"></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- NOTES -->
-
-            <div class="lesson-notes">
-
-                <div class="notes-label">
-                    YOUR NOTES
-                </div>
-
-                <textarea
-                    id="lessonNotes"
-                    placeholder="Write your explanation here..."
-                ></textarea>
-
-            </div>
-
-        </main>
-
-
-
-        <!-- NEXT -->
-
-        <button
-            id="nextLessonBtn"
-            class="next-lesson"
-        >
-            NEXT LESSON →
-        </button>
-
-
-        <div class="lab-bottom">
-
-            <span>
-                TRADEVERSE
-            </span>
-
-            <span>
-                CANDLESTICKS
-            </span>
-
-            <span>
-                01 / 05
-            </span>
 
         </div>
 
-    </section>
+    </main>
+
+    <footer class="home-footer">
+        <div>MOVE YOUR MOUSE</div>
+        <div>SCROLL TO EXPLORE</div>
+        <div>v0.1</div>
+    </footer>
+
+</section>
 
 
+<!-- ================= LESSON 01 ================= -->
 
-    <!-- =================================================
-         LESSON 02 — TREND
-    ================================================== -->
+<section id="lab" class="lab">
 
-    <section
-        id="trendLab"
-        class="trend-lab"
+    <header class="lab-header">
+
+        <div>
+            <div class="lab-title">MARKET LAB</div>
+            <div class="lab-number">LESSON 01 / 05</div>
+        </div>
+
+        <button id="backBtn" class="back-btn">
+            ← BACK
+        </button>
+
+    </header>
+
+
+    <main class="lab-main">
+
+        <div class="candle-stage">
+
+            <div id="candleScene" class="candle-scene">
+
+                <div class="candle-shadow"></div>
+
+                <div class="wick"></div>
+
+                <div class="candle-body">
+
+                    <div class="body-front"></div>
+                    <div class="body-back"></div>
+                    <div class="body-left"></div>
+                    <div class="body-right"></div>
+                    <div class="body-top"></div>
+                    <div class="body-bottom"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="lesson-notes">
+
+            <div class="notes-label">
+                YOUR NOTES
+            </div>
+
+            <textarea
+                id="lessonNotes"
+                placeholder="Write your explanation here..."
+            ></textarea>
+
+        </div>
+
+    </main>
+
+
+    <button
+        id="nextLessonBtn"
+        class="next-lesson"
     >
+        NEXT LESSON →
+    </button>
 
-        <header class="lab-header">
 
-            <div>
+    <div class="lab-bottom">
+        <span>TRADEVERSE</span>
+        <span>CANDLESTICKS</span>
+        <span>01 / 05</span>
+    </div>
 
-                <div class="lab-title">
-                    MARKET LAB 02
-                </div>
+</section>
 
-                <div class="lab-number">
-                    TREND / LESSON 02 / 05
-                </div>
 
-            </div>
+<!-- ================= LESSON 02 ================= -->
 
+<section id="trendLab" class="trend-lab">
 
-            <button
-                id="trendBackBtn"
-                class="back-btn"
-            >
-                ← BACK
-            </button>
+    <header class="lab-header">
 
-        </header>
+        <div>
+            <div class="lab-title">MARKET LAB</div>
+            <div class="lab-number">LESSON 02 / 05</div>
+        </div>
 
-
-
-        <main class="trend-main">
-
-            <!-- TREND CHART -->
-
-            <div class="trend-stage">
-
-                <div
-                    id="trendChart"
-                    class="trend-chart"
-                >
-
-
-                    <!-- CANDLE 1 -->
-
-                    <div class="mini-candle candle-1">
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- CANDLE 2 -->
-
-                    <div class="mini-candle candle-2">
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- CANDLE 3 -->
-
-                    <div
-                        class="mini-candle candle-3 red"
-                    >
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- CANDLE 4 -->
-
-                    <div class="mini-candle candle-4">
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- CANDLE 5 -->
-
-                    <div
-                        class="mini-candle candle-5 red"
-                    >
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- CANDLE 6 -->
-
-                    <div class="mini-candle candle-6">
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- CANDLE 7 -->
-
-                    <div class="mini-candle candle-7">
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- CANDLE 8 -->
-
-                    <div class="mini-candle candle-8">
-
-                        <div class="mini-wick"></div>
-
-                        <div class="mini-body"></div>
-
-                    </div>
-
-
-
-                    <!-- TREND LINES -->
-
-                    <div class="trend-line line-1"></div>
-                    <div class="trend-line line-2"></div>
-                    <div class="trend-line line-3"></div>
-                    <div class="trend-line line-4"></div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- NOTES -->
-
-            <div class="trend-notes">
-
-                <div class="notes-label">
-                    TREND NOTES
-                </div>
-
-                <textarea
-                    id="trendNotes"
-                    placeholder="Explain what you understand about trend..."
-                ></textarea>
-
-            </div>
-
-        </main>
-
-
-
-        <!-- PREVIOUS -->
-
-        <button
-            id="previousLessonBtn"
-            class="previous-lesson"
-        >
-            ← LESSON 01
+        <button id="trendBackBtn" class="back-btn">
+            ← BACK
         </button>
 
+    </header>
 
 
-        <!-- NEXT -->
+    <main class="trend-main">
 
-        <button
-            id="nextTrendBtn"
-            class="next-lesson"
-        >
-            NEXT LESSON →
-        </button>
+        <div class="trend-stage">
+
+            <div id="trendChart" class="trend-chart">
 
 
+                <!-- CANDLE 1 -->
 
-        <div class="lab-bottom">
+                <div class="mini-candle candle-1">
 
-            <span>
-                TRADEVERSE
-            </span>
+                    <div class="mini-wick"></div>
 
-            <span>
-                TREND LAB
-            </span>
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
 
-            <span>
-                02 / 05
-            </span>
+                </div>
+
+
+                <!-- CANDLE 2 -->
+
+                <div class="mini-candle candle-2">
+
+                    <div class="mini-wick"></div>
+
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- CANDLE 3 -->
+
+                <div class="mini-candle candle-3 red">
+
+                    <div class="mini-wick"></div>
+
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- CANDLE 4 -->
+
+                <div class="mini-candle candle-4">
+
+                    <div class="mini-wick"></div>
+
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- CANDLE 5 -->
+
+                <div class="mini-candle candle-5 red">
+
+                    <div class="mini-wick"></div>
+
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- CANDLE 6 -->
+
+                <div class="mini-candle candle-6">
+
+                    <div class="mini-wick"></div>
+
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- CANDLE 7 -->
+
+                <div class="mini-candle candle-7">
+
+                    <div class="mini-wick"></div>
+
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- CANDLE 8 -->
+
+                <div class="mini-candle candle-8">
+
+                    <div class="mini-wick"></div>
+
+                    <div class="mini-body">
+                        <div class="mini-front"></div>
+                        <div class="mini-back"></div>
+                        <div class="mini-left"></div>
+                        <div class="mini-right"></div>
+                        <div class="mini-top"></div>
+                        <div class="mini-bottom"></div>
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </div>
 
-    </section>
+
+        <div class="trend-notes">
+
+            <div class="notes-label">
+                TREND NOTES
+            </div>
+
+            <textarea
+                id="trendNotes"
+                placeholder="Explain what you understand about trend..."
+            ></textarea>
+
+        </div>
+
+    </main>
 
 
-    <!-- =================================================
-         JAVASCRIPT
-    ================================================== -->
+    <button
+        id="previousLessonBtn"
+        class="previous-lesson"
+    >
+        ← LESSON 01
+    </button>
 
-    <script src="script.js"></script>
+
+    <div class="lab-bottom">
+        <span>TRADEVERSE</span>
+        <span>TREND LAB</span>
+        <span>02 / 05</span>
+    </div>
+
+</section>
+
+
+<script src="script.js"></script>
 
 </body>
-
-</html>
+                 </html>
