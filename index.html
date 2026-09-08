@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,164 +12,327 @@
 
 <body>
 
-    <!-- ================= HOME ================= -->
+<!-- =====================================================
+     HOME
+===================================================== -->
 
-    <section id="home" class="home">
+<section id="home" class="home">
 
-        <div class="top-title">
+    <div class="top-title">
+        TRADEVERSE
+        <span>MARKET LAB ONLINE</span>
+    </div>
+
+    <div class="hero">
+
+        <div class="hero-small">
             TRADEVERSE
-            <span>MARKET LAB ONLINE</span>
         </div>
 
-        <div class="hero">
+        <h1>
+            UNDERSTAND<br>
+            THE MARKET.
+        </h1>
 
-            <div class="hero-small">
-                TRADEVERSE
-            </div>
+        <p>
+            Learn how price moves,<br>
+            one concept at a time.
+        </p>
 
-            <h1>
-                UNDERSTAND<br>
-                THE MARKET.
-            </h1>
+        <button id="startBtn">
+            START LEARNING
+            <span>→</span>
+        </button>
 
-            <p>
-                Learn how price moves,<br>
-                one concept at a time.
-            </p>
+    </div>
 
-            <button id="startBtn">
-                START LEARNING
-                <span>→</span>
-            </button>
+    <div class="home-footer">
 
+        <div>
+            MOVE YOUR MOUSE<br>
+            <span>SCROLL TO EXPLORE</span>
         </div>
 
-        <div class="home-footer">
-
-            <div>
-                MOVE YOUR MOUSE<br>
-                <span>SCROLL TO EXPLORE</span>
-            </div>
-
-            <div>
-                v0.1
-            </div>
-
+        <div>
+            v0.1
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ================= MARKET LAB ================= -->
+<!-- =====================================================
+     LESSON 01 — CANDLESTICK
+===================================================== -->
 
-    <section id="lab" class="lab">
+<section id="lab" class="lab">
 
-        <header class="lab-header">
+    <header class="lab-header">
 
-            <div>
-                <span>MARKET LAB</span>
-                <strong>01</strong>
-            </div>
+        <div>
+            <span>MARKET LAB</span>
+            <strong>01</strong>
+        </div>
 
-            <button id="backBtn">
-                ← BACK
-            </button>
+        <button id="backBtn">
+            ← BACK
+        </button>
 
-        </header>
+    </header>
 
 
-        <!-- ================= CANDLE ================= -->
+    <!-- CANDLE -->
 
-        <div class="candle-stage">
+    <div class="candle-stage">
 
-            <div
-                class="candle-scene"
-                id="candleScene"
-            >
+        <div
+            class="candle-scene"
+            id="candleScene"
+        >
 
-                <div class="candle">
+            <div class="candle">
 
-                    <!-- Colored wick -->
-                    <div class="wick"></div>
+                <div class="wick"></div>
 
-                    <!-- Candle body -->
-                    <div class="candle-body">
+                <div class="candle-body">
 
-                        <div class="face front"></div>
-                        <div class="face back"></div>
-                        <div class="face right"></div>
-                        <div class="face left"></div>
-                        <div class="face top"></div>
-                        <div class="face bottom"></div>
-
-                    </div>
-
-                    <!-- Glow -->
-                    <div class="glow"></div>
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
 
                 </div>
 
+                <div class="glow"></div>
+
             </div>
 
         </div>
 
+    </div>
 
-        <!-- ================= NOTES ================= -->
 
-        <div class="notes-panel">
+    <!-- NOTES -->
 
-            <div class="notes-header">
+    <div class="notes-panel">
 
-                <span>01</span>
+        <div class="notes-header">
 
-                <div>
-                    <small>YOUR EXPLANATION</small>
-                    <strong>CANDLESTICK</strong>
-                </div>
+            <span>01</span>
 
+            <div>
+                <small>YOUR EXPLANATION</small>
+                <strong>CANDLESTICK</strong>
+            </div>
+
+        </div>
+
+        <textarea
+            id="lessonNotes"
+            placeholder="Write your explanation here..."
+        ></textarea>
+
+        <div class="notes-footer">
+            WRITE • EXPLAIN • LEARN
+        </div>
+
+    </div>
+
+
+    <!-- NEXT -->
+
+    <button
+        id="nextLessonBtn"
+        class="next-lesson"
+    >
+        NEXT LESSON →
+    </button>
+
+
+    <div class="lab-bottom">
+
+        <div>
+            <span>TRADEVERSE</span>
+            <strong>CANDLESTICK LAB</strong>
+        </div>
+
+        <div class="lesson-number">
+            01 <span>/</span> 05
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LESSON 02 — TREND
+===================================================== -->
+
+<section id="trendLab" class="trend-lab">
+
+    <header class="lab-header">
+
+        <div>
+            <span>MARKET LAB</span>
+            <strong>02</strong>
+        </div>
+
+        <button id="trendBackBtn">
+            ← BACK
+        </button>
+
+    </header>
+
+
+    <!-- TREND VISUAL -->
+
+    <div class="trend-stage">
+
+        <div
+            class="trend-chart"
+            id="trendChart"
+        >
+
+            <!-- Connecting line -->
+
+            <div class="trend-line line-1"></div>
+            <div class="trend-line line-2"></div>
+            <div class="trend-line line-3"></div>
+            <div class="trend-line line-4"></div>
+
+
+            <!-- Candle 1 -->
+
+            <div class="mini-candle candle-1">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
             </div>
 
 
-            <textarea
-                id="lessonNotes"
-                placeholder="Write your explanation here...
+            <!-- Candle 2 -->
+
+            <div class="mini-candle candle-2">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
+            </div>
+
+
+            <!-- Candle 3 -->
+
+            <div class="mini-candle candle-3 red">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
+            </div>
+
+
+            <!-- Candle 4 -->
+
+            <div class="mini-candle candle-4">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
+            </div>
+
+
+            <!-- Candle 5 -->
+
+            <div class="mini-candle candle-5">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
+            </div>
+
+
+            <!-- Candle 6 -->
+
+            <div class="mini-candle candle-6 red">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
+            </div>
+
+
+            <!-- Candle 7 -->
+
+            <div class="mini-candle candle-7">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
+            </div>
+
+
+            <!-- Candle 8 -->
+
+            <div class="mini-candle candle-8">
+                <div class="mini-wick"></div>
+                <div class="mini-body"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TREND NOTES -->
+
+    <div class="trend-notes">
+
+        <div class="notes-header">
+
+            <span>02</span>
+
+            <div>
+                <small>YOUR EXPLANATION</small>
+                <strong>TREND</strong>
+            </div>
+
+        </div>
+
+        <textarea
+            id="trendNotes"
+            placeholder="Write your explanation here...
 
 Example:
 
-A candlestick shows Open,
-High, Low and Close.
+An uptrend happens when
+price creates Higher Highs
+and Higher Lows."
+        ></textarea>
 
-Explain the concept
-the way you want."
-            ></textarea>
-
-
-            <div class="notes-footer">
-                WRITE • EXPLAIN • LEARN
-            </div>
-
+        <div class="notes-footer">
+            WRITE • EXPLAIN • LEARN
         </div>
 
+    </div>
 
-        <!-- ================= BOTTOM ================= -->
 
-        <div class="lab-bottom">
+    <!-- BACK TO LESSON 01 -->
 
-            <div>
-                <span>TRADEVERSE</span>
-                <strong>CANDLESTICK LAB</strong>
-            </div>
+    <button
+        id="previousLessonBtn"
+        class="previous-lesson"
+    >
+        ← PREVIOUS
+    </button>
 
-            <div class="lesson-number">
-                01 <span>/</span> 05
-            </div>
 
+    <div class="lab-bottom">
+
+        <div>
+            <span>TRADEVERSE</span>
+            <strong>TREND LAB</strong>
         </div>
 
-    </section>
+        <div class="lesson-number">
+            02 <span>/</span> 05
+        </div>
+
+    </div>
+
+</section>
 
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
-</html>
+    </html>
