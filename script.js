@@ -5,12 +5,20 @@ const trendLab = document.getElementById("trendLab");
 const startBtn = document.getElementById("startBtn");
 const backBtn = document.getElementById("backBtn");
 
-const nextLessonBtn = document.getElementById("nextLessonBtn");
-const previousLessonBtn = document.getElementById("previousLessonBtn");
-const trendBackBtn = document.getElementById("trendBackBtn");
+const nextLessonBtn =
+    document.getElementById("nextLessonBtn");
 
-const candleScene = document.getElementById("candleScene");
-const trendChart = document.getElementById("trendChart");
+const previousLessonBtn =
+    document.getElementById("previousLessonBtn");
+
+const trendBackBtn =
+    document.getElementById("trendBackBtn");
+
+const candleScene =
+    document.getElementById("candleScene");
+
+const trendChart =
+    document.getElementById("trendChart");
 
 
 // =====================================================
@@ -18,10 +26,15 @@ const trendChart = document.getElementById("trendChart");
 // =====================================================
 
 if (startBtn) {
+
     startBtn.addEventListener("click", () => {
+
         home.style.display = "none";
+
         lab.classList.add("active");
+
     });
+
 }
 
 
@@ -30,10 +43,15 @@ if (startBtn) {
 // =====================================================
 
 if (backBtn) {
+
     backBtn.addEventListener("click", () => {
+
         lab.classList.remove("active");
+
         home.style.display = "block";
+
     });
+
 }
 
 
@@ -42,16 +60,17 @@ if (backBtn) {
 // =====================================================
 
 if (nextLessonBtn) {
+
     nextLessonBtn.addEventListener("click", () => {
 
         lab.classList.remove("active");
 
-        if (trendLab) {
-            trendLab.classList.add("active");
-        }
+        trendLab.classList.add("active");
 
         window.scrollTo(0, 0);
+
     });
+
 }
 
 
@@ -60,16 +79,17 @@ if (nextLessonBtn) {
 // =====================================================
 
 if (previousLessonBtn) {
+
     previousLessonBtn.addEventListener("click", () => {
 
-        if (trendLab) {
-            trendLab.classList.remove("active");
-        }
+        trendLab.classList.remove("active");
 
         lab.classList.add("active");
 
         window.scrollTo(0, 0);
+
     });
+
 }
 
 
@@ -78,21 +98,22 @@ if (previousLessonBtn) {
 // =====================================================
 
 if (trendBackBtn) {
+
     trendBackBtn.addEventListener("click", () => {
 
-        if (trendLab) {
-            trendLab.classList.remove("active");
-        }
+        trendLab.classList.remove("active");
 
         home.style.display = "block";
 
         window.scrollTo(0, 0);
+
     });
+
 }
 
 
 // =====================================================
-// LESSON 01 — 3D CANDLE MOVEMENT
+// 3D CANDLE — LESSON 01
 // =====================================================
 
 if (candleScene) {
@@ -118,65 +139,80 @@ if (candleScene) {
              scale(${zoom})
              rotateX(${rotateX}deg)
              rotateY(${rotateY}deg)`;
+
     }
 
 
-    candleScene.addEventListener("pointerdown", (e) => {
+    candleScene.addEventListener(
+        "pointerdown",
+        (e) => {
 
-        dragging = true;
+            dragging = true;
 
-        lastX = e.clientX;
-        lastY = e.clientY;
+            lastX = e.clientX;
+            lastY = e.clientY;
 
-        velocityX = 0;
-        velocityY = 0;
+            velocityX = 0;
+            velocityY = 0;
 
-        candleScene.style.cursor = "grabbing";
+            candleScene.style.cursor =
+                "grabbing";
 
-        candleScene.setPointerCapture(e.pointerId);
-    });
+            candleScene.setPointerCapture(
+                e.pointerId
+            );
+
+        }
+    );
 
 
-    candleScene.addEventListener("pointermove", (e) => {
+    candleScene.addEventListener(
+        "pointermove",
+        (e) => {
 
-        if (!dragging) return;
+            if (!dragging) return;
 
-        const dx = e.clientX - lastX;
-        const dy = e.clientY - lastY;
+            const dx =
+                e.clientX - lastX;
 
-        rotateY += dx * 1.8;
-        rotateX -= dy * 1.8;
+            const dy =
+                e.clientY - lastY;
 
-        rotateX = Math.max(
-            -70,
-            Math.min(70, rotateX)
-        );
+            rotateY += dx * 1.8;
+            rotateX -= dy * 1.8;
 
-        velocityY = dx * 1.8;
-        velocityX = -dy * 1.8;
+            rotateX = Math.max(
+                -70,
+                Math.min(70, rotateX)
+            );
 
-        lastX = e.clientX;
-        lastY = e.clientY;
+            velocityY = dx * 1.8;
+            velocityX = -dy * 1.8;
 
-        updateCandle();
-    });
+            lastX = e.clientX;
+            lastY = e.clientY;
+
+            updateCandle();
+
+        }
+    );
 
 
     function stopCandleDrag(e) {
 
         dragging = false;
 
-        candleScene.style.cursor = "grab";
+        candleScene.style.cursor =
+            "grab";
 
         try {
 
-            if (e.pointerId !== undefined) {
-                candleScene.releasePointerCapture(
-                    e.pointerId
-                );
-            }
+            candleScene.releasePointerCapture(
+                e.pointerId
+            );
 
         } catch (error) {}
+
     }
 
 
@@ -221,9 +257,11 @@ if (candleScene) {
 
             rotateY += 0.20;
 
-            rotateY += velocityY * 0.04;
+            rotateY +=
+                velocityY * 0.04;
 
-            rotateX += velocityX * 0.04;
+            rotateX +=
+                velocityX * 0.04;
 
             rotateX = Math.max(
                 -70,
@@ -234,20 +272,23 @@ if (candleScene) {
             velocityY *= 0.92;
 
             updateCandle();
+
         }
 
         requestAnimationFrame(
             animateCandle
         );
+
     }
 
 
     animateCandle();
+
 }
 
 
 // =====================================================
-// LESSON 01 — NOTES AUTO SAVE
+// LESSON 01 NOTES
 // =====================================================
 
 const lessonNotes =
@@ -255,15 +296,14 @@ const lessonNotes =
 
 if (lessonNotes) {
 
-    const savedNotes =
+    const saved =
         localStorage.getItem(
             "tradeverse-candle-notes"
         );
 
-    if (savedNotes !== null) {
-        lessonNotes.value = savedNotes;
+    if (saved !== null) {
+        lessonNotes.value = saved;
     }
-
 
     lessonNotes.addEventListener(
         "input",
@@ -276,36 +316,38 @@ if (lessonNotes) {
 
         }
     );
+
 }
 
 
 // =====================================================
-// LESSON 02 — 3D TREND CHART MOVEMENT
+// 3D TREND CHART — LESSON 02
 // =====================================================
 
 if (trendChart) {
 
-    let trendRotateX = 0;
-    let trendRotateY = 0;
+    let rotateX = 0;
+    let rotateY = 0;
 
-    let trendZoom = 1;
+    let zoom = 1;
 
-    let trendDragging = false;
+    let dragging = false;
 
-    let trendLastX = 0;
-    let trendLastY = 0;
+    let lastX = 0;
+    let lastY = 0;
 
-    let trendVelocityX = 0;
-    let trendVelocityY = 0;
+    let velocityX = 0;
+    let velocityY = 0;
 
 
-    function updateTrendChart() {
+    function updateTrend() {
 
         trendChart.style.transform =
             `translate(-50%, -50%)
-             scale(${trendZoom})
-             rotateX(${trendRotateX}deg)
-             rotateY(${trendRotateY}deg)`;
+             scale(${zoom})
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)`;
+
     }
 
 
@@ -313,13 +355,13 @@ if (trendChart) {
         "pointerdown",
         (e) => {
 
-            trendDragging = true;
+            dragging = true;
 
-            trendLastX = e.clientX;
-            trendLastY = e.clientY;
+            lastX = e.clientX;
+            lastY = e.clientY;
 
-            trendVelocityX = 0;
-            trendVelocityY = 0;
+            velocityX = 0;
+            velocityY = 0;
 
             trendChart.style.cursor =
                 "grabbing";
@@ -327,6 +369,7 @@ if (trendChart) {
             trendChart.setPointerCapture(
                 e.pointerId
             );
+
         }
     );
 
@@ -335,57 +378,49 @@ if (trendChart) {
         "pointermove",
         (e) => {
 
-            if (!trendDragging) return;
+            if (!dragging) return;
 
             const dx =
-                e.clientX - trendLastX;
+                e.clientX - lastX;
 
             const dy =
-                e.clientY - trendLastY;
+                e.clientY - lastY;
 
+            rotateY += dx * 1.6;
+            rotateX -= dy * 1.6;
 
-            trendRotateY += dx * 1.5;
-            trendRotateX -= dy * 1.5;
-
-
-            trendRotateX = Math.max(
+            rotateX = Math.max(
                 -60,
-                Math.min(60, trendRotateX)
+                Math.min(60, rotateX)
             );
 
+            velocityY = dx * 1.6;
+            velocityX = -dy * 1.6;
 
-            trendVelocityY = dx * 1.5;
-            trendVelocityX = -dy * 1.5;
+            lastX = e.clientX;
+            lastY = e.clientY;
 
+            updateTrend();
 
-            trendLastX = e.clientX;
-            trendLastY = e.clientY;
-
-
-            updateTrendChart();
         }
     );
 
 
     function stopTrendDrag(e) {
 
-        trendDragging = false;
+        dragging = false;
 
         trendChart.style.cursor =
             "grab";
 
         try {
 
-            if (
-                e.pointerId !== undefined
-            ) {
-
-                trendChart.releasePointerCapture(
-                    e.pointerId
-                );
-            }
+            trendChart.releasePointerCapture(
+                e.pointerId
+            );
 
         } catch (error) {}
+
     }
 
 
@@ -407,19 +442,17 @@ if (trendChart) {
             e.preventDefault();
 
             if (e.deltaY < 0) {
-                trendZoom += 0.10;
+                zoom += 0.10;
             } else {
-                trendZoom -= 0.10;
+                zoom -= 0.10;
             }
 
-
-            trendZoom = Math.max(
+            zoom = Math.max(
                 0.55,
-                Math.min(1.7, trendZoom)
+                Math.min(1.7, zoom)
             );
 
-
-            updateTrendChart();
+            updateTrend();
 
         },
         { passive: false }
@@ -428,42 +461,42 @@ if (trendChart) {
 
     function animateTrend() {
 
-        if (!trendDragging) {
+        if (!dragging) {
 
-            trendRotateY += 0.12;
+            rotateY += 0.12;
 
-            trendRotateY +=
-                trendVelocityY * 0.035;
+            rotateY +=
+                velocityY * 0.035;
 
-            trendRotateX +=
-                trendVelocityX * 0.035;
+            rotateX +=
+                velocityX * 0.035;
 
-
-            trendRotateX = Math.max(
+            rotateX = Math.max(
                 -60,
-                Math.min(60, trendRotateX)
+                Math.min(60, rotateX)
             );
 
+            velocityX *= 0.92;
+            velocityY *= 0.92;
 
-            trendVelocityX *= 0.92;
-            trendVelocityY *= 0.92;
+            updateTrend();
 
-
-            updateTrendChart();
         }
 
         requestAnimationFrame(
             animateTrend
         );
+
     }
 
 
     animateTrend();
+
 }
 
 
 // =====================================================
-// LESSON 02 — NOTES AUTO SAVE
+// LESSON 02 NOTES
 // =====================================================
 
 const trendNotes =
@@ -471,17 +504,14 @@ const trendNotes =
 
 if (trendNotes) {
 
-    const savedTrendNotes =
+    const saved =
         localStorage.getItem(
             "tradeverse-trend-notes"
         );
 
-
-    if (savedTrendNotes !== null) {
-        trendNotes.value =
-            savedTrendNotes;
+    if (saved !== null) {
+        trendNotes.value = saved;
     }
-
 
     trendNotes.addEventListener(
         "input",
@@ -494,4 +524,5 @@ if (trendNotes) {
 
         }
     );
-           }
+
+        }
