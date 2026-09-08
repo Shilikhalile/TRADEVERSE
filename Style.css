@@ -1363,3 +1363,17 @@ body {
         font-size: 11px;
     }
 }
+@media (max-width: 900px) {
+
+    .next-lesson {
+        display: block;
+        right: 20px;
+        bottom: 350px;
+    }
+
+    .previous-lesson {
+        display: block;
+        left: 20px;
+        bottom: 350px;
+    }
+}
