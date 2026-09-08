@@ -3,157 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>TRADEVERSE — Market Lab</title>
+
     <link rel="stylesheet" href="Style.css">
 </head>
 
 <body>
 
-<!-- ================= HOME ================= -->
+    <!-- ================= HOME ================= -->
 
-<section id="home" class="home">
+    <section id="home" class="home">
 
-    <div class="top-title">
-        TRADEVERSE
-        <span>MARKET LAB ONLINE</span>
-    </div>
-
-    <div class="hero">
-        <div class="hero-small">TRADEVERSE</div>
-
-        <h1>
-            UNDERSTAND<br>
-            THE MARKET.
-        </h1>
-
-        <p>
-            Learn how price moves,<br>
-            one concept at a time.
-        </p>
-
-        <button id="startBtn">
-            START LEARNING
-            <span>→</span>
-        </button>
-    </div>
-
-    <div class="home-footer">
-        <div>
-            MOVE YOUR MOUSE<br>
-            <span>SCROLL TO EXPLORE</span>
+        <div class="top-title">
+            TRADEVERSE
+            <span>MARKET LAB ONLINE</span>
         </div>
 
-        <div>v0.1</div>
-    </div>
+        <div class="hero">
 
-</section>
+            <div class="hero-small">
+                TRADEVERSE
+            </div>
 
+            <h1>
+                UNDERSTAND<br>
+                THE MARKET.
+            </h1>
 
-<!-- ================= MARKET LAB ================= -->
+            <p>
+                Learn how price moves,<br>
+                one concept at a time.
+            </p>
 
-<section id="lab" class="lab">
+            <button id="startBtn">
+                START LEARNING
+                <span>→</span>
+            </button>
 
-    <header class="lab-header">
-
-        <div>
-            <span>MARKET LAB</span>
-            <strong>01</strong>
         </div>
 
-        <button id="backBtn">
-            ← BACK
-        </button>
+        <div class="home-footer">
 
-    </header>
+            <div>
+                MOVE YOUR MOUSE<br>
+                <span>SCROLL TO EXPLORE</span>
+            </div>
 
+            <div>
+                v0.1
+            </div>
 
-    <!-- CANDLE AREA -->
-
-    <div class="candle-stage">
-
-        <!-- ================= FIXED LABELS ================= -->
-
-        <div class="label high-label">
-            <span>HIGH</span>
-            <i></i>
         </div>
 
-        <div class="label open-label">
-            <span>OPEN</span>
-            <i></i>
-        </div>
-
-        <div class="label close-label">
-            <span>CLOSE</span>
-            <i></i>
-        </div>
-
-        <div class="label low-label">
-            <span>LOW</span>
-            <i></i>
-        </div>
+    </section>
 
 
-        <div class="part-label upper-label">
-            UPPER WICK
-        </div>
+    <!-- ================= MARKET LAB ================= -->
 
-        <div class="part-label body-label">
-            BODY
-        </div>
+    <section id="lab" class="lab">
 
-        <div class="part-label lower-label">
-            LOWER WICK
-        </div>
+        <header class="lab-header">
+
+            <div>
+                <span>MARKET LAB</span>
+                <strong>01</strong>
+            </div>
+
+            <button id="backBtn">
+                ← BACK
+            </button>
+
+        </header>
 
 
-        <!-- ================= 3D CANDLE ================= -->
+        <!-- ================= CANDLE ================= -->
 
-        <div class="candle-scene" id="candleScene">
+        <div class="candle-stage">
 
-            <div class="candle">
+            <div
+                class="candle-scene"
+                id="candleScene"
+            >
 
-                <div class="wick"></div>
+                <div class="candle">
 
-                <div class="candle-body">
+                    <!-- Colored wick -->
+                    <div class="wick"></div>
 
-                    <div class="face front"></div>
-                    <div class="face back"></div>
-                    <div class="face right"></div>
-                    <div class="face left"></div>
-                    <div class="face top"></div>
-                    <div class="face bottom"></div>
+                    <!-- Candle body -->
+                    <div class="candle-body">
+
+                        <div class="face front"></div>
+                        <div class="face back"></div>
+                        <div class="face right"></div>
+                        <div class="face left"></div>
+                        <div class="face top"></div>
+                        <div class="face bottom"></div>
+
+                    </div>
+
+                    <!-- Glow -->
+                    <div class="glow"></div>
 
                 </div>
-
-                <div class="glow"></div>
 
             </div>
 
         </div>
 
-    </div>
+
+        <!-- ================= NOTES ================= -->
+
+        <div class="notes-panel">
+
+            <div class="notes-header">
+
+                <span>01</span>
+
+                <div>
+                    <small>YOUR EXPLANATION</small>
+                    <strong>CANDLESTICK</strong>
+                </div>
+
+            </div>
 
 
-    <!-- ================= BOTTOM INFO ================= -->
+            <textarea
+                id="lessonNotes"
+                placeholder="Write your explanation here...
 
-    <div class="lab-bottom">
+Example:
 
-        <div>
-            <span>TRADEVERSE</span>
-            <strong>CANDLESTICK LAB</strong>
+A candlestick shows Open,
+High, Low and Close.
+
+Explain the concept
+the way you want."
+            ></textarea>
+
+
+            <div class="notes-footer">
+                WRITE • EXPLAIN • LEARN
+            </div>
+
         </div>
 
-        <div class="lesson-number">
-            01 <span>/</span> 05
+
+        <!-- ================= BOTTOM ================= -->
+
+        <div class="lab-bottom">
+
+            <div>
+                <span>TRADEVERSE</span>
+                <strong>CANDLESTICK LAB</strong>
+            </div>
+
+            <div class="lesson-number">
+                01 <span>/</span> 05
+            </div>
+
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
